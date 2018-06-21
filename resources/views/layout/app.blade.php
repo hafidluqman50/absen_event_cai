@@ -247,9 +247,6 @@
                                 <a href="#">Laporan</a>
                             </li>
                             <li>
-                                <a href="#">Tutorial</a>
-                            </li>
-                            <li>
                                 <a href="#">User</a>
                             </li>
                         </ul>
