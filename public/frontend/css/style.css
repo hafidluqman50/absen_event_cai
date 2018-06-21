@@ -4972,7 +4972,8 @@ section.content {
       -o-transition: 0.25s ease-in;
       -webkit-transition: 0.25s ease-in;
       transition: 0.25s ease-in;
-      border-bottom: 2px solid #1f91f3; }
+      /* border-bottom: 2px solid #1f91f3;  */
+      border-bottom: 2px solid #4b3f33; }
     .input-group .form-line + .input-group-addon {
       padding-right: 0;
       padding-left: 10px; }
@@ -7719,8 +7720,10 @@ fieldset[disabled] .form-control {
   color: #2196F3; }
 
 /* Login Page ================================== */
+
 .login-page {
-  background-color: #00BCD4;
+  /* background-color: #00BCD4; */
+  background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 100%),url('../images/animation-bg.jpg'); 
   padding-left: 0;
   max-width: 360px;
   margin: 5% auto;
