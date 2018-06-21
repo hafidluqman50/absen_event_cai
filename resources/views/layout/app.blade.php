@@ -235,13 +235,16 @@
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="#">Berita</a>
+                                <a href="#">Peserta</a>
                             </li>
                             <li>
-                                <a href="#">Slider</a>
+                                <a href="#">Kegiatan</a>
                             </li>
                             <li>
-                                <a href="#">Tentang</a>
+                                <a href="#">Kelompok</a>
+                            </li>
+                            <li>
+                                <a href="#">Laporan</a>
                             </li>
                             <li>
                                 <a href="#">Tutorial</a>

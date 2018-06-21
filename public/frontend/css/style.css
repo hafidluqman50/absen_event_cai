@@ -7723,7 +7723,9 @@ fieldset[disabled] .form-control {
 
 .login-page {
   /* background-color: #00BCD4; */
-  background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 100%),url('../images/animation-bg.jpg'); 
+  background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 100%),url('../images/img7.jpeg'); 
+  /* background-repeat: no-repeat; */
+	background-size: cover;
   padding-left: 0;
   max-width: 360px;
   margin: 5% auto;
