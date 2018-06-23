@@ -22,3 +22,5 @@ Route::get('/', function () {
 Route::get('/Dashboard', function () {
     return view('dashboard');
 });
+
+Route::resource('kelompok', 'KelompokController');

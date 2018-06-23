@@ -6,7 +6,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>Absen</title>
     <!-- Favicon-->
-    <link rel="icon" href="" type="image/x-icon">
+    <link rel="icon" href="{{ asset('frontend/images/ppg.png') }}" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
@@ -229,6 +229,36 @@
                     </li>
                     <li class="header">KONTEN</li>
                     <li>
+                        <a href="#">
+                            <i class="material-icons">playlist_add_check</i>
+                            <span>Kegiatan</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('kelompok.index')}}">
+                            <i class="material-icons">group</i>
+                            <span>Kelompok</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">content_paste</i>
+                            <span>Laporan</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">contacts</i>
+                            <span>Peserta</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">person</i>
+                            <span>User</span>
+                        </a>
+                    </li>
+                    {{-- <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">content_copy</i>
                             <span>Data</span>
@@ -250,14 +280,14 @@
                                 <a href="#">User</a>
                             </li>
                         </ul>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
             <!-- #Menu -->
             <!-- Footer -->
             <div class="legal">
                 <div class="copyright">
-                    &copy; <?= date('Y') ?> <a href="javascript:void(0);">DediRahmanur</a>.
+                    &copy; <?= date('Y') ?> <a href="javascript:void(0);">Absen - PPG Samarinda</a>.
                 </div>
             </div>
             <!-- #Footer -->
