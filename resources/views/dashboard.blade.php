@@ -57,6 +57,3 @@
     </div>
     <!-- #END# Widgets -->
 @endsection
-
-@section('custom_js')
-@endsection
