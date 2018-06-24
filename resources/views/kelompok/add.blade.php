@@ -21,7 +21,7 @@
                 </div>
                 <div class="body">
                     {{-- {!! Form::open(['route'=>'jabatan.store','class'=>'form-horizontal','files'=>true]) !!} --}}
-                    {!! Form::open(['route'=>'','class'=>'','files'=>true]) !!}
+                    {!! Form::open(['class'=>'','files'=>true]) !!}
                         @include('kelompok.form')
                         <button type="submit" class="btn bg-orange waves-effect" name="submit" value="submit">
                             <i class="material-icons">save</i>

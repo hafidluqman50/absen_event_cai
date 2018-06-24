@@ -15,7 +15,7 @@
             <div class="card">
                 <div class="header" style="box-shadow: 2px 3px 2px rgba(0, 0, 0, 0.3);">
                     <h2>DATA KELOMPOK</h2>
-                    <a href="#" style="float: right; margin-top:-2.8rem" class="btn btn-default btn-circle waves-effect waves-circle waves-float">
+                    <a href="{{ route('kelompok.create') }}" style="float: right; margin-top:-2.8rem" class="btn btn-default btn-circle waves-effect waves-circle waves-float" title="tambah kelompok">
                         <i class="material-icons">group</i>
                     </a>
                 </div>
