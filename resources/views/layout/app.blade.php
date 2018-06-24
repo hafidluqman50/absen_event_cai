@@ -19,6 +19,7 @@
 
     <!-- Waves Effect Css -->
     <link href="{{ asset('frontend/plugins/node-waves/waves.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('frontend/datatables/datatables.min.css') }}">
 
     <!-- Animation Css -->
     <link href="{{ asset('frontend/plugins/animate-css/animate.css') }}" rel="stylesheet" />
@@ -464,9 +465,15 @@
 
     <!-- Custom Js -->
     <script src="{{ asset('frontend/js/admin.js') }}"></script>
+    <script src="{{ asset('frontend/datatables/datatables.min.js') }}"></script>
 
     <!-- Demo Js -->
     <script src="{{ asset('frontend/js/demo.js') }}"></script>
+    <script>
+        $(function(){
+            $('#table').DataTable();
+        });
+    </script>
 </body>
 
 </html>
