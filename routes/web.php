@@ -24,3 +24,6 @@ Route::get('/Dashboard', function () {
 });
 
 Route::resource('kelompok', 'KelompokController');
+Route::resource('kegiatan', 'KegiatanController');
+Route::resource('laporan', 'LaporanController');
+Route::resource('user', 'UserController');

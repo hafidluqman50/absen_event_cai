@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Absen</title>
+    {{-- <title>Absen | @yield('title')</title> --}}
+    <title>@yield('page_title', 'Home') | Absensi Online</title>
     <!-- Favicon-->
     <link rel="icon" href="{{ asset('frontend/images/ppg.png') }}" type="image/x-icon">
 
@@ -31,12 +32,12 @@
     <link href="{{ asset('frontend/css/themes/all-themes.css') }}" rel="stylesheet" />
 </head>
 
-<body class="theme-red">
+<body class="theme-green">
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
             <div class="preloader">
-                <div class="spinner-layer pl-red">
+                <div class="spinner-layer pl-green">
                     <div class="circle-clipper left">
                         <div class="circle"></div>
                     </div>
@@ -45,7 +46,7 @@
                     </div>
                 </div>
             </div>
-            <p>Please wait...</p>
+            <p>Mohon Tunggu...</p>
         </div>
     </div>
     <!-- #END# Page Loader -->
@@ -186,7 +187,8 @@
                         </ul>
                     </li>
                     <!-- #END# Notifications -->
-                    <li class="pull-right"><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="material-icons">more_vert</i></a></li>
+                    {{-- <li class="pull-right"><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="material-icons"></i></a></li> --}}
+                    {{-- <li class="pull-right"><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="material-icons">more_vert</i></a></li> --}}
                 </ul>
             </div>
         </div>
@@ -223,14 +225,14 @@
                 <ul class="list">
                     <li class="header">BERANDA</li>
                     <li class="active">
-                        <a href="#">
+                        <a href="{{ url('/Dashboard') }}">
                             <i class="material-icons">home</i>
                             <span>Home</span>
                         </a>
                     </li>
                     <li class="header">KONTEN</li>
                     <li>
-                        <a href="#">
+                        <a href="{{ route('kegiatan.index') }}">
                             <i class="material-icons">playlist_add_check</i>
                             <span>Kegiatan</span>
                         </a>
@@ -242,19 +244,19 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="{{route('laporan.index')}}">
                             <i class="material-icons">content_paste</i>
                             <span>Laporan</span>
                         </a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a href="#">
                             <i class="material-icons">contacts</i>
                             <span>Peserta</span>
                         </a>
-                    </li>
+                    </li> --}}
                     <li>
-                        <a href="#">
+                        <a href="{{route('user.index')}}">
                             <i class="material-icons">person</i>
                             <span>User</span>
                         </a>
@@ -295,7 +297,7 @@
         </aside>
         <!-- #END# Left Sidebar -->
         <!-- Right Sidebar -->
-        <aside id="rightsidebar" class="right-sidebar">
+        {{-- <aside id="rightsidebar" class="right-sidebar">
             <ul class="nav nav-tabs tab-nav-right" role="tablist">
                 <li role="presentation" class="active"><a href="#skins" data-toggle="tab">SKINS</a></li>
                 <li role="presentation"><a href="#settings" data-toggle="tab">SETTINGS</a></li>
@@ -435,7 +437,7 @@
                     </div>
                 </div>
             </div>
-        </aside>
+        </aside> --}}
         <!-- #END# Right Sidebar -->
     </section>
     
