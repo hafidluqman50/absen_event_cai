@@ -1,12 +1,8 @@
 @extends('layout.app')
 
-@section('custom_css')
-    
-@endsection
-
 @section('content')
     <div class="block-header">
-        <h2>USER</h2>
+        <h2>KELOMPOK</h2>
     </div>
 
     <div class="row clearfix">
@@ -14,38 +10,43 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="card">
                 <div class="header" style="box-shadow: 2px 3px 2px rgba(0, 0, 0, 0.3);">
-                    <h2>DATA USER</h2>
-                    <a href="{{ route('user.create') }}" style="float: right; margin-top:-2.8rem" class="btn btn-default btn-circle waves-effect waves-circle waves-float" title="tambah user">
+                    <h2>DATA KELOMPOK</h2>
+                    <a href="{{ url('/admin/kelompok/tambah') }}" style="float: right; margin-top:-2.8rem" class="btn btn-default btn-circle waves-effect waves-circle waves-float" title="tambah kelompok">
                         <i class="material-icons">group</i>
                     </a>
                 </div>
                 <div class="body">
+                    @if(session()->has('message'))
+                    <div class="alert alert-success alert-dismissible">
+                        {{ session('message') }}<button class="close" data-dismiss="alert">x</button>
+                    </div>
+                    @endif
                     <div class="table-responsive">
                         <table class="table table-hover dashboard-task-infos" id="table">
-
                             <thead>
                                 <tr>
                                     <th>No</th>
                                     <th>Nama</th>
-                                    <th>Username</th>
-                                    <th>Status</th>
+                                    <th>Lokasi</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $no = 1; ?>
+                                @foreach($kelompok as $key => $data)
                                 <tr>
-                                    <th scope="row"><?= $no++; ?></th>
-                                    <td>Nama</td>
-                                    <td>Mr.yeye</td>
-                                    <td><span class="badge bg-indigo">Aktif</span></td>
+                                    <td>{{ $key+1 }}</td>
+                                    <td>{{ $data->nama_kelompok }}</td>
+                                    <td>{{ $data->lokasi_kelompok }}</td>
                                     <td>
                                         <div class="btn-group" role="group">
-                                            <a href="#" title="Edit" class="btn btn-warning waves-effect"><i class="fa fa-pencil"></i></a>
-                                            <a href="#" title="Hapus"  class="btn btn-danger waves-effect" onclick="return confirm('Anda Yakin?')"><i class="fa fa-trash"></i></a>
+                                            <a href="{{ url('/admin/kelompok/'.$data->id_kelompok.'/edit') }}" title="Edit" class="btn btn-warning waves-effect">Edit</a>
+                                        </div>
+                                        <div class="btn-group" role="button">
+                                            <a href="{{ url('/admin/kelompok/'.$data->id_kelompok.'/delete') }}" title="Hapus"  class="btn btn-danger waves-effect" onclick="return confirm('Anda Yakin?')">Hapus</a>
                                         </div>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

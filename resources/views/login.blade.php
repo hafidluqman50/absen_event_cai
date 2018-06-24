@@ -33,8 +33,11 @@
         </div>
         <div class="card">
             <div class="body">
-                <form id="sign_in" method="POST">
-                    <div class="msg"></div>
+                <form id="sign_in" action="{{ url('/login/auth') }}" method="POST">
+                    @csrf
+                    @if(session()->has('log'))
+                    <div class="msg">{{ session('log') }}</div>
+                    @endif
                     <div class="input-group">
                         <span class="input-group-addon">
                             <i class="material-icons">person</i>
@@ -56,7 +59,7 @@
                             &nbsp;
                         </div>
                         <div class="col-xs-4">
-                            <a href="{{ url('/Dashboard') }}" class="btn btn-block waves-effect" type="submit" style="background: #1e2021;color: white;">LOGIN</a>
+                            <button class="btn btn-block waves-effect" type="submit" style="background: #1e2021;color: white;">LOGIN</button>
                         </div>
                     </div>
                 </form>

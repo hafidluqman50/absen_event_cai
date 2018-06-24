@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     {{-- <title>Absen | @yield('title')</title> --}}
-    <title>@yield('page_title', 'Home') | Absensi Online</title>
+    <title>{{ $title }} | Absensi Online</title>
     <!-- Favicon-->
     <link rel="icon" href="{{ asset('frontend/images/ppg.png') }}" type="image/x-icon">
 
@@ -70,122 +70,13 @@
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
-                <!-- <a class="navbar-brand" href="index.html">ADMINBSB - MATERIAL DESIGN</a> -->
                  <a class="navbar-brand" href="#">ABSEN - PPG SAMARINDA</a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Call Search -->
-                    <li><a href="javascript:void(0);" class="js-search" data-close="true"><i class="material-icons">search</i></a></li>
                     <!-- #END# Call Search -->
                     <!-- Notifications -->
-                    <li class="dropdown">
-                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                            <i class="material-icons">notifications</i>
-                            <span class="label-count">7</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="header">NOTIFICATIONS</li>
-                            <li class="body">
-                                <ul class="menu">
-                                    <li>
-                                        <a href="javascript:void(0);">
-                                            <div class="icon-circle bg-light-green">
-                                                <i class="material-icons">person_add</i>
-                                            </div>
-                                            <div class="menu-info">
-                                                <h4>12 new members joined</h4>
-                                                <p>
-                                                    <i class="material-icons">access_time</i> 14 mins ago
-                                                </p>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);">
-                                            <div class="icon-circle bg-cyan">
-                                                <i class="material-icons">add_shopping_cart</i>
-                                            </div>
-                                            <div class="menu-info">
-                                                <h4>4 sales made</h4>
-                                                <p>
-                                                    <i class="material-icons">access_time</i> 22 mins ago
-                                                </p>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);">
-                                            <div class="icon-circle bg-red">
-                                                <i class="material-icons">delete_forever</i>
-                                            </div>
-                                            <div class="menu-info">
-                                                <h4><b>Nancy Doe</b> deleted account</h4>
-                                                <p>
-                                                    <i class="material-icons">access_time</i> 3 hours ago
-                                                </p>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);">
-                                            <div class="icon-circle bg-orange">
-                                                <i class="material-icons">mode_edit</i>
-                                            </div>
-                                            <div class="menu-info">
-                                                <h4><b>Nancy</b> changed name</h4>
-                                                <p>
-                                                    <i class="material-icons">access_time</i> 2 hours ago
-                                                </p>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);">
-                                            <div class="icon-circle bg-blue-grey">
-                                                <i class="material-icons">comment</i>
-                                            </div>
-                                            <div class="menu-info">
-                                                <h4><b>John</b> commented your post</h4>
-                                                <p>
-                                                    <i class="material-icons">access_time</i> 4 hours ago
-                                                </p>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);">
-                                            <div class="icon-circle bg-light-green">
-                                                <i class="material-icons">cached</i>
-                                            </div>
-                                            <div class="menu-info">
-                                                <h4><b>John</b> updated status</h4>
-                                                <p>
-                                                    <i class="material-icons">access_time</i> 3 hours ago
-                                                </p>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);">
-                                            <div class="icon-circle bg-purple">
-                                                <i class="material-icons">settings</i>
-                                            </div>
-                                            <div class="menu-info">
-                                                <h4>Settings updated</h4>
-                                                <p>
-                                                    <i class="material-icons">access_time</i> Yesterday
-                                                </p>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="footer">
-                                <a href="javascript:void(0);">View All Notifications</a>
-                            </li>
-                        </ul>
-                    </li>
                     <!-- #END# Notifications -->
                     {{-- <li class="pull-right"><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="material-icons"></i></a></li> --}}
                     {{-- <li class="pull-right"><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="material-icons">more_vert</i></a></li> --}}
@@ -208,13 +99,8 @@
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
-                            <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
-                            <li role="seperator" class="divider"></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">group</i>Followers</a></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">shopping_cart</i>Sales</a></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">favorite</i>Likes</a></li>
-                            <li role="seperator" class="divider"></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">input</i>Sign Out</a></li>
+                            <li><a href="{{ Auth::user()->level == 1 ? url('/admin/profile') : (Auth::user()->level == 0 ? url('/petugas/profile') : '') }}"><i class="material-icons">person</i>Profile</a></li>
+                            <li><a href="{{ url('/logout') }}"><i class="material-icons">input</i>Sign Out</a></li>
                         </ul>
                     </div>
                 </div>
@@ -224,66 +110,40 @@
             <div class="menu">
                 <ul class="list">
                     <li class="header">BERANDA</li>
-                    <li class="active">
-                        <a href="{{ url('/Dashboard') }}">
+                    <li @if(isset($page)){!!$page == 'beranda' ? 'class="active"' : ''!!}@endif>
+                        <a href="{{ Auth::user()->level == 1 ? url('/admin/dashboard') : (Auth::user()->level == 0 ? url('/petugas/dashboard') : '') }}">
                             <i class="material-icons">home</i>
                             <span>Home</span>
                         </a>
                     </li>
                     <li class="header">KONTEN</li>
-                    <li>
-                        <a href="{{ route('kegiatan.index') }}">
+                    @if(Auth::user()->level == 1)
+                    <li @if(isset($page)){!!$page == 'kegiatan' ? 'class="active"' : ''!!}@endif>
+                        <a href="{{ url('/admin/kegiatan') }}">
                             <i class="material-icons">playlist_add_check</i>
                             <span>Kegiatan</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="{{route('kelompok.index')}}">
+                    <li @if(isset($page)){!!$page == 'kelompok' ? 'class="active"' : ''!!}@endif>
+                        <a href="{{ url('/admin/kelompok') }}">
                             <i class="material-icons">group</i>
                             <span>Kelompok</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="{{route('laporan.index')}}">
-                            <i class="material-icons">content_paste</i>
-                            <span>Laporan</span>
-                        </a>
-                    </li>
-                    {{-- <li>
-                        <a href="#">
-                            <i class="material-icons">contacts</i>
-                            <span>Peserta</span>
-                        </a>
-                    </li> --}}
-                    <li>
-                        <a href="{{route('user.index')}}">
+                    <li @if(isset($page)){!!$page == 'user' ? 'class="active"' : ''!!}@endif>
+                        <a href="{{ url('/admin/users') }}">
                             <i class="material-icons">person</i>
-                            <span>User</span>
+                            <span>Data User</span>
                         </a>
                     </li>
-                    {{-- <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">content_copy</i>
-                            <span>Data</span>
+                    @elseif(Auth::user()->level == 0)
+                    <li @if(isset($page)){!!$page == 'kegiatan' ? 'class="active"' : ''!!}@endif>
+                        <a href="{{ url('/petugas/kegiatan') }}">
+                            <i class="material-icons">playlist_add_check</i>
+                            <span>Kegiatan</span>
                         </a>
-                        <ul class="ml-menu">
-                            <li>
-                                <a href="#">Peserta</a>
-                            </li>
-                            <li>
-                                <a href="#">Kegiatan</a>
-                            </li>
-                            <li>
-                                <a href="#">Kelompok</a>
-                            </li>
-                            <li>
-                                <a href="#">Laporan</a>
-                            </li>
-                            <li>
-                                <a href="#">User</a>
-                            </li>
-                        </ul>
-                    </li> --}}
+                    </li>
+                    @endif
                 </ul>
             </div>
             <!-- #Menu -->
