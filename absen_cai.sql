@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 25, 2018 at 08:58 AM
+-- Generation Time: Jun 25, 2018 at 12:14 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -124,8 +124,7 @@ CREATE TABLE `kegiatan_detail` (
 
 INSERT INTO `kegiatan_detail` (`id_detail`, `id_kegiatan`, `code_barcode`, `id_kelompok`, `id_anggota`, `ket`, `id_users`, `created_at`, `updated_at`) VALUES
 (1, 1, '2941533150001', 1, 1, 'panitia', 1, '2018-06-24 18:15:12', '2018-06-24 22:05:41'),
-(2, 1, '2941533150002', 1, 2, 'peserta', 1, '2018-06-24 22:08:22', '2018-06-24 22:11:36'),
-(4, 1, '2941533150003', 1, 2, 'panitia', 1, '2018-06-24 22:14:21', '2018-06-24 22:15:22');
+(2, 1, '2941533150002', 1, 2, 'peserta', 1, '2018-06-24 22:08:22', '2018-06-24 22:11:36');
 
 -- --------------------------------------------------------
 
@@ -189,7 +188,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_users`, `name`, `username`, `password`, `level`, `status_akun`, `last_login`, `remember_token`) VALUES
-(1, 'Administrator', 'admin', '$2y$10$SSTPVCNQM60/kGfdCO8eEO0PLdDekSpAVsMdD4x9bhOPvjHBBrZ0G', 2, 1, NULL, 'Jtiz7DBqMIYspE0WXJjjnZcQLD33pjHzHU1mKzK8sKYWP1kJDcLWA52JKwjJ'),
+(1, 'Administrator', 'admin', '$2y$10$SSTPVCNQM60/kGfdCO8eEO0PLdDekSpAVsMdD4x9bhOPvjHBBrZ0G', 2, 1, NULL, 'ru4FpS6LcBR31nmGweXR4aKfzGkmUDcRgNMCdfBiD40tNRBzXo6IFAwPNT9e'),
 (3, 'Daguy', 'daguy', '$2y$10$x/DtXp.55nXXBnNXEwk5fuE1nDqgAxog7zdUrBARoa2SDIX3QWaHm', 0, 1, NULL, 'rCbbqn7KGkNFI3HyhqkJaqO5ZBrBM1C7VkBwXyjBGglXnl0f6i1cbPf6qEpS'),
 (4, 'Petugas', 'petugas', '$2y$10$WhLIk9dJYCt.YZ0iXc6Uy.tpvAOqgz8rBVl8I3dsVcM1TT3ZzSdwy', 1, 1, NULL, 'KUIl5YFRA3UW5xDjrAuv8r2OnFyoKV3ZQoeRyDR1yVV2DE8DmmAthyjyJbGj');
 

@@ -18,7 +18,7 @@
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // });
-Route::get('/sip', 'AuthController@user');
+// Route::get('/sip', 'AuthController@user');
 Route::get('/', ['as' => 'login-page', 'uses' => 'AuthController@index'])->middleware('isAuth');
 Route::get('/login', ['as' => 'login-page', 'uses' => 'AuthController@index'])->middleware('isAuth');
 Route::post('/login/auth', ['as' => 'login-post', 'uses' => 'AuthController@login']);

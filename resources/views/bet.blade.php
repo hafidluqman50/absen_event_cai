@@ -55,18 +55,19 @@
                 <br><br><br>
                 <div class="col-md-12">
                     <div class="box col-md-10 offset-md-1">
-                        <label class="nama">KHOIRULLI NURUL FATIMAH</label>
+                        <label class="nama">{{ $get->nama_anggota }}</label>
                     </div>
                 </div>
                 <br>
                 <div class="col-md-12">
                     <div class="box col-md-10 offset-md-1">
-                        <label class="nama">SAMBUTAN</label>
+                        <label class="nama">{{ $get->desa }}</label>
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="text-left">
-                        <label class="barcode">294153315001</label>
+                        {{-- <label class="barcode">{{ $get->code_barcode }}</label> --}}
+                        <img class="barcode" src="data:image/png;base64,{{ $code }}" />
                     </div>
                 </div>
             </div>
