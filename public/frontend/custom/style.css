@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css?family=Libre+Barcode+128+Text|Lobster|Montserrat|Source+Sans+Pro:700');
+
+.bg{
+    background: linear-gradient(0deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%),url('../images/bgmosque.png'); 
+    background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.nama{
+    font-family: 'Source Sans Pro', sans-serif;
+    color:#05172f;
+    font-size:30px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.box{
+    border-radius: 0px 10px 0px 10px;
+    text-align: center;
+    width: 80%;
+    background: white;
+}
+
+.barcode{
+    font-family: 'Libre Barcode 128 Text', cursive;
+    margin-top:5rem;
+    font-size:60px;
+    color: white;
+}
+
+.jabatan{
+    font-family: 'Source Sans Pro', sans-serif;
+    margin-left:-4rem;
+    font-size: 80px;
+    font-weight: bold;
+    color: white;
+}
+
+.tmpt{
+    margin-left:-12rem;
+    margin-top:-3rem;
+    margin-bottom:1.5rem;
+    text-align: center;
+    font-family: 'Lobster', cursive;
+    font-size: 40px;
+    color: white;
+}
+
+.lokasi{
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+}
