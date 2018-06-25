@@ -18,6 +18,7 @@
 
     @yield('custom_css')
 
+    <link href="{{ asset('frontend/plugins/bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet" />
     <!-- Waves Effect Css -->
     <link href="{{ asset('frontend/plugins/node-waves/waves.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('frontend/datatables/datatables.min.css') }}">
@@ -94,12 +95,12 @@
                     <img src="{{ asset('frontend/images/ppg.png') }}" width="48" height="48" alt="User" />
                 </div>
                 <div class="info-container">
-                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Khoirulli NF</div>
-                    <div class="email">Admin</div>
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{Auth::user()->name}}</div>
+                    <div class="email">{{ Auth::user()->level == 2 ? 'Admin' : (Auth::user()->level == 1 ? 'Petugas' : 'Guest') }}</div>
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
-                            <li><a href="{{ Auth::user()->level == 1 ? url('/admin/profile') : (Auth::user()->level == 0 ? url('/petugas/profile') : '') }}"><i class="material-icons">person</i>Profile</a></li>
+                            <li @if(isset($page)){!!$page == 'profile' ? 'class="active"' : ''!!}@endif><a href="{{ Auth::user()->level == 2 ? url('/admin/profile') : (Auth::user()->level == 1 ? url('/petugas/profile') : '') }}"><i class="material-icons">person</i>Profile</a></li>
                             <li><a href="{{ url('/logout') }}"><i class="material-icons">input</i>Sign Out</a></li>
                         </ul>
                     </div>
@@ -111,13 +112,13 @@
                 <ul class="list">
                     <li class="header">BERANDA</li>
                     <li @if(isset($page)){!!$page == 'beranda' ? 'class="active"' : ''!!}@endif>
-                        <a href="{{ Auth::user()->level == 1 ? url('/admin/dashboard') : (Auth::user()->level == 0 ? url('/petugas/dashboard') : '') }}">
+                        <a href="{{ Auth::user()->level == 2 ? url('/admin/dashboard') : (Auth::user()->level == 1 ? url('/petugas/dashboard') : '') }}">
                             <i class="material-icons">home</i>
                             <span>Home</span>
                         </a>
                     </li>
                     <li class="header">KONTEN</li>
-                    @if(Auth::user()->level == 1)
+                    @if(Auth::user()->level == 2)
                     <li @if(isset($page)){!!$page == 'kegiatan' ? 'class="active"' : ''!!}@endif>
                         <a href="{{ url('/admin/kegiatan') }}">
                             <i class="material-icons">playlist_add_check</i>
@@ -130,17 +131,42 @@
                             <span>Kelompok</span>
                         </a>
                     </li>
+                    <li @if(isset($page)){!!$page == 'anggota' ? 'class="active"' : ''!!}@endif>
+                        <a href="{{ url('/admin/anggota') }}">
+                            <i class="material-icons">person</i>
+                            <span>Anggota</span>
+                        </a>
+                    </li>
                     <li @if(isset($page)){!!$page == 'user' ? 'class="active"' : ''!!}@endif>
                         <a href="{{ url('/admin/users') }}">
-                            <i class="material-icons">person</i>
+                            <i class="material-icons">build</i>
                             <span>Data User</span>
                         </a>
                     </li>
-                    @elseif(Auth::user()->level == 0)
+                    @elseif(Auth::user()->level == 1)
                     <li @if(isset($page)){!!$page == 'kegiatan' ? 'class="active"' : ''!!}@endif>
                         <a href="{{ url('/petugas/kegiatan') }}">
                             <i class="material-icons">playlist_add_check</i>
                             <span>Kegiatan</span>
+                        </a>
+                    </li>
+                    <li @if(isset($page)){!!$page == 'anggota' ? 'class="active"' : ''!!}@endif>
+                        <a href="{{ url('/petugas/anggota') }}">
+                            <i class="material-icons">person</i>
+                            <span>Anggota</span>
+                        </a>
+                    </li>
+                    @elseif(Auth::user()->level == 0)
+                    <li @if(isset($page)){!!$page == 'kegiatan' ? 'class="active"' : ''!!}@endif>
+                        <a href="{{ url('/guest/kegiatan') }}">
+                            <i class="material-icons">playlist_add_check</i>
+                            <span>Kegiatan</span>
+                        </a>
+                    </li>
+                    <li @if(isset($page)){!!$page == 'anggota' ? 'class="active"' : ''!!}@endif>
+                        <a href="{{ url('/guest/anggota') }}">
+                            <i class="material-icons">person</i>
+                            <span>Anggota</span>
                         </a>
                     </li>
                     @endif

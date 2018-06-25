@@ -14,12 +14,12 @@
             <div class="card">
                 <div class="header" style="box-shadow: 2px 3px 2px rgba(0, 0, 0, 0.3)">
                     <h2>FORM PESERTA KEGIATAN</h2>
-                    <a href="{{ url('/admin/kegiatan/'.$id.'/peserta') }}" style="float: right; margin-top:-2.8rem" class="btn btn-default btn-circle waves-effect waves-circle waves-float">
+                    <a href="{{ url('/petugas/kegiatan/'.$id.'/peserta') }}" style="float: right; margin-top:-2.8rem" class="btn btn-default btn-circle waves-effect waves-circle waves-float">
                         <i class="material-icons">keyboard_backspace</i>
                     </a>
                 </div>
                 <div class="body">
-                    <form action="{{ url('/admin/kegiatan/peserta/save') }}" method="POST">
+                    <form action="{{ url('/petugas/kegiatan/peserta/save') }}" method="POST">
                         @csrf
                         <div class="form-group form-float">
                             <label class="form-label" for="">Nama Peserta</label>

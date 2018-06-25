@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="block-header">
-        <h2>USER</h2>
+        <h2>PROFILE</h2>
     </div>
 
     <div class="row clearfix">
@@ -14,8 +14,8 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="card">
                 <div class="header" style="box-shadow: 2px 3px 2px rgba(0, 0, 0, 0.3)">
-                    <h2>FORM USER</h2>
-                    <a href="{{ url('/admin/users') }}" style="float: right; margin-top:-2.8rem" class="btn btn-default btn-circle waves-effect waves-circle waves-float">
+                    <h2>UBAH PROFILE</h2>
+                    <a href="{{ url('/petugas/dashboard') }}" style="float: right; margin-top:-2.8rem" class="btn btn-default btn-circle waves-effect waves-circle waves-float">
                         <i class="material-icons">person</i>
                     </a>
                 </div>
@@ -24,8 +24,12 @@
                     <div class="alert alert-danger alert-dismissible">
                         {{ session('log') }} <button class="close" data-dismiss="alert">x</button>
                     </div>
+                    @elseif(session()->has('message'))
+                    <div class="alert alert-success alert-dismissible">
+                        {{ session('message') }} <button class="close" data-dismiss="alert">x</button>
+                    </div>
                     @endif
-                    <form action="{{ url('/admin/users/save') }}" method="POST">
+                    <form action="{{ url('/petugas/profile/save') }}" method="POST">
                         @csrf
                         <div class="form-group form-float">
                             <div class="form-line">
@@ -45,17 +49,6 @@
                                 <label class="form-label">Password</label>
                             </div>
                         </div>
-                        <div class="form-group form-float">
-                            <label class="form-label" for="">Level User</label>
-                            <div class="form-line">
-                                <select name="level" class="form-control show-tick" required="required">
-                                    <option selected="selected" disabled="disabled">=== Pilih Level User</option>
-                                    <option value="1" @if(isset($row)){{$row->level==1 ? 'selected="selected"' : ''}}@endif>Petugas</option>
-                                    <option value="0" @if(isset($row)){{$row->level==0 ? 'selected="selected"' : ''}}@endif>Guest</option>
-                                </select>
-                            </div>
-                        </div>
-                        <input type="hidden" name="id_users" value="{{ isset($row) ? $row->id_users : '' }}">
                         <button type="submit" class="btn bg-orange waves-effect" name="submit" value="submit">
                             <i class="material-icons">save</i>
                             <span>SIMPAN</span>

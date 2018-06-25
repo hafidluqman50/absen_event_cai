@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Petugas;
+namespace App\Http\Controllers\Guest;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -12,14 +12,14 @@ class DashboardController extends Controller
     public function index() {
     	$title = 'Dashboard';
     	$page = 'beranda';
-    	return view('Petugas.dashboard',compact('title','page'));
+    	return view('Guest.dashboard',compact('title','page'));
     }
 
     public function profile() {
     	$title = 'Profile';
     	$page = 'profile';
     	$row = User::where('id_users',Auth::id())->firstOrFail();
-    	return view('Petugas.profile',compact('row','title','page'));
+    	return view('Guest.profile',compact('row','title','page'));
     }
 
     public function save(Request $request) {

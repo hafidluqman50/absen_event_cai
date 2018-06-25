@@ -11,7 +11,7 @@ class UsersController extends Controller
     public function index() {
     	$title = 'Users';
     	$page = 'user';
-    	$users = User::where('level',0)->get();
+    	$users = User::whereIn('level',[1,0])->get();
     	return view('Admin.user.main',compact('title','page','users'));
     }
 
@@ -24,7 +24,7 @@ class UsersController extends Controller
     public function edit($id) {
     	$title = 'Form Users';
     	$page = 'user';
-    	$row = User::where('level',0)->where('id_users',$id)->firstOrFail();
+    	$row = User::whereIn('level',[1,0])->where('id_users',$id)->firstOrFail();
     	return view('Admin.user.form-user',compact('title','page','row'));
     }
 
@@ -36,8 +36,11 @@ class UsersController extends Controller
     public function save(Request $request) {
     	$name = $request->name;
     	$username = $request->username;
+    	// if (User::where('username',$username)->count() == 1) {
+    	// 	return redirect('')->with('log','Maaf User Sudah Ada');
+    	// }
     	$password = $request->password;
-    	$level = 0;
+    	$level = $request->level;
     	$status_akun = 1;
     	$id_users = $request->id_users;
     	if ($id_users == '') {
@@ -56,7 +59,6 @@ class UsersController extends Controller
 		    	$array = [
 		    		'name' => $name,
 		    		'username' => $username,
-		    		'password' => bcrypt($password),
 		    		'level' => $level,
 		    		'status_akun' => $status_akun
 		    	];
@@ -65,11 +67,12 @@ class UsersController extends Controller
 		    	$array = [
 		    		'name' => $name,
 		    		'username' => $username,
+		    		'password' => bcrypt($password),
 		    		'level' => $level,
 		    		'status_akun' => $status_akun
 		    	];
     		}
-	    	User::where('id_users',$id)->update($array);
+	    	User::where('id_users',$id_users)->update($array);
 	    	$message = 'Berhasil Update User';
     	}
     	return redirect('/admin/users')->with('message',$message);

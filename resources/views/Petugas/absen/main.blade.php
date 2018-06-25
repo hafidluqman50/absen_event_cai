@@ -10,11 +10,11 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="card">
                 <div class="header" style="box-shadow: 2px 3px 2px rgba(0, 0, 0, 0.3);">
-                    <a href="{{ url('/admin/kegiatan') }}" style="float:left; margin-top:-1.2rem" class="btn btn-default btn-circle waves-effect waves-circle waves-float" title="kembali">
+                    <a href="{{ url('/petugas/kegiatan') }}" style="float:left; margin-top:-1.2rem" class="btn btn-default btn-circle waves-effect waves-circle waves-float" title="kembali">
                         <i class="material-icons">keyboard_backspace</i>
                     </a>
                     <h2>DATA ABSEN</h2>
-                    <a href="{{ url('/admin/kegiatan/'.$id.'/absen/tambah') }}" style="float: right; margin-top:-2.8rem" class="btn btn-default btn-circle waves-effect waves-circle waves-float" title="tambah kelompok">
+                    <a href="{{ url('/petugas/kegiatan/'.$id.'/absen/tambah') }}" style="float: right; margin-top:-2.8rem" class="btn btn-default btn-circle waves-effect waves-circle waves-float" title="tambah kelompok">
                         <i class="material-icons">playlist_add_check</i>
                     </a>
                 </div>
@@ -65,7 +65,7 @@
                                     <td>{{ $data->name }}</td>
                                     <td>
                                         <div class="btn-group" role="button">
-                                            <a href="{{ url('/admin/kegiatan/'.$id.'/absen/'.$data->id_absen.'/delete') }}" title="Hapus" class="btn btn-danger waves-effect" onclick="return confirm('Anda Yakin?')"><b>Hapus</b></a>
+                                            <a href="{{ url('/petugas/kegiatan/'.$id.'/absen/'.$data->id_absen.'/delete') }}" title="Hapus" class="btn btn-danger waves-effect" onclick="return confirm('Anda Yakin?')"><b>Hapus</b></a>
                                         </div>
                                     </td>
                                 </tr>

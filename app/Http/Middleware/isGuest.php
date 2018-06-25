@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Auth;
 
-class isAdmin
+class isGuest
 {
     /**
      * Handle an incoming request.
@@ -17,7 +17,7 @@ class isAdmin
     public function handle($request, Closure $next)
     {
         if (Auth::check() && Auth::user()->status_akun == 1) {
-            if (Auth::user()->level != 2) {
+            if (Auth::user()->level != 0) {
                 return redirect('/login');
             }
         }

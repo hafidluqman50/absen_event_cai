@@ -34,12 +34,12 @@ class KelompokController extends Controller
     }
 
     public function save(Request $request) {
-    	$nama_kelompok = $request->nama_kelompok;
-    	$lokasi_kelompok = $request->lokasi_kelompok;
-    	$id_kelompok = $request->id_kelompok;
+		$nama_kelompok   = strtoupper($request->nama_kelompok);
+		$lokasi_kelompok = strtoupper($request->lokasi_kelompok);
+		$id_kelompok     = $request->id_kelompok;
     	$array = [
-    		'nama_kelompok' => $nama_kelompok,
-    		'lokasi_kelompok' => $lokasi_kelompok
+			'nama_kelompok'   => $nama_kelompok,
+			'lokasi_kelompok' => $lokasi_kelompok
     	];
     	if ($id_kelompok == '') {
     		Kelompok::create($array);

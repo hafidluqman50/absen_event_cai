@@ -104,4 +104,8 @@ function loadTracking() {
     ga('create', trackingId, 'auto');
     ga('send', 'pageview');
 }
+
+$('.selectpicker').selectpicker({
+    style:'.form-control'
+});
 //========================================================================================================

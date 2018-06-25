@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="block-header">
-        <h2>PESERTA</h2>
+        <h2>ANGGOTA</h2>
     </div>
 
     <div class="row clearfix">
@@ -10,8 +10,8 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="card">
                 <div class="header" style="box-shadow: 2px 3px 2px rgba(0, 0, 0, 0.3);">
-                    <h2>DATA PESERTA</h2>
-                    <a href="{{ url('/admin/kegiatan/'.$id.'/peserta/tambah') }}" style="float: right; margin-top:-2.8rem" class="btn btn-default btn-circle waves-effect waves-circle waves-float" title="tambah kelompok">
+                    <h2>DATA ANGGOTA</h2>
+                    <a href="{{ url('/admin/anggota/tambah') }}" style="float: right; margin-top:-2.8rem" class="btn btn-default btn-circle waves-effect waves-circle waves-float" title="tambah kelompok">
                         <i class="material-icons">playlist_add_check</i>
                     </a>
                 </div>
@@ -22,36 +22,39 @@
                     </div>
                     @endif
                     <div class="table-responsive">
-                        <h5>Nama Kegiatan : {{ $kegiatan->nama_kegiatan }}</h5>
-                        <h5>Tanggal Kegiatan : {{ explodeDate($kegiatan->tanggal_kegiatan) }}</h5>
-                        <h5>Lokasi Kegiatan : {{ $kegiatan->lokasi_kegiatan }}</h5>
                         <table class="table table-hover dashboard-task-infos" id="table">
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama Anggota</th>
-                                    <th>Nama Kelompok</th>
+                                    <th>Peserta</th>
+                                    <th>Nama</th>
+                                    <th>Tempat Lhr</th>
                                     <th>Tgl Lahir</th>
                                     <th>No Telepon</th>
+                                    <th>Email</th>
+                                    <th>JK</th>
                                     <th>Alamat</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($peserta as $key => $data)
+                                @foreach($anggota as $key => $data)
                                 <tr>
                                     <td>{{ $key+1 }}</td>
+                                    <td>{{ $data->ket_peserta }}</td>
                                     <td>{{ $data->nama_anggota }}</td>
-                                    <td>{{ $data->nama_kelompok }}</td>
+                                    <td>{{ $data->tempat_lahir }}</td>
                                     <td>{{ explodeDate($data->tgl_lahir) }}</td>
                                     <td>{{ $data->no_telepon }}</td>
+                                    <td>{{ $data->email }}</td>
+                                    <td>{{ strtoupper($data->jenis_kelamin) }}</td>
                                     <td>{{ $data->alamat }}</td>
                                     <td>
                                         <div class="btn-group" role="group">
-                                            <a href="{{ url('/admin/kegiatan/'.$id.'/peserta/'.$data->id_kegiatan.'/edit') }}" title="Edit" class="btn btn-warning waves-effect"><b>Edit</b></a>
+                                            <a href="{{ url('/admin/anggota/'.$data->id_anggota.'/edit') }}" title="Edit" class="btn btn-warning waves-effect"><b>Edit</b></a>
                                         </div>
                                         <div class="btn-group" role="button">
-                                            <a href="{{ url('/admin/kegiatan/'.$id.'/peserta/'.$data->id_kegiatan.'/delete') }}" title="Hapus" class="btn btn-danger waves-effect" onclick="return confirm('Anda Yakin?')"><b>Hapus</b></a>
+                                            <a href="{{ url('/admin/anggota/'.$data->id_anggota.'/delete') }}" title="Hapus" class="btn btn-danger waves-effect" onclick="return confirm('Anda Yakin?')"><b>Hapus</b></a>
                                         </div>
                                     </td>
                                 </tr>

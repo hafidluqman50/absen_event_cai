@@ -17,11 +17,14 @@ class isAuth
     public function handle($request, Closure $next)
     {
         if (Auth::check()) {
-            if (Auth::user()->level == 1) {
+            if (Auth::user()->level == 2) {
                 $user = 'admin';
             }
-            elseif(Auth::user()->level == 0) {
+            elseif(Auth::user()->level == 1) {
                 $user = 'petugas';
+            }
+            elseif(Auth::user()->level == 0) {
+                $user = 'guest';
             }
             return redirect('/'.$user.'/dashboard');
         }
