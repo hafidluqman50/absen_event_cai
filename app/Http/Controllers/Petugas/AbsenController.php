@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Petugas;
+date_default_timezone_set('Asia/Singapore');
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

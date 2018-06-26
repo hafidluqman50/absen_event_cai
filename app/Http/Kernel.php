@@ -62,6 +62,7 @@ class Kernel extends HttpKernel
         'isAuth' => \App\Http\Middleware\isAuth::class,
         'isAdmin' => \App\Http\Middleware\isAdmin::class,
         'isPetugas' => \App\Http\Middleware\isPetugas::class,
-        'isGuest' => \App\Http\Middleware\isGuest::class
+        'isGuest' => \App\Http\Middleware\isGuest::class,
+        'CorsApi' => \App\Http\Middleware\CorsApi::class
     ];
 }

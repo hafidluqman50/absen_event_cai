@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 26, 2018 at 10:06 AM
+-- Generation Time: Jun 26, 2018 at 07:12 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -45,7 +45,8 @@ CREATE TABLE `absen` (
 INSERT INTO `absen` (`id_absen`, `id_detail`, `waktu_absen`, `id_jadwal`, `id_users`, `created_at`, `updated_at`) VALUES
 (2, 1, '2018-06-25 05:12:36', 1, 1, '2018-06-26 01:32:20', '2018-06-24 21:12:36'),
 (3, 3, '2018-06-26 06:54:30', 1, 1, '2018-06-25 22:54:30', '2018-06-25 22:54:30'),
-(4, 4, '2018-06-26 07:10:55', 2, 1, '2018-06-25 23:10:55', '2018-06-25 23:10:55');
+(4, 4, '2018-06-26 07:10:55', 2, 1, '2018-06-25 23:10:55', '2018-06-25 23:10:55'),
+(5, 5, '2018-06-27 00:49:14', 1, 1, '2018-06-26 16:49:14', '2018-06-26 16:49:14');
 
 -- --------------------------------------------------------
 
@@ -78,7 +79,16 @@ CREATE TABLE `anggota` (
 
 INSERT INTO `anggota` (`id_anggota`, `nama_anggota`, `id_kelompok`, `tgl_lahir`, `tempat_lahir`, `desa`, `jenis_kelamin`, `no_telepon`, `email`, `alamat`, `ket_peserta`, `ukuran_baju`, `dapukan`, `status_peserta`, `created_at`, `updated_at`) VALUES
 (1, 'MAMAT', 1, '2018-06-22', 'SAMARINDA', 'KARANG MUMUS', 'laki-laki', '085391791228', 'uhuy@gmail.com', 'JLN. MUSO SALIM', 'PAKETAN', 'XLL', 'TUKANG RUQYAH', 'ULAMA', '2018-06-26 01:13:24', '2018-06-24 20:12:48'),
-(4, 'KING T\'CHALLA', 2, '2018-06-30', 'SAMARINDA', 'BLACK PANTHER', 'laki-laki', '08888888888888', 't\'chall@mail.com', 'JLN. BATU ANGIN', 'JAGOAN', 'XL', 'SEPUH', 'RAJA', '2018-06-25 22:24:02', '2018-06-25 22:24:02');
+(2, 'KING T\'CHALLA', 2, '2018-06-30', 'SAMARINDA', 'BLACK PANTHER', 'laki-laki', '08888888888888', 't\'chall@mail.com', 'JLN. BATU ANGIN', 'JAGOAN', 'XL', 'SEPUH', 'RAJA', '2018-06-26 14:12:24', '2018-06-25 22:24:02'),
+(3, 'PANGGALIH HUSODO', 3, '1994-11-18', 'MALANG', 'SAMARINDA ULU', 'laki-laki', '0813-5015-7264', 'gnom354@yahoo.com', '-', 'KIRIMAN', 'XL', 'KETUA MUDA/I', 'MUBALLIGH SETEMPAT', '2018-06-26 07:26:13', '2018-06-26 07:26:13'),
+(4, 'NADIA KURNIKOVA', 5, '2003-08-11', 'SAMARINDA', 'SAMARINDA ULU', 'perempuan', '0853-9058-9108', '-', '-', 'KIRIMAN', 'XL', 'ROKYAH', 'PELAJAR', '2018-06-26 07:26:13', '2018-06-26 07:26:13'),
+(5, 'NOVIA RATNA SARI', 4, '1997-11-04', 'SAMARINDA', 'SAMARINDA ULU', 'perempuan', '0813-8512-1140', '-', '-', 'KIRIMAN', 'XL', 'KEPUTRIAN KELOMPOK', 'MUBALLIGH SETEMPAT', '2018-06-26 07:26:13', '2018-06-26 07:26:13'),
+(6, 'KHODIJAH KIKI LESTARI', 5, '1995-04-30', 'SAMARINDA', 'SAMBUTAN', 'perempuan', '0822 5512 1207', 'khodijahklestari@gmail.com', '-', 'KIRIMAN', 'L', 'KEPUTRIAN DESA', 'MUBALLIGH SETEMPAT', '2018-06-26 07:26:13', '2018-06-26 07:26:13'),
+(7, 'MUHAMMAD AFIF', 6, '1998-02-13', 'SAMARINDA', 'SAMBUTAN', 'laki-laki', '0812 5383 9523', 'afif1998m@gmail.com', '-', 'KIRIMAN', 'XL', 'KETUA MUDA MUDI ', 'MAHASISWA', '2018-06-26 07:26:13', '2018-06-26 07:26:13'),
+(8, 'MUHAMMAD NUR HUDA', 5, '1996-11-01', 'SAMARINDA', 'SAMBUTAN', 'laki-laki', '0823 0148 2826', '-', '-', 'KIRIMAN', 'L', 'ROKYAH', 'KERJA', '2018-06-26 07:26:13', '2018-06-26 07:26:13'),
+(9, 'FADLI UMAR HAMDAN', 6, '2000-04-26', 'SAMARINDA', 'SAMBUTAN', 'laki-laki', '0823 5306 8300', 'fedli354@gmail.com', '-', 'KIRIMAN', 'M', 'WAKIL KETUA MUDA MUDI', 'PELAJAR', '2018-06-26 07:26:13', '2018-06-26 07:26:13'),
+(10, 'BAGUSTO PRANTAU PRATMAJAYA', 5, '1998-11-28', 'BALIKPAPAN', 'SAMARINDA SEBERANG', 'laki-laki', '0821 3963 7760', 'Bagussatrya2898@gmail.com', '-', 'KIRIMAN', 'XL', 'WAKIL KETUA MUDA/I', 'MAHASISWA', '2018-06-26 07:26:13', '2018-06-26 07:26:13'),
+(11, 'IRVAN JAENUDIN', 3, '1998-05-28', 'BITUNG', 'SAMARINDA SEBERANG', 'laki-laki', '-', '-', '-', 'KIRIMAN', 'L', 'MUBALLIGH TUGASAN', 'MUBALLIGH TUGASAN', '2018-06-26 07:26:13', '2018-06-26 07:26:13');
 
 -- --------------------------------------------------------
 
@@ -149,8 +159,10 @@ CREATE TABLE `kegiatan_detail` (
 
 INSERT INTO `kegiatan_detail` (`id_detail`, `id_kegiatan`, `code_barcode`, `id_anggota`, `ket`, `id_users`, `created_at`, `updated_at`) VALUES
 (1, 1, '2941533150001', 1, 'panitia', 1, '2018-06-24 18:15:12', '2018-06-24 22:05:41'),
-(3, 1, '2941533150002', 4, 'panitia', 1, '2018-06-25 22:41:23', '2018-06-25 22:41:23'),
-(4, 2, '2941533150001', 1, 'peserta', 1, '2018-06-25 23:10:40', '2018-06-25 23:10:40');
+(3, 1, '2941533150002', 2, 'panitia', 1, '2018-06-25 22:41:23', '2018-06-25 22:41:23'),
+(4, 2, '2941533150001', 1, 'peserta', 1, '2018-06-25 23:10:40', '2018-06-25 23:10:40'),
+(5, 1, '2941533150003', 3, 'peserta', 1, '2018-06-26 08:48:28', '2018-06-26 08:48:28'),
+(6, 1, '2941533150004', 11, 'peserta', 1, '2018-06-26 08:48:57', '2018-06-26 08:48:57');
 
 -- --------------------------------------------------------
 
@@ -172,7 +184,11 @@ CREATE TABLE `kelompok` (
 
 INSERT INTO `kelompok` (`id_kelompok`, `nama_kelompok`, `lokasi_kelompok`, `created_at`, `updated_at`) VALUES
 (1, 'SHINOBI KONOHA', 'JLN. MENUJU MASA DEPAN', '2018-06-24 05:42:21', '2018-06-24 20:15:23'),
-(2, 'JAGOAN MAMA', 'WAKANDA', '2018-06-25 19:37:29', '2018-06-25 19:37:29');
+(2, 'JAGOAN MAMA', 'WAKANDA', '2018-06-25 19:37:29', '2018-06-25 19:37:29'),
+(3, 'KONOHA', 'KONOHAGAKURE', '2018-06-26 07:26:12', '2018-06-26 07:26:12'),
+(4, 'HOKAGE', 'SUNAGAKURE', '2018-06-26 07:26:12', '2018-06-26 07:26:12'),
+(5, 'UCHIHA', 'INDRA', '2018-06-26 07:26:12', '2018-06-26 07:26:12'),
+(6, 'UZUMAKI', 'ASHURA', '2018-06-26 07:26:12', '2018-06-26 07:26:12');
 
 -- --------------------------------------------------------
 
@@ -289,13 +305,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `absen`
 --
 ALTER TABLE `absen`
-  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `anggota`
 --
 ALTER TABLE `anggota`
-  MODIFY `id_anggota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_anggota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `jadwal`
@@ -313,13 +329,13 @@ ALTER TABLE `kegiatan`
 -- AUTO_INCREMENT for table `kegiatan_detail`
 --
 ALTER TABLE `kegiatan_detail`
-  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `kelompok`
 --
 ALTER TABLE `kelompok`
-  MODIFY `id_kelompok` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_kelompok` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `migrations`

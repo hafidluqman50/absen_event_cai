@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 date_default_timezone_set('Asia/Singapore');
+
 use Illuminate\Http\Request;
 use Auth;
 use App\User;

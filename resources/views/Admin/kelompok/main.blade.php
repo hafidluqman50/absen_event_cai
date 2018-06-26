@@ -25,6 +25,11 @@
                         <b>{{ session('log') }}</b> <button class="close" data-dismiss="alert">x</button>
                     </div>
                     @endif
+                    <div class="btn-group mg">
+                        <a href="{{ url('/admin/import') }}" class="btn btn-success waves-effect waves-float btn-lg" title="tambah kelompok">
+                            <b>Import Data</b>    
+                        </a>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-hover dashboard-task-infos" id="table">
                             <thead>

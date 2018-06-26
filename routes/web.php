@@ -25,17 +25,25 @@ Route::post('/login/auth', ['as' => 'login-post', 'uses' => 'AuthController@logi
 Route::get('/logout', ['as' => 'logout', 'uses' => 'AuthController@logout']);
 Route::get('/get-anggota/{id}',['as'=>'get-ajax-anggota','uses'=>'AjaxController@getAnggota']);
 
+Route::group(['prefix'=>'api','middleware'=>'CorsApi'],function(){
+    Route::get('/absen-cai','ApiController@absen');
+});
+
 // ROUTE ADMIN //
 Route::group(['prefix' => 'admin', 'middleware' => 'isAdmin'], function () {
     // PAGE //
     Route::get('/dashboard', ['as' => 'dashboard-admin-page', 'uses' => 'Admin\DashboardController@index']);
+    
     Route::get('/kegiatan', ['as' => 'kegiatan-admin-page', 'uses' => 'Admin\KegiatanController@index']);
     Route::get('/kegiatan/{id}/peserta', ['as' => 'peserta-admin-page', 'uses' => 'Admin\KegiatanController@peserta']);
     Route::get('/kegiatan/{id}/jadwal',['as' => 'jadwal-admin-page', 'uses' => 'Admin\JadwalController@index']);
     Route::get('/kegiatan/{id}/jadwal/{id_jadwal}/absen',['as' => 'absen-admin-page', 'uses' => 'Admin\AbsenController@index']);
+    
     Route::get('/users', ['as' => 'users-admin-page', 'uses' => 'Admin\UsersController@index']);
+    
     Route::get('/kelompok', ['as' => 'kelompok-admin-page', 'uses' => 'Admin\KelompokController@index']);
     Route::get('/kelompok/{id}/anggota',['as'=>'peserta-admin-page','uses'=>'Admin\AnggotaController@index']);
+
     Route::get('/profile', ['as' => 'change-profile-page', 'uses' => 'Admin\DashboardController@profile']);
     Route::get('/bet', function () {
         return view('bet');
@@ -65,7 +73,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'isAdmin'], function () {
     Route::get('/kelompok/{id}/delete', ['as' => 'kelompok-edit-admin', 'uses' => 'Admin\KelompokController@delete']);
     Route::get('/kelompok/{id}/anggota/tambah',['as' => 'anggota-tambah-admin', 'uses' => 'Admin\AnggotaController@tambah']);
     Route::get('/kelompok/{id}/anggota/{id_anggota}/edit',['as' => 'anggota-edit-admin', 'uses' => 'Admin\AnggotaController@edit']);
-    Route::get('/kelompok/{id}/anggota/{id_anggota}/delete',['as' => 'anggot-delete-admin', 'uses' => 'Admin\AnggotaController@delete']);
+    Route::get('/kelompok/{id}/anggota/{id_anggota}/delete',['as' => 'anggota-delete-admin', 'uses' => 'Admin\AnggotaController@delete']);
+    Route::get('/import',['as' => 'import-excel-admin', 'uses' => 'Admin\KelompokController@importForm']);
     
     Route::get('/users/tambah', ['as' => 'tambah-user-admin', 'uses' => 'Admin\UsersController@tambah']);
     Route::get('/users/{id}/edit', ['as' => 'edit-user-admin', 'uses' => 'Admin\UsersController@edit']);
@@ -80,6 +89,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'isAdmin'], function () {
     Route::post('/absen/save', ['as' => 'absen-post-admin', 'uses' => 'Admin\AbsenController@save']);
     Route::post('/jadwal/save',['as' => 'jadwal-post-admin','uses' => 'Admin\JadwalController@save']);
     Route::post('/kelompok/save', ['as' => 'kelompok-post-admin', 'uses' => 'Admin\KelompokController@save']);
+    Route::post('/import/post',['as' => 'import-post-admin', 'uses' => 'Admin\KelompokController@importExcel']);
     Route::post('/users/save', ['as' => 'users-post-admin', 'uses' => 'Admin\UsersController@save']);
     Route::post('/profile/save', ['as' => 'profile-save-admin', 'uses' => 'Admin\DashboardController@save']);
     // END PROSES //
