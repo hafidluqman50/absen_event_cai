@@ -18,7 +18,7 @@
                 <div class="body">
                     @if(session()->has('message'))
                     <div class="alert alert-success alert-dismissible">
-                        {{ session('message') }}<button class="close" data-dismiss="alert">x</button>
+                        <b>{{ session('message') }}</b> <button class="close" data-dismiss="alert">x</button>
                     </div>
                     @endif
                     <div class="table-responsive">
@@ -48,10 +48,10 @@
                                     <td>
                                         <div class="btn-group" role="group">
                                             <a href="{{ url('/admin/users/'.$data->id_users.'/edit') }}" title="Edit" class="btn btn-warning waves-effect">Edit</a>
-                                        </div>{{-- 
+                                        </div>
                                         <div class="btn-group" role="button">
                                             <a href="{{ url('/admin/users/'.$data->id_users.'/delete') }}" title="Hapus"  class="btn btn-danger waves-effect" onclick="return confirm('Anda Yakin?')">Hapus</a>
-                                        </div>  --}}
+                                        </div> 
                                         <div class="btn-group" role="group">
                                             @if($data->status_akun == 1)
                                             <a href="{{ url('/admin/users/'.$data->id_users.'/status-users') }}" title="Status" class="btn btn-primary waves-effect">Nonaktifkan</a>

@@ -10,21 +10,17 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="card">
                 <div class="header" style="box-shadow: 2px 3px 2px rgba(0, 0, 0, 0.3);">
-                    <a href="{{ url('/guest/kegiatan') }}" style="float:left; margin-top:-1.2rem" class="btn btn-default btn-circle waves-effect waves-circle waves-float" title="kembali">
+                    <a href="{{ url('/guest/kegiatan/'.$id.'/jadwal') }}" style="float:left; margin-top:-1.2rem" class="btn btn-default btn-circle waves-effect waves-circle waves-float" title="kembali">
                         <i class="material-icons">keyboard_backspace</i>
                     </a>
                     <h2>DATA ABSEN</h2>
                 </div>
                 <div class="body">
-                    @if(session()->has('message'))
-                    <div class="alert alert-success alert-dismissible">
-                        {{ session('message') }} <button class="close" data-dismiss="alert">x</button>
-                    </div>
-                    @endif
                     <div class="table-responsive">
-                        <h5>Nama Kegiatan : {{ $kegiatan->nama_kegiatan }}</h5>
-                        <h5>Tanggal Kegiatan : {{ explodeDate($kegiatan->tanggal_kegiatan) }}</h5>
-                        <h5>Lokasi Kegiatan : {{ $kegiatan->lokasi_kegiatan }}</h5>
+                        <h5>Nama Kegiatan : {{ $jadwal->kegiatan->nama_kegiatan }}</h5>
+                        <h5>Tanggal Kegiatan : {{ explodeDate($jadwal->kegiatan->tanggal_kegiatan) }}</h5>
+                        <h5>Lokasi Kegiatan : {{ $jadwal->kegiatan->lokasi_kegiatan }}</h5>
+                        <h5>Jadwal : {{ $jadwal->nama_jadwal }}</h5>
                         <table class="table table-hover dashboard-task-infos" id="table">
                             <thead>
                                 <tr>
@@ -32,9 +28,9 @@
                                     <th>Code Barcode</th>
                                     <th>Nama Anggota</th>
                                     <th>Nama Kelompok</th>
-                                    <th>Ket.</th>
+                                    <th>Jabatan</th>
+                                    <th>Ket. Peserta</th>
                                     <th>Waktu Tiba</th>
-                                    <th>Jadwal</th>
                                     <th>Input By</th>
                                 </tr>
                             </thead>
@@ -56,8 +52,8 @@
                                         </span>
                                         @endif
                                     </td>
+                                    <td>{{ $data->ket_peserta }}</td>
                                     <td>{{ $data->waktu_absen }}</td>
-                                    <td>{{ ucwords($data->keterangan) }}</td>
                                     <td>{{ $data->name }}</td>
                                 </tr>
                                 @endforeach

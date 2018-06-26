@@ -15,9 +15,6 @@
             <div class="card">
                 <div class="header" style="box-shadow: 2px 3px 2px rgba(0, 0, 0, 0.3)">
                     <h2>UBAH PROFILE</h2>
-                    <a href="{{ url('/guest/dashboard') }}" style="float: right; margin-top:-2.8rem" class="btn btn-default btn-circle waves-effect waves-circle waves-float">
-                        <i class="material-icons">person</i>
-                    </a>
                 </div>
                 <div class="body">
                     @if(session()->has('log'))

@@ -10,24 +10,45 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="card">
                 <div class="header" style="box-shadow: 2px 3px 2px rgba(0, 0, 0, 0.3);">
-                    <a href="{{ url('/admin/kegiatan') }}" style="float:left; margin-top:-1.2rem" class="btn btn-default btn-circle waves-effect waves-circle waves-float" title="kembali">
+                    <a href="{{ url('/admin/kegiatan/'.$id.'/jadwal') }}" style="float:left; margin-top:-1.2rem" class="btn btn-default btn-circle waves-effect waves-circle waves-float" title="kembali">
                         <i class="material-icons">keyboard_backspace</i>
                     </a>
                     <h2>DATA ABSEN</h2>
-                    <a href="{{ url('/admin/kegiatan/'.$id.'/absen/tambah') }}" style="float: right; margin-top:-2.8rem" class="btn btn-default btn-circle waves-effect waves-circle waves-float" title="tambah kelompok">
-                        <i class="material-icons">playlist_add_check</i>
-                    </a>
                 </div>
                 <div class="body">
                     @if(session()->has('message'))
                     <div class="alert alert-success alert-dismissible">
-                        {{ session('message') }} <button class="close" data-dismiss="alert">x</button>
+                        <b>{{ session('message') }}</b> <button class="close" data-dismiss="alert">x</button>
+                    </div>
+                    @elseif(session()->has('log'))
+                    <div class="alert alert-danger alert-dismissible">
+                        <b>{{ session('log') }}</b> <button class="close" data-dismiss="alert">x</button>
                     </div>
                     @endif
+                    <form action="{{ url('admin/absen/save') }}" method="POST">
+                        @csrf
+                        <div class="display-flex row clearfix">
+                            <div class="col-md-10 form-group form-float">
+                                <div class="form-line">
+                                    <input type="number" class="form-control" name="barcode" required="required">
+                                    <label class="form-label" for="">Barcode</label>
+                                </div>
+                            </div>
+                            <input type="hidden" name="id_jadwal" value="{{ $id_jadwal }}">
+                            <input type="hidden" name="id_kegiatan" value="{{ $id }}">
+                            <div class="col-md-2">
+                                <button type="submit" class="btn bg-orange waves-effect" name="submit" value="submit">
+                                    <i class="material-icons">save</i>
+                                    <span>SIMPAN</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                     <div class="table-responsive">
-                        <h5>Nama Kegiatan : {{ $kegiatan->nama_kegiatan }}</h5>
-                        <h5>Tanggal Kegiatan : {{ explodeDate($kegiatan->tanggal_kegiatan) }}</h5>
-                        <h5>Lokasi Kegiatan : {{ $kegiatan->lokasi_kegiatan }}</h5>
+                        <h5>Nama Kegiatan : {{ $jadwal->kegiatan->nama_kegiatan }}</h5>
+                        <h5>Tanggal Kegiatan : {{ explodeDate($jadwal->kegiatan->tanggal_kegiatan) }}</h5>
+                        <h5>Lokasi Kegiatan : {{ $jadwal->kegiatan->lokasi_kegiatan }}</h5>
+                        <h5>Jadwal : {{ $jadwal->nama_jadwal }}</h5>
                         <table class="table table-hover dashboard-task-infos" id="table">
                             <thead>
                                 <tr>
@@ -35,11 +56,11 @@
                                     <th>Code Barcode</th>
                                     <th>Nama Anggota</th>
                                     <th>Nama Kelompok</th>
-                                    <th>Ket.</th>
+                                    <th>Jabatan</th>
+                                    <th>Ket. Peserta</th>
                                     <th>Waktu Tiba</th>
-                                    <th>Jadwal</th>
                                     <th>Input By</th>
-                                    <th>Aksi</th>
+                                    <th>#</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -60,8 +81,8 @@
                                         </span>
                                         @endif
                                     </td>
+                                    <td>{{ $data->ket_peserta }}</td>
                                     <td>{{ $data->waktu_absen }}</td>
-                                    <td>{{ ucwords($data->keterangan) }}</td>
                                     <td>{{ $data->name }}</td>
                                     <td>
                                         <div class="btn-group" role="button">

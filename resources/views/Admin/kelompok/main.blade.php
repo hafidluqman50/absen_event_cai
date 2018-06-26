@@ -18,7 +18,11 @@
                 <div class="body">
                     @if(session()->has('message'))
                     <div class="alert alert-success alert-dismissible">
-                        {{ session('message') }}<button class="close" data-dismiss="alert">x</button>
+                        <b>{{ session('message') }}</b> <button class="close" data-dismiss="alert">x</button>
+                    </div>
+                    @elseif(session()->has('log'))
+                    <div class="alert alert-danger alert-dismissible">
+                        <b>{{ session('log') }}</b> <button class="close" data-dismiss="alert">x</button>
                     </div>
                     @endif
                     <div class="table-responsive">
@@ -28,7 +32,7 @@
                                     <th>No</th>
                                     <th>Nama</th>
                                     <th>Lokasi</th>
-                                    <th>Aksi</th>
+                                    <th>#</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -39,10 +43,15 @@
                                     <td>{{ $data->lokasi_kelompok }}</td>
                                     <td>
                                         <div class="btn-group" role="group">
-                                            <a href="{{ url('/admin/kelompok/'.$data->id_kelompok.'/edit') }}" title="Edit" class="btn btn-warning waves-effect">Edit</a>
+                                            <a href="{{ url('/admin/kelompok/'.$data->id_kelompok.'/anggota') }}" title="Lihat Anggota" class="btn btn-info">
+                                                <b>Lihat Anggota</b>
+                                            </a>
+                                        </div>
+                                        <div class="btn-group" role="group">
+                                            <a href="{{ url('/admin/kelompok/'.$data->id_kelompok.'/edit') }}" title="Edit" class="btn btn-warning waves-effect"><b>Edit</b></a>
                                         </div>
                                         <div class="btn-group" role="button">
-                                            <a href="{{ url('/admin/kelompok/'.$data->id_kelompok.'/delete') }}" title="Hapus"  class="btn btn-danger waves-effect" onclick="return confirm('Anda Yakin?')">Hapus</a>
+                                            <a href="{{ url('/admin/kelompok/'.$data->id_kelompok.'/delete') }}" title="Hapus"  class="btn btn-danger waves-effect" onclick="return confirm('Anda Yakin?')"><b>Hapus</b></a>
                                         </div>
                                     </td>
                                 </tr>

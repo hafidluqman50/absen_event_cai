@@ -16,7 +16,7 @@ class isAuth
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check()) {
+        if (Auth::check() && Auth::user()->status_delete == 0) {
             if (Auth::user()->level == 2) {
                 $user = 'admin';
             }

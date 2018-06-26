@@ -37,18 +37,24 @@ class KelompokController extends Controller
 		$nama_kelompok   = strtoupper($request->nama_kelompok);
 		$lokasi_kelompok = strtoupper($request->lokasi_kelompok);
 		$id_kelompok     = $request->id_kelompok;
-    	$array = [
-			'nama_kelompok'   => $nama_kelompok,
-			'lokasi_kelompok' => $lokasi_kelompok
-    	];
-    	if ($id_kelompok == '') {
-    		Kelompok::create($array);
-    		$message = 'Berhasil Input Kelompok';
-    	}
-    	else {
-    		Kelompok::where('id_kelompok',$id_kelompok)->update($array);
-    		$message = 'Berhasil Update Kelompok';
-    	}
-    	return redirect('/admin/kelompok')->with('message',$message);
+        $get             = Kelompok::where('nama_kelompok',$nama_kelompok)->count();
+        if ($get != 0) {
+            return redirect('/admin/kelompok')->with('log','Maaf Kelompok Sudah Ada');
+        }
+        else {
+            $array = [
+                'nama_kelompok'   => $nama_kelompok,
+                'lokasi_kelompok' => $lokasi_kelompok
+            ];
+            if ($id_kelompok == '') {
+                Kelompok::create($array);
+                $message = 'Berhasil Input Kelompok';
+            }
+            else {
+                Kelompok::where('id_kelompok',$id_kelompok)->update($array);
+                $message = 'Berhasil Update Kelompok';
+            }
+            return redirect('/admin/kelompok')->with('message',$message);
+        }
     }
 }

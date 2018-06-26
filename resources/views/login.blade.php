@@ -36,7 +36,9 @@
                 <form id="sign_in" action="{{ url('/login/auth') }}" method="POST">
                     @csrf
                     @if(session()->has('log'))
-                    <div class="msg">{{ session('log') }}</div>
+                    <div class="alert alert-danger alert-dismissible">
+                        <b>{{ session('log') }}</b> <button class="close" data-dismiss="alert">x</button>
+                    </div>
                     @endif
                     <div class="input-group">
                         <span class="input-group-addon">

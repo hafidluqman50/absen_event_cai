@@ -14,6 +14,9 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="card">
                 <div class="header" style="box-shadow: 2px 3px 2px rgba(0, 0, 0, 0.3)">
+                    <a href="{{ url('/admin/users') }}" style="float:left; margin-top:-1.2rem" class="btn btn-default btn-circle waves-effect waves-circle waves-float" title="kembali">
+                        <i class="material-icons">keyboard_backspace</i>
+                    </a>
                     <h2>FORM USER</h2>
                     <a href="{{ url('/admin/users') }}" style="float: right; margin-top:-2.8rem" class="btn btn-default btn-circle waves-effect waves-circle waves-float">
                         <i class="material-icons">person</i>

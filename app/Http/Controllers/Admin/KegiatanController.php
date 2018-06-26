@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
@@ -15,59 +14,59 @@ use Auth;
 class KegiatanController extends Controller
 {
     public function index() {
-    	$title = 'Kegiatan';
-    	$page = 'kegiatan';
-    	$kegiatan = Kegiatan::all();
-    	return view('Admin.kegiatan.main',compact('kegiatan','title','page'));
+        $title = 'Kegiatan';
+        $page = 'kegiatan';
+        $kegiatan = Kegiatan::all();
+        return view('Admin.kegiatan.main',compact('kegiatan','title','page'));
     }
 
     public function tambah() {
-    	$title = 'Form Kegiatan';
-    	$page = 'kegiatan';
-    	return view('Admin.kegiatan.form-kegiatan',compact('title','page'));
+        $title = 'Form Kegiatan';
+        $page = 'kegiatan';
+        return view('Admin.kegiatan.form-kegiatan',compact('title','page'));
     }
 
     public function edit($id) {
-    	$title = 'Form Kegiatan';
-    	$page = 'kegiatan';
-    	$row = Kegiatan::where('id_kegiatan',$id)->firstOrFail();
-    	return view('Admin.kegiatan.form-kegiatan',compact('row','title','page'));
+        $title = 'Form Kegiatan';
+        $page = 'kegiatan';
+        $row = Kegiatan::where('id_kegiatan',$id)->firstOrFail();
+        return view('Admin.kegiatan.form-kegiatan',compact('row','title','page'));
     }
 
     public function delete($id) {
-    	Kegiatan::where('id_kegiatan',$id)->delete();
-    	return redirect('/admin/kegiatan')->with('message','Berhasil Hapus Kegiatan');
+        Kegiatan::where('id_kegiatan',$id)->delete();
+        return redirect('/admin/kegiatan')->with('message','Berhasil Hapus Kegiatan');
     }
 
     public function save(Request $request) {
-    	$nama_kegiatan = $request->nama_kegiatan;
-    	$tanggal_kegiatan = $request->tanggal_kegiatan;
-    	$lokasi_kegiatan = $request->lokasi_kegiatan;
-    	$id_kegiatan = $request->id_kegiatan;
-    	$array = [
-    		'nama_kegiatan' => $nama_kegiatan,
-    		'tanggal_kegiatan' => $tanggal_kegiatan,
-    		'lokasi_kegiatan' => $lokasi_kegiatan
-    	];
-    	if ($id_kegiatan == '') {
-    		Kegiatan::create($array);
-    		$message = 'Berhasil Input Kegiatan';
-    	}
-    	else {
-    		Kegiatan::where('id_kegiatan',$id_kegiatan)->update($array);
-    		$message = 'Berhasil Update Kegiatan';
-    	}
-		return redirect('/admin/kegiatan')->with('message',$message);
+        $nama_kegiatan = $request->nama_kegiatan;
+        $tanggal_kegiatan = $request->tanggal_kegiatan;
+        $lokasi_kegiatan = $request->lokasi_kegiatan;
+        $id_kegiatan = $request->id_kegiatan;
+        $array = [
+            'nama_kegiatan' => $nama_kegiatan,
+            'tanggal_kegiatan' => $tanggal_kegiatan,
+            'lokasi_kegiatan' => $lokasi_kegiatan
+        ];
+        if ($id_kegiatan == '') {
+            Kegiatan::create($array);
+            $message = 'Berhasil Input Kegiatan';
+        }
+        else {
+            Kegiatan::where('id_kegiatan',$id_kegiatan)->update($array);
+            $message = 'Berhasil Update Kegiatan';
+        }
+        return redirect('/admin/kegiatan')->with('message',$message);
     }
 
     public function peserta($id) {
-    	$title = 'Peserta';
-    	$page = 'kegiatan';
-    	$kegiatan = Kegiatan::where('id_kegiatan',$id)->firstOrFail();
-    	$peserta = DB::table('kegiatan_detail')
-    				->join('anggota','kegiatan_detail.id_anggota','=','anggota.id_anggota')
-    				->join('kelompok','kegiatan_detail.id_kelompok','=','kelompok.id_kelompok')
-    				->join('users','kegiatan_detail.id_users','=','users.id_users')
+        $title = 'Peserta';
+        $page = 'kegiatan';
+        $kegiatan = Kegiatan::where('id_kegiatan',$id)->firstOrFail();
+        $peserta = DB::table('kegiatan_detail')
+                    ->join('anggota','kegiatan_detail.id_anggota','=','anggota.id_anggota')
+                    ->join('kelompok','anggota.id_kelompok','=','kelompok.id_kelompok')
+                    ->join('users','kegiatan_detail.id_users','=','users.id_users')
     				->where('id_kegiatan',$id)
     				->get();
     	return view('Admin.kegiatan.peserta',compact('title','page','peserta','kegiatan','id'));
@@ -97,34 +96,39 @@ class KegiatanController extends Controller
 
     public function savePeserta(Request $request) {
     	$code = 294153315;
-		$peserta     = $request->peserta;
-		$kelompok    = $request->kelompok;
-		$keterangan  = $request->keterangan;
-		$id_kegiatan = $request->id_kegiatan;
-		$id_detail   = $request->id_detail;
-    	$number = KegiatanDetail::where('id_kegiatan',$id_kegiatan)->count();
-    	if ($number <= 9999) {
-    		$number++;
-    		$str = str_pad($number,4,'0000',STR_PAD_LEFT);
-    	}
-		$barcode = $request->code != '' ? $request->code : $code.$str;
-    	$array = [
-    		'code_barcode' => $barcode,
-    		'id_anggota' => $peserta,
-    		'id_kelompok' => $kelompok,
-    		'id_kegiatan' => $id_kegiatan,
-    		'id_users' => Auth::id(),
-    		'ket' => strtolower($keterangan)
-    	];
-    	if ($id_detail == '') {
-    		KegiatanDetail::create($array);
-    		$message = 'Berhasil Input Peserta';
-    	}
-    	else {
-    		KegiatanDetail::where('id_detail',$id_detail)->update($array);
-    		$message = 'Berhasil Update Peserta';
-    	}
-    	return redirect('/admin/kegiatan/'.$id_kegiatan.'/peserta')->with('message',$message);
+        $peserta     = $request->peserta;
+        $keterangan  = $request->keterangan;
+        $id_kegiatan = $request->id_kegiatan;
+        $id_detail   = $request->id_detail;
+        $kegiatanDetail = new KegiatanDetail;
+        $count = $kegiatanDetail->where('id_kegiatan',$id_kegiatan)->where('id_anggota',$peserta)->count();
+        if ($count != 0) {
+            return redirect('/admin/kegiatan/'.$id_kegiatan.'/peserta')->with('log','Maaf Data Sudah Ada');
+        }
+        else {
+            $number = $kegiatanDetail->where('id_kegiatan',$id_kegiatan)->count();
+            if ($number <= 9999) {
+                $number++;
+                $str = str_pad($number,4,'0000',STR_PAD_LEFT);
+            }
+            $barcode = $request->code != '' ? $request->code : $code.$str;
+            $array = [
+                'code_barcode' => $barcode,
+                'id_anggota' => $peserta,
+                'id_kegiatan' => $id_kegiatan,
+                'id_users' => Auth::id(),
+                'ket' => strtolower($keterangan)
+            ];
+            if ($id_detail == '') {
+                KegiatanDetail::create($array);
+                $message = 'Berhasil Input Peserta';
+            }
+            else {
+                KegiatanDetail::where('id_detail',$id_detail)->update($array);
+                $message = 'Berhasil Update Peserta';
+            }
+            return redirect('/admin/kegiatan/'.$id_kegiatan.'/peserta')->with('message',$message);
+        }
     }
 
     public function cetakBet($id,$id_detail) {
@@ -145,7 +149,18 @@ class KegiatanController extends Controller
     	return view('bet',compact('get','code'));
     }
 
-    public function cetak($id) {
-    	echo "<h1>Coming Soon Hehe :) </h1>";
+    public function cetakBetAll($id) {
+        if (KegiatanDetail::where('id_kegiatan',$id)->count() == 0) {
+            return redirect('/admin/kegiatan/'.$id.'/peserta')->with('log','Maaf Peserta Tidak Ada');
+        }
+        else {
+            $get = DB::table('kegiatan_detail')
+                    ->join('anggota','kegiatan_detail.id_anggota','=','anggota.id_anggota')
+                    ->select('anggota.*','kegiatan_detail.code_barcode')
+                    ->where('id_kegiatan',$id)
+                    ->get();
+            $barcode = new KegiatanDetail;
+            return view('bet-all',compact('get','barcode'));
+        }
     }
 }

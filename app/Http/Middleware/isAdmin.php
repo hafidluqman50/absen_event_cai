@@ -16,14 +16,14 @@ class isAdmin
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->status_akun == 1) {
+        if (Auth::check() && Auth::user()->status_akun == 1 && Auth::user()->status_delete == 0) {
             if (Auth::user()->level != 2) {
                 return redirect('/login');
             }
         }
         else {
             Auth::check() ? Auth::logout() : '';
-            return redirect('/login')->with('message','Login Terlebih Dahulu');
+            return redirect('/login')->with('log','Login Terlebih Dahulu');
         }
         return $next($request);
     }

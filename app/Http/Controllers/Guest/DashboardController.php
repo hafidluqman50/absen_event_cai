@@ -44,6 +44,6 @@ class DashboardController extends Controller
 			];
 		}
 		User::where('id_users',Auth::id())->update($array);
-		return redirect('/petugas/profile')->with('message','Berhasil Update Profile');
+		return redirect('/guest/profile')->with('message','Berhasil Update Profile');
     }
 }

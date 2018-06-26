@@ -15,11 +15,6 @@
                     <h2>DATA PESERTA</h2>
                 </div>
                 <div class="body">
-                    @if(session()->has('message'))
-                    <div class="alert alert-success alert-dismissible">
-                        {{ session('message') }} <button class="close" data-dismiss="alert">x</button>
-                    </div>
-                    @endif
                     <div class="table-responsive">
                         <h5>Nama Kegiatan : {{ $kegiatan->nama_kegiatan }}</h5>
                         <h5>Tanggal Kegiatan : {{ explodeDate($kegiatan->tanggal_kegiatan) }}</h5>

@@ -19,19 +19,11 @@
                     </a>
                 </div>
                 <div class="body">
+                    <div class="alert alert-danger alert-dismissible">
+                        Data Tidak Ada <button class="close" data-dismiss="alert">x</button>
+                    </div>
                     <form action="{{ url('/admin/kegiatan/peserta/save') }}" method="POST">
                         @csrf
-                        <div class="form-group form-float">
-                            <label class="form-label" for="">Nama Peserta</label>
-                            <div class="form-line">
-                                <select name="peserta" class="form-control show-tick" data-live-search="true" required="required">
-                                    <option selected="selected" disabled="disabled">=== Pilih Peserta ===</option>
-                                    @foreach($peserta as $data)
-                                    <option value="{{ $data->id_anggota }}" @if(isset($row)){{$row->id_anggota == $data->id_anggota ? 'selected="selected"' : ''}}@endif>Nama : {{ $data->nama_anggota }} | Tanggal Lahir : {{ explodeDate($data->tgl_lahir) }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
                         <div class="form-group form-float">
                             <label class="form-label">Nama Kelompok</label>
                             <div class="form-line">
@@ -40,6 +32,19 @@
                                     @foreach($kelompok as $data)
                                     <option value="{{ $data->id_kelompok }}" @if(isset($row)){{$row->id_kelompok == $data->id_kelompok ? 'selected="selected"' : ''}}@endif>{{ $data->nama_kelompok }}</option>
                                     @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <label class="form-label" for="">Nama Peserta</label>
+                            <div class="form-line">
+                                <select name="peserta" class="form-control show-tick" data-live-search="true" required="required" {{ isset($row) ? '' : 'disabled="disabled"' }}>
+                                    <option selected="selected" disabled="disabled">=== Pilih Peserta ===</option>
+                                    @if(isset($row))
+                                        @foreach($peserta as $data)
+                                        <option value="{{ $data->id_anggota }}" {{$row->id_anggota == $data->id_anggota ? 'selected="selected"' : ''}} >Nama : {{ $data->nama_anggota }} | Tanggal Lahir : {{ explodeDate($data->tgl_lahir) }}</option>
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>
                         </div>
@@ -66,5 +71,32 @@
 @endsection
 
 @section('custom_js')
-    
+    <script>
+        $(function(){
+            $('.alert').hide();
+            $('select[name="kelompok"]').change(function(){
+                var val = $(this).val();
+                $.ajax({
+                    url: window.location.origin+'/get-anggota/'+val,
+                    type:'GET',
+                })
+                .done(function(done) {
+                    if (done.message == 'No Rows') {
+                        $('.alert').show();
+                        $('select[name="peserta"]').attr('disabled',true);
+                        $('select[name="peserta"]').html(done.anggota).selectpicker('refresh');
+                    }
+                    else {
+                        $('select[name="peserta"]').removeAttr('disabled');
+                        $('select[name="peserta"]').html(done.anggota).selectpicker('refresh');
+                    }
+                    console.log(done.message);
+                })
+                .fail(function(error) {
+                    console.log(error);
+                });
+                
+            });
+        });
+    </script>
 @endsection

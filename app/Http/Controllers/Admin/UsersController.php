@@ -11,7 +11,7 @@ class UsersController extends Controller
     public function index() {
     	$title = 'Users';
     	$page = 'user';
-    	$users = User::whereIn('level',[1,0])->get();
+    	$users = User::where('status_delete',0)->whereIn('level',[1,0])->get();
     	return view('Admin.user.main',compact('title','page','users'));
     }
 
@@ -24,12 +24,12 @@ class UsersController extends Controller
     public function edit($id) {
     	$title = 'Form Users';
     	$page = 'user';
-    	$row = User::whereIn('level',[1,0])->where('id_users',$id)->firstOrFail();
+    	$row = User::where('status_delete',0)->whereIn('level',[1,0])->where('id_users',$id)->firstOrFail();
     	return view('Admin.user.form-user',compact('title','page','row'));
     }
 
     public function delete($id) {
-    	User::where('id_users',$id)->delete();
+        User::where('id_users',$id)->update(['status_delete'=>1,'deleted_at'=>date('Y-m-d H:i:s')]);
     	return redirect('/admin/users')->with('message','Berhasil Hapus User');
     }
 

@@ -20,13 +20,22 @@
                 <div class="body">
                     @if(session()->has('message'))
                     <div class="alert alert-success alert-dismissible">
-                        {{ session('message') }} <button class="close" data-dismiss="alert">x</button>
+                        <b>{{ session('message') }}</b> <button class="close" data-dismiss="alert">x</button>
+                    </div>
+                    @elseif(session()->has('log'))
+                    <div class="alert alert-danger alert-dismissible">
+                        <b>{{ session('log') }}</b> <button class="close" data-dismiss="alert">x</button>
                     </div>
                     @endif
                     <div class="table-responsive">
                         <h5>Nama Kegiatan : {{ $kegiatan->nama_kegiatan }}</h5>
                         <h5>Tanggal Kegiatan : {{ explodeDate($kegiatan->tanggal_kegiatan) }}</h5>
                         <h5>Lokasi Kegiatan : {{ $kegiatan->lokasi_kegiatan }}</h5>
+                        <div class="btn-group mg">
+                            <a href="{{ url('/petugas/kegiatan/'.$id.'/peserta/cetak-semua-bet') }}" class="btn btn-primary btn-lg waves-effect" target="_blank">
+                                <b>Cetak Semua Bet</b>
+                            </a>
+                        </div>
                         <table class="table table-hover dashboard-task-infos" id="table">
                             <thead>
                                 <tr>
@@ -39,7 +48,7 @@
                                     <th>Alamat</th>
                                     <th>Ket.</th>
                                     <th>Input By</th>
-                                    <th>Aksi</th>
+                                    <th>#</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -72,7 +81,7 @@
                                             <a href="{{ url('/petugas/kegiatan/'.$id.'/peserta/'.$data->id_detail.'/delete') }}" title="Hapus" class="btn btn-danger waves-effect" onclick="return confirm('Anda Yakin?')"><b>Hapus</b></a>
                                         </div>
                                         <div class="btn-group" role="button">
-                                            <a href="{{ url('/petugas/kegiatan/'.$id.'/peserta/'.$data->id_detail.'/cetak-bet') }}" class="btn btn-info waves-effect"><b>Cetak Bet</b></a>
+                                            <a href="{{ url('/petugas/kegiatan/'.$id.'/peserta/'.$data->id_detail.'/cetak-bet') }}" class="btn btn-info waves-effect" target="_blank"><b>Cetak Bet</b></a>
                                         </div>
                                     </td>
                                 </tr>

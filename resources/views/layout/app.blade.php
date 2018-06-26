@@ -21,7 +21,8 @@
     <link href="{{ asset('frontend/plugins/bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet" />
     <!-- Waves Effect Css -->
     <link href="{{ asset('frontend/plugins/node-waves/waves.css') }}" rel="stylesheet" />
-    <link rel="stylesheet" href="{{ asset('frontend/datatables/datatables.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('frontend/datatables/DataTables-1.10.16/css/jquery.dataTables.min.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('frontend/datatables/DataTables-1.10.16/css/dataTables.bootstrap.min.css') }}">
 
     <!-- Animation Css -->
     <link href="{{ asset('frontend/plugins/animate-css/animate.css') }}" rel="stylesheet" />
@@ -100,7 +101,12 @@
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
-                            <li @if(isset($page)){!!$page == 'profile' ? 'class="active"' : ''!!}@endif><a href="{{ Auth::user()->level == 2 ? url('/admin/profile') : (Auth::user()->level == 1 ? url('/petugas/profile') : '') }}"><i class="material-icons">person</i>Profile</a></li>
+                            <li @if(isset($page)){!!$page == 'profile' ? 'class="active"' : ''!!}@endif>
+                                <a href="{{ Auth::user()->level == 2 ? url('/admin/profile') : (Auth::user()->level == 1 ? url('/petugas/profile') : url('/guest/profile')) }}">
+                                    <i class="material-icons">person</i>
+                                    Profile
+                                </a>
+                            </li>
                             <li><a href="{{ url('/logout') }}"><i class="material-icons">input</i>Sign Out</a></li>
                         </ul>
                     </div>
@@ -112,7 +118,7 @@
                 <ul class="list">
                     <li class="header">BERANDA</li>
                     <li @if(isset($page)){!!$page == 'beranda' ? 'class="active"' : ''!!}@endif>
-                        <a href="{{ Auth::user()->level == 2 ? url('/admin/dashboard') : (Auth::user()->level == 1 ? url('/petugas/dashboard') : '') }}">
+                        <a href="{{ Auth::user()->level == 2 ? url('/admin/dashboard') : (Auth::user()->level == 1 ? url('/petugas/dashboard') : url('/guest/dashboard')) }}">
                             <i class="material-icons">home</i>
                             <span>Home</span>
                         </a>
@@ -130,13 +136,13 @@
                             <i class="material-icons">group</i>
                             <span>Kelompok</span>
                         </a>
-                    </li>
+                    </li>{{-- 
                     <li @if(isset($page)){!!$page == 'anggota' ? 'class="active"' : ''!!}@endif>
                         <a href="{{ url('/admin/anggota') }}">
                             <i class="material-icons">person</i>
                             <span>Anggota</span>
                         </a>
-                    </li>
+                    </li> --}}
                     <li @if(isset($page)){!!$page == 'user' ? 'class="active"' : ''!!}@endif>
                         <a href="{{ url('/admin/users') }}">
                             <i class="material-icons">build</i>
@@ -150,25 +156,25 @@
                             <span>Kegiatan</span>
                         </a>
                     </li>
-                    <li @if(isset($page)){!!$page == 'anggota' ? 'class="active"' : ''!!}@endif>
+                    {{-- <li @if(isset($page)){!!$page == 'anggota' ? 'class="active"' : ''!!}@endif>
                         <a href="{{ url('/petugas/anggota') }}">
                             <i class="material-icons">person</i>
                             <span>Anggota</span>
                         </a>
-                    </li>
+                    </li> --}}
                     @elseif(Auth::user()->level == 0)
                     <li @if(isset($page)){!!$page == 'kegiatan' ? 'class="active"' : ''!!}@endif>
                         <a href="{{ url('/guest/kegiatan') }}">
                             <i class="material-icons">playlist_add_check</i>
                             <span>Kegiatan</span>
                         </a>
-                    </li>
+                    </li>{{-- 
                     <li @if(isset($page)){!!$page == 'anggota' ? 'class="active"' : ''!!}@endif>
                         <a href="{{ url('/guest/anggota') }}">
                             <i class="material-icons">person</i>
                             <span>Anggota</span>
                         </a>
-                    </li>
+                    </li> --}}
                     @endif
                 </ul>
             </div>
@@ -353,7 +359,8 @@
 
     <!-- Custom Js -->
     <script src="{{ asset('frontend/js/admin.js') }}"></script>
-    <script src="{{ asset('frontend/datatables/datatables.min.js') }}"></script>
+    <script src="{{ asset('frontend/datatables/DataTables-1.10.16/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('frontend/datatables/DataTables-1.10.16/js/dataTables.bootstrap.min.js') }}"></script>
 
     <!-- Demo Js -->
     <script src="{{ asset('frontend/js/demo.js') }}"></script>

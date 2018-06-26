@@ -11,7 +11,7 @@
             <div class="card">
                 <div class="header" style="box-shadow: 2px 3px 2px rgba(0, 0, 0, 0.3)">
                     <h2>FORM PESERTA</h2>
-                    <a href="{{ url('/admin/anggota') }}" style="float: right; margin-top:-2.8rem" class="btn btn-default btn-circle waves-effect waves-circle waves-float">
+                    <a href="{{ url('/admin/kelompok/'.$id.'/anggota') }}" style="float: right; margin-top:-2.8rem" class="btn btn-default btn-circle waves-effect waves-circle waves-float">
                         <i class="material-icons">keyboard_backspace</i>
                     </a>
                 </div>
@@ -22,6 +22,17 @@
                             <div class="form-line">
                                 <input type="text" class="form-control" name="nama_anggota" value="{{ isset($row) ? $row->nama_anggota : '' }}" required="required">
                                 <label class="form-label" for="">Nama Peserta</label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <label class="form-label" for="">Kelompok</label>
+                            <div class="form-line">
+                                <select name="kelompok" class="form-control show-tick" required="required" data-live-search="true">
+                                    <option selected="selected" disabled="disabled">=== Pilih Kelompok</option>
+                                    @foreach($kelompok as $data)
+                                    <option value="{{ $data->id_kelompok }}" @if(isset($row)){{$row->id_kelompok == $data->id_kelompok ? 'selected="selected"' : ''}}@endif>{{ $data->nama_kelompok }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="form-group form-float">
@@ -73,7 +84,7 @@
                         <div class="form-group form-float">
                             <div class="form-line">
                                 <input type="text" name="ket" class="form-control" value="{{ isset($row) ? $row->ket_peserta : '' }}" required="required">
-                                <label class="form-label" for="">Keterangan Peserta</label>
+                                <label class="form-label" for="">Keterangan Anggota</label>
                             </div>
                         </div>
                         <div class="form-group form-float">
@@ -91,9 +102,10 @@
                         <div class="form-group form-float">
                             <div class="form-line">
                                 <input type="text" name="status" class="form-control" value="{{ isset($row) ? $row->status_peserta : '' }}" required="required">
-                                <label class="form-label" for="">Status Peserta</label>
+                                <label class="form-label" for="">Status Anggota</label>
                             </div>
                         </div>
+                        <input type="hidden" name="id_kelompok" value="{{ $id }}">
                         <input type="hidden" name="id_anggota" value="{{ isset($row) ? $row->id_anggota : '' }}">
                         <button type="submit" class="btn bg-orange waves-effect" name="submit" value="submit">
                             <i class="material-icons">save</i>
