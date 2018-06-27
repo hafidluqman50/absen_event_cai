@@ -86,7 +86,7 @@
                                     <td>{{ $data->name }}</td>
                                     <td>
                                         <div class="btn-group" role="button">
-                                            <a href="{{ url('/admin/kegiatan/'.$id.'/absen/'.$data->id_absen.'/delete') }}" title="Hapus" class="btn btn-danger waves-effect" onclick="return confirm('Anda Yakin?')"><b>Hapus</b></a>
+                                            <a href="{{ url('/admin/kegiatan/'.$id.'/jadwal/'.$id_jadwal.'/absen/'.$data->id_absen.'/delete') }}" title="Hapus" class="btn btn-danger waves-effect" onclick="return confirm('Anda Yakin?')"><b>Hapus</b></a>
                                         </div>
                                     </td>
                                 </tr>
