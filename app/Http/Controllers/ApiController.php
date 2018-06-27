@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+date_default_timezone_set('Asia/Singapore');
 
 use Illuminate\Http\Request;
 use App\Model\KegiatanModel as Kegiatan;
@@ -9,7 +10,7 @@ use DB;
 class ApiController extends Controller
 {
     public function absen() {
-    	$get = Kegiatan::where('tanggal_kegiatan','2018-06-19')->firstOrFail();
+    	$get = Kegiatan::where('tanggal_kegiatan',date('Y-m-d'))->firstOrFail();
     	$absens = DB::table('absen')
                     ->join('jadwal','absen.id_jadwal','=','jadwal.id_jadwal')
                     ->join('kegiatan_detail','absen.id_detail','=','kegiatan_detail.id_detail')
