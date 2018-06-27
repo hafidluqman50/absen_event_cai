@@ -16,12 +16,9 @@
     <!-- Bootstrap Core Css -->
     <link href="{{ asset('frontend/plugins/bootstrap/css/bootstrap.css') }}" rel="stylesheet">
 
-    @yield('custom_css')
-
     <link href="{{ asset('frontend/plugins/bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet" />
     <!-- Waves Effect Css -->
     <link href="{{ asset('frontend/plugins/node-waves/waves.css') }}" rel="stylesheet" />
-    {{-- <link rel="stylesheet" href="{{ asset('frontend/datatables/DataTables-1.10.16/css/jquery.dataTables.min.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('frontend/datatables/DataTables-1.10.16/css/dataTables.bootstrap.min.css') }}">
 
     <!-- Animation Css -->
@@ -156,25 +153,13 @@
                             <span>Kegiatan</span>
                         </a>
                     </li>
-                    {{-- <li @if(isset($page)){!!$page == 'anggota' ? 'class="active"' : ''!!}@endif>
-                        <a href="{{ url('/petugas/anggota') }}">
-                            <i class="material-icons">person</i>
-                            <span>Anggota</span>
-                        </a>
-                    </li> --}}
                     @elseif(Auth::user()->level == 0)
                     <li @if(isset($page)){!!$page == 'kegiatan' ? 'class="active"' : ''!!}@endif>
                         <a href="{{ url('/guest/kegiatan') }}">
                             <i class="material-icons">playlist_add_check</i>
                             <span>Kegiatan</span>
                         </a>
-                    </li>{{-- 
-                    <li @if(isset($page)){!!$page == 'anggota' ? 'class="active"' : ''!!}@endif>
-                        <a href="{{ url('/guest/anggota') }}">
-                            <i class="material-icons">person</i>
-                            <span>Anggota</span>
-                        </a>
-                    </li> --}}
+                    </li>
                     @endif
                 </ul>
             </div>
@@ -363,13 +348,7 @@
 
     <!-- Demo Js -->
     <script src="{{ asset('frontend/js/demo.js') }}"></script>
-    {{-- <script src="{{ asset('frontend/js/script.js') }}"></script> --}}
     @yield('custom_js')
-    <script>
-        $(function(){
-            $('#table').DataTable();
-        });
-    </script>
 </body>
 
 </html>
