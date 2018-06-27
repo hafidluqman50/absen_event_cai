@@ -60,6 +60,79 @@ class KelompokController extends Controller
         }
     }
 
+    public function contohFormat() {
+        Excel::create('contoh format absen cai',function($excel){
+            $excel->sheet('Kelompok',function($sheet){
+                // TITLE //
+                $sheet->setCellValue('A1','NO.');
+                $sheet->setCellValue('B1','NAMA KELOMPOK');
+                $sheet->setCellValue('C1','LOKASI KELOMPOK');
+                // END TITLE //
+
+                // DATA //
+                $sheet->setCellValue('A2','1');
+                $sheet->setCellValue('B2','PELINDUNG KONOHA');
+                $sheet->setCellValue('C2','DIMENSI SASUKE');
+
+                $sheet->setCellValue('A3','2');
+                $sheet->setCellValue('B3','DEWA SHINOBI');
+                $sheet->setCellValue('C3','DUNIA HAGOROMO');
+                // END DATA //
+            });
+
+            $excel->sheet('Peserta',function($sheet){
+                // TITLE //
+                $sheet->setCellValue('A1','NO.');
+                $sheet->setCellValue('B1','PESERTA');
+                $sheet->setCellValue('C1','NAMA LENGKAP PESERTA');
+                $sheet->setCellValue('D1','TEMPAT LAHIR');
+                $sheet->setCellValue('E1','TANGGAL LAHIR');
+                $sheet->setCellValue('F1','ALAMAT');
+                $sheet->setCellValue('G1','JENIS KELAMIN');
+                $sheet->setCellValue('H1','NOMOR TELEPON');
+                $sheet->setCellValue('I1','EMAIL PESERTA');
+                $sheet->setCellValue('J1','KELOMPOK');
+                $sheet->setCellValue('K1','DESA');
+                $sheet->setCellValue('L1','DAPUKAN MUDA-MUDI');
+                $sheet->setCellValue('M1','UKURAN BAJU');
+                $sheet->setCellValue('N1','STATUS');
+                // END TITLE //
+
+                // DATA //
+                $sheet->setCellValue('A2','1');
+                $sheet->setCellValue('B2','KIRIMAN');
+                $sheet->setCellValue('C2','UCHIHA SASUKE');
+                $sheet->setCellValue('D2','KONOHAGAKURE');
+                $sheet->setCellValue('E2','23/06/1997');
+                $sheet->setCellValue('F2','JLN. PERUM UCHIHA BLOK 1');
+                $sheet->setCellValue('G2','LAKI-LAKI');
+                $sheet->setCellValue('H2','0888 8888 8888');
+                $sheet->setCellValue('I2','sasukegagah@gmail.com');
+                $sheet->setCellValue('J2','PELINDUNG KONOHA');
+                $sheet->setCellValue('K2','KONOHA');
+                $sheet->setCellValue('L2','FREELANCER');
+                $sheet->setCellValue('M2','XL');
+                $sheet->setCellValue('N2','VETERAN PERANG');
+
+                $sheet->setCellValue('A3','2');
+                $sheet->setCellValue('B3','PENDATANG');
+                $sheet->setCellValue('C3','HAGOROMO OTSUTSUKI');
+                $sheet->setCellValue('D3','BUMI');
+                $sheet->setCellValue('E3','23/06/1290');
+                $sheet->setCellValue('F3','JLN. SETAPAK DI SEBUAH DESA');
+                $sheet->setCellValue('G3','PEREMPUAN');
+                $sheet->setCellValue('H3','0888 8888 8888');
+                $sheet->setCellValue('I3','hagoromonakmamah@gmail.com');
+                $sheet->setCellValue('J3','PENDIRI NINSHU');
+                $sheet->setCellValue('K3','DEWA SHINOBI');
+                $sheet->setCellValue('L3','GURU');
+                $sheet->setCellValue('M3','XL');
+                $sheet->setCellValue('N3','TUKANG SEGEL');
+                // END DATA //
+            });
+        })->download('xlsx');
+    }
+
     public function importForm() {
         $title = 'Import';
         $page = 'kelompok';
@@ -91,7 +164,7 @@ class KelompokController extends Controller
                     'tgl_lahir'      => $date,
                     'tempat_lahir'   => strtoupper($val->tempat_lahir),
                     'desa'           => strtoupper($val->desa),
-                    'jenis_kelamin'  => strtoupper($val->jenis_kelamin),
+                    'jenis_kelamin'  => strtolower($val->jenis_kelamin),
                     'no_telepon'     => $val->nomor_telepon,
                     'email'          => $val->email_peserta,
                     'alamat'         => strtoupper($val->alamat),

@@ -75,6 +75,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'isAdmin'], function () {
     Route::get('/kelompok/{id}/anggota/{id_anggota}/edit',['as' => 'anggota-edit-admin', 'uses' => 'Admin\AnggotaController@edit']);
     Route::get('/kelompok/{id}/anggota/{id_anggota}/delete',['as' => 'anggota-delete-admin', 'uses' => 'Admin\AnggotaController@delete']);
     Route::get('/import',['as' => 'import-excel-admin', 'uses' => 'Admin\KelompokController@importForm']);
+    Route::get('/contoh-import',['as' => 'contoh-format-excel', 'uses' => 'Admin\KelompokController@contohFormat']);
     
     Route::get('/users/tambah', ['as' => 'tambah-user-admin', 'uses' => 'Admin\UsersController@tambah']);
     Route::get('/users/{id}/edit', ['as' => 'edit-user-admin', 'uses' => 'Admin\UsersController@edit']);

@@ -30,6 +30,11 @@
                             <b>Import Data</b>    
                         </a>
                     </div>
+                    <div class="btn-group mg">
+                        <a href="{{ url('/admin/contoh-import') }}" class="btn btn-success waves-effect waves-float btn-lg" title="tambah kelompok">
+                            <b>Contoh Format Excel</b>    
+                        </a>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-hover dashboard-task-infos" id="table">
                             <thead>

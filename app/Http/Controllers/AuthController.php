@@ -43,9 +43,9 @@ class AuthController extends Controller
                        ."<b>IP Address : </b>".$_SERVER['REMOTE_ADDR']."\n"
                        ."<b>Login as : </b> Petugas";
             Telegram::sendMessage([
-                'chat_id' => env('GROUP_ID'),
+                'chat_id'    => env('GROUP_ID'),
                 'parse_mode' => 'html',
-                'text' => $message
+                'text'       => $message
             ]);
     			return redirect('/petugas/dashboard');
     		}
@@ -58,9 +58,9 @@ class AuthController extends Controller
                        ."<b>IP Address : </b>".$_SERVER['REMOTE_ADDR']."\n"
                        ."<b>Login as : </b> Guest";
             Telegram::sendMessage([
-                'chat_id' => env('GROUP_ID'),
+                'chat_id'    => env('GROUP_ID'),
                 'parse_mode' => 'html',
-                'text' => $message
+                'text'       => $message
             ]);
             return redirect('/guest/dashboard');
         }
@@ -86,9 +86,9 @@ class AuthController extends Controller
                    ."<b>IP Address : </b>".$_SERVER['REMOTE_ADDR']."\n"
                    ."<b>Level User : </b>".$level;
         Telegram::sendMessage([
-            'chat_id' => env('GROUP_ID'),
+            'chat_id'    => env('GROUP_ID'),
             'parse_mode' => 'html',
-            'text' => $message
+            'text'       => $message
         ]);
     	Auth::check() ? Auth::logout() : '';
     	return redirect('/login');
