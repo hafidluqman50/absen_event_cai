@@ -36,16 +36,16 @@
                         </a>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-hover dashboard-task-infos" id="table">
+                        <table class="table table-hover dashboard-task-infos kelompok" id="table">
                             <thead>
                                 <tr>
-                                    <th>No</th>
+                                    {{-- <th>No</th> --}}
                                     <th>Nama</th>
                                     <th>Lokasi</th>
                                     <th>#</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody>{{-- 
                                 @foreach($kelompok as $key => $data)
                                 <tr>
                                     <td>{{ $key+1 }}</td>
@@ -65,9 +65,10 @@
                                         </div>
                                     </td>
                                 </tr>
-                                @endforeach
+                                @endforeach --}}
                             </tbody>
                         </table>
+                        {{-- {!!$html->table()!!} --}}
                     </div>
                 </div>
             </div>
@@ -77,5 +78,19 @@
 @endsection
 
 @section('custom_js')
-    
+<script>
+    $(function(){
+        $('.kelompok').DataTable({
+            processing:true,
+            serverSide:true,
+            ajax:"{{ url('/ajax/kelompok') }}",
+            columns:[
+                // {data:'row',name:'row'},
+                {data:'nama_kelompok',name:'nama_kelompok'},
+                {data:'lokasi_kelompok',name:'lokasi_kelompok'},
+                {data:'action',name:'action',searchable:false,orderable:false}
+            ]
+        });
+    });
+</script>
 @endsection

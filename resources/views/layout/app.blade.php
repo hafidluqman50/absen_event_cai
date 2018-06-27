@@ -346,7 +346,6 @@
     <!-- Bootstrap Core Js -->
     <script src="{{ asset('frontend/plugins/bootstrap/js/bootstrap.js') }}"></script>
 
-    @yield('custom_js')
 
     <!-- Select Plugin Js -->
     <script src="{{ asset('frontend/plugins/bootstrap-select/js/bootstrap-select.js') }}"></script>
@@ -364,6 +363,7 @@
 
     <!-- Demo Js -->
     <script src="{{ asset('frontend/js/demo.js') }}"></script>
+    @yield('custom_js')
     <script>
         $(function(){
             $('#table').DataTable();

@@ -11,10 +11,10 @@ use Excel;
 class KelompokController extends Controller
 {
     public function index() {
-    	$title = 'Kelompok';
-    	$page = 'kelompok';
-    	$kelompok = Kelompok::all();
-    	return view('Admin.kelompok.main',compact('kelompok','title','page'));
+        $title = 'Kelompok';
+        $page  = 'kelompok';
+        $kelompok = Kelompok::all();
+    	return view('Admin.kelompok.main',compact('title','page','kelompok'));
     }
 
     public function tambah() {

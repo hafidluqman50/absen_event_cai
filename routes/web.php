@@ -29,6 +29,10 @@ Route::group(['prefix'=>'api','middleware'=>'CorsApi'],function(){
     Route::get('/absen-cai','ApiController@absen');
 });
 
+Route::group(['prefix'=>'ajax'],function(){
+    Route::get('/kelompok',['as'=>'ajax-kelompok','uses'=>'AjaxController@dataKelompok']);
+});
+
 // ROUTE ADMIN //
 Route::group(['prefix' => 'admin', 'middleware' => 'isAdmin'], function () {
     // PAGE //
