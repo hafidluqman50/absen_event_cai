@@ -18,17 +18,7 @@ class AbsenController extends Controller
     	$title = 'Absen';
     	$page = 'kegiatan';
     	$jadwal = Jadwal::with('kegiatan')->where('id_kegiatan',$id)->where('id_jadwal',$id_jadwal)->firstOrFail();
-    	$absen = DB::table('absen')
-                    ->join('jadwal','absen.id_jadwal','=','jadwal.id_jadwal')
-                    ->join('kegiatan_detail','absen.id_detail','=','kegiatan_detail.id_detail')
-    				->join('anggota','kegiatan_detail.id_anggota','=','anggota.id_anggota')
-    				->join('kelompok','anggota.id_kelompok','=','kelompok.id_kelompok')
-    				->join('users','absen.id_users','=','users.id_users')
-    				->select('anggota.*','kelompok.nama_kelompok','kegiatan_detail.*','users.name','absen.*','jadwal.*')
-    				->where('kegiatan_detail.id_kegiatan',$id)
-                    ->where('absen.id_jadwal',$id_jadwal)
-    				->get();
-    	return view('Petugas.absen.main',compact('absen','title','page','id','jadwal','id_jadwal'));
+    	return view('Petugas.absen.main',compact('title','page','id','jadwal','id_jadwal'));
     }
 
     public function form($id,$id_jadwal) {

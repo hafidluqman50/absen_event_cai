@@ -36,7 +36,7 @@
                                 <b>Cetak Semua Bet</b>
                             </a>
                         </div>
-                        <table class="table table-hover dashboard-task-infos" id="table">
+                        <table class="table table-hover dashboard-task-infos peserta" id="table">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -52,40 +52,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($peserta as $key => $data)
-                                <tr>
-                                    <td>{{ $key+1 }}</td>
-                                    <td>{{ $data->code_barcode }}</td>
-                                    <td>{{ $data->nama_anggota }}</td>
-                                    <td>{{ $data->nama_kelompok }}</td>
-                                    <td>{{ explodeDate($data->tgl_lahir) }}</td>
-                                    <td>{{ $data->no_telepon }}</td>
-                                    <td>{{ $data->alamat }}</td>
-                                    <td>
-                                        @if($data->ket == 'panitia')
-                                        <span class="badge label-danger">
-                                            {{ ucwords($data->ket) }}
-                                        </span>
-                                        @else
-                                        <span class="badge label-success">
-                                            {{ ucwords($data->ket) }}
-                                        </span>
-                                        @endif
-                                    </td>
-                                    <td>{{ $data->name }}</td>
-                                    <td>
-                                        <div class="btn-group" role="group">
-                                            <a href="{{ url('/petugas/kegiatan/'.$id.'/peserta/'.$data->id_detail.'/edit') }}" title="Edit" class="btn btn-warning waves-effect"><b>Edit</b></a>
-                                        </div>
-                                        <div class="btn-group" role="button">
-                                            <a href="{{ url('/petugas/kegiatan/'.$id.'/peserta/'.$data->id_detail.'/delete') }}" title="Hapus" class="btn btn-danger waves-effect" onclick="return confirm('Anda Yakin?')"><b>Hapus</b></a>
-                                        </div>
-                                        <div class="btn-group" role="button">
-                                            <a href="{{ url('/petugas/kegiatan/'.$id.'/peserta/'.$data->id_detail.'/cetak-bet') }}" class="btn btn-info waves-effect" target="_blank"><b>Cetak Bet</b></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                @endforeach
+                                
                             </tbody>
                         </table>
                     </div>
@@ -97,5 +64,41 @@
 @endsection
 
 @section('custom_js')
-    
+<script>
+    $(function(){
+        var peserta = $('.peserta').DataTable({
+            processing:true,
+            serverSide:true,
+            ajax:"{{ url('/ajax/peserta/'.$id) }}",
+            columns:[
+                {data:'id_anggota',searchable:false,render:function(data,type,row,meta){
+                    return meta.row + meta.settings._iDisplayStart+1;
+                    console.log(data);
+                }},
+                {data:'code_barcode',name:'code_barcode'},
+                {data:'nama_anggota',name:'nama_anggota'},
+                {data:'nama_kelompok',name:'nama_kelompok'},
+                {data:'tgl_lahir',name:'tgl_lahir'},
+                {data:'no_telepon',name:'no_telepon'},
+                {data:'alamat',name:'alamat'},
+                {data:'ket',name:'ket'},
+                {data:'name',name:'name'},
+                {data:'action',name:'action',searchable:false,orderable:false}
+            ],
+            scrollCollapse: true,
+            columnDefs: [ {
+            sortable: true,
+            "class": "index",
+            targets: 0
+            }],
+            order: [[ 0, 'desc' ]],
+            fixedColumns: true
+        });
+        peserta.on( 'order.dt search.dt', function () {
+        peserta.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+        cell.innerHTML = i+1;
+        });
+        }).draw();
+    });
+</script>
 @endsection

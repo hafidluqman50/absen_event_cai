@@ -39,36 +39,16 @@
                         <table class="table table-hover dashboard-task-infos kelompok" id="table">
                             <thead>
                                 <tr>
-                                    {{-- <th>No</th> --}}
+                                    <th>No</th>
                                     <th>Nama</th>
                                     <th>Lokasi</th>
                                     <th>#</th>
                                 </tr>
                             </thead>
-                            <tbody>{{-- 
-                                @foreach($kelompok as $key => $data)
-                                <tr>
-                                    <td>{{ $key+1 }}</td>
-                                    <td>{{ $data->nama_kelompok }}</td>
-                                    <td>{{ $data->lokasi_kelompok }}</td>
-                                    <td>
-                                        <div class="btn-group" role="group">
-                                            <a href="{{ url('/admin/kelompok/'.$data->id_kelompok.'/anggota') }}" title="Lihat Anggota" class="btn btn-info">
-                                                <b>Lihat Anggota</b>
-                                            </a>
-                                        </div>
-                                        <div class="btn-group" role="group">
-                                            <a href="{{ url('/admin/kelompok/'.$data->id_kelompok.'/edit') }}" title="Edit" class="btn btn-warning waves-effect"><b>Edit</b></a>
-                                        </div>
-                                        <div class="btn-group" role="button">
-                                            <a href="{{ url('/admin/kelompok/'.$data->id_kelompok.'/delete') }}" title="Hapus"  class="btn btn-danger waves-effect" onclick="return confirm('Anda Yakin?')"><b>Hapus</b></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                @endforeach --}}
+                            <tbody>
+
                             </tbody>
                         </table>
-                        {{-- {!!$html->table()!!} --}}
                     </div>
                 </div>
             </div>
@@ -80,17 +60,33 @@
 @section('custom_js')
 <script>
     $(function(){
-        $('.kelompok').DataTable({
+       var kelompok = $('.kelompok').DataTable({
             processing:true,
             serverSide:true,
             ajax:"{{ url('/ajax/kelompok') }}",
             columns:[
-                // {data:'row',name:'row'},
+                {data:'id_kelompok',searchable:false,render:function(data,type,row,meta){
+                    return meta.row + meta.settings._iDisplayStart+1;
+                    console.log(meta.row);
+                }},
                 {data:'nama_kelompok',name:'nama_kelompok'},
                 {data:'lokasi_kelompok',name:'lokasi_kelompok'},
                 {data:'action',name:'action',searchable:false,orderable:false}
-            ]
+            ],
+            scrollCollapse: true,
+            columnDefs: [{
+            sortable: true,
+            "class": "index",
+            targets: 0
+            }],
+            order: [[ 0, 'desc' ]],
+            // fixedColumns: true
         });
+        kelompok.on( 'order.dt search.dt', function () {
+        kelompok.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+        cell.innerHTML = i+1;
+        });
+        }).draw();
     });
 </script>
 @endsection

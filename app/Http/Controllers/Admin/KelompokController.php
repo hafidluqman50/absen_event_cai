@@ -6,15 +6,17 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\KelompokModel as Kelompok;
 use App\Model\AnggotaModel as Anggota;
+use Yajra\DataTables\Html\Builder;
+use Yajra\Datatables\Datatables;
+use DB;
 use Excel;
 
 class KelompokController extends Controller
 {
-    public function index() {
+    public function index(Request $request,Builder $builder) {
         $title = 'Kelompok';
         $page  = 'kelompok';
-        $kelompok = Kelompok::all();
-    	return view('Admin.kelompok.main',compact('title','page','kelompok'));
+    	return view('Admin.kelompok.main',compact('title','page'));
     }
 
     public function tambah() {

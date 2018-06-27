@@ -17,8 +17,7 @@ class KegiatanController extends Controller
     public function index() {
         $title = 'Kegiatan';
         $page = 'kegiatan';
-        $kegiatan = Kegiatan::all();
-        return view('Admin.kegiatan.main',compact('kegiatan','title','page'));
+        return view('Admin.kegiatan.main',compact('title','page'));
     }
 
     public function tambah() {
@@ -64,13 +63,7 @@ class KegiatanController extends Controller
         $title = 'Peserta';
         $page = 'kegiatan';
         $kegiatan = Kegiatan::where('id_kegiatan',$id)->firstOrFail();
-        $peserta = DB::table('kegiatan_detail')
-                    ->join('anggota','kegiatan_detail.id_anggota','=','anggota.id_anggota')
-                    ->join('kelompok','anggota.id_kelompok','=','kelompok.id_kelompok')
-                    ->join('users','kegiatan_detail.id_users','=','users.id_users')
-    				->where('id_kegiatan',$id)
-    				->get();
-    	return view('Admin.kegiatan.peserta',compact('title','page','peserta','kegiatan','id'));
+    	return view('Admin.kegiatan.peserta',compact('title','page','kegiatan','id'));
     }
 
     public function tambahPeserta($id) {
@@ -86,7 +79,11 @@ class KegiatanController extends Controller
     	$page = 'kegiatan';
     	$kelompok = Kelompok::all();
     	$peserta = Anggota::all();
-    	$row = KegiatanDetail::where('id_detail',$id_detail)->firstOrFail();
+    	$row = DB::table('kegiatan_detail')
+                 ->join('anggota','kegiatan_detail.id_anggota','=','anggota.id_anggota')
+                 ->where('id_kegiatan',$id)
+                 ->where('id_detail',$id_detail)
+                 ->first();
     	return view('Admin.kegiatan.form-peserta-kegiatan',compact('title','page','kelompok','id','row','peserta'));
     }
 

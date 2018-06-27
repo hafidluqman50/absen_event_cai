@@ -29,8 +29,14 @@ Route::group(['prefix'=>'api','middleware'=>'CorsApi'],function(){
     Route::get('/absen-cai','ApiController@absen');
 });
 
-Route::group(['prefix'=>'ajax'],function(){
-    Route::get('/kelompok',['as'=>'ajax-kelompok','uses'=>'AjaxController@dataKelompok']);
+Route::group(['prefix'=>'ajax','middleware'=>'ajax'],function(){
+    Route::get('/kelompok','AjaxController@dataKelompok');
+    Route::get('/anggota/{id}','AjaxController@dataAnggota');
+    Route::get('/kegiatan','AjaxController@dataKegiatan');
+    Route::get('/peserta/{id}','AjaxController@dataPeserta');
+    Route::get('/jadwal/{id}','AjaxController@dataJadwal');
+    Route::get('/absen/{id}/{id_jadwal}','AjaxController@dataAbsen');
+    Route::get('/users','AjaxController@dataUsers');
 });
 
 // ROUTE ADMIN //

@@ -16,20 +16,13 @@ class KegiatanController extends Controller
     public function index() {
         $title = 'Kegiatan';
         $page = 'kegiatan';
-        $kegiatan = Kegiatan::all();
-        return view('Guest.kegiatan.main',compact('kegiatan','title','page'));
+        return view('Guest.kegiatan.main',compact('title','page'));
     }
 
     public function peserta($id) {
         $title = 'Peserta';
         $page = 'kegiatan';
         $kegiatan = Kegiatan::where('id_kegiatan',$id)->firstOrFail();
-        $peserta = DB::table('kegiatan_detail')
-                    ->join('anggota','kegiatan_detail.id_anggota','=','anggota.id_anggota')
-                    ->join('kelompok','anggota.id_kelompok','=','kelompok.id_kelompok')
-                    ->join('users','kegiatan_detail.id_users','=','users.id_users')
-                    ->where('id_kegiatan',$id)
-                    ->get();
-        return view('Guest.kegiatan.peserta',compact('title','page','peserta','kegiatan','id'));
+        return view('Guest.kegiatan.peserta',compact('title','page','kegiatan','id'));
     }
 }

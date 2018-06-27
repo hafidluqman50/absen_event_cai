@@ -17,8 +17,7 @@ class AnggotaController extends Controller
         $title   = 'Anggota';
         $page    = 'kelompok';
         $kelompok = Kelompok::where('id_kelompok',$id)->firstOrFail();
-        $anggota = Anggota::where('id_kelompok',$id)->get();
-        return view('Admin.anggota.main',compact('title','page','anggota','kelompok','id'));
+        return view('Admin.anggota.main',compact('title','page','kelompok','id'));
     }
 
     public function tambah($id) {

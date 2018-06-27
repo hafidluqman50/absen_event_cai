@@ -22,46 +22,18 @@
                     </div>
                     @endif
                     <div class="table-responsive">
-                        <table class="table table-hover dashboard-task-infos" id="table">
+                        <table class="table table-hover dashboard-task-infos users" id="table">
                             <thead>
                                 <tr>
                                     <th>No</th>
                                     <th>Nama</th>
                                     <th>Username</th>
                                     <th>Status</th>
-                                    <th>Aksi</th>
+                                    <th>#</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($users as $key => $data)
-                                <tr>
-                                    <td>{{ $key+1 }}</td>
-                                    <td>{{ $data->name }}</td>
-                                    <td>{{ $data->username }}</td>
-                                    <td>
-                                        @if($data->status_akun == 1)
-                                        <span class="badge bg-indigo">Aktif</span>
-                                        @else
-                                        <span class="badge label-danger">Nonaktif</span>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <div class="btn-group" role="group">
-                                            <a href="{{ url('/admin/users/'.$data->id_users.'/edit') }}" title="Edit" class="btn btn-warning waves-effect">Edit</a>
-                                        </div>
-                                        <div class="btn-group" role="button">
-                                            <a href="{{ url('/admin/users/'.$data->id_users.'/delete') }}" title="Hapus"  class="btn btn-danger waves-effect" onclick="return confirm('Anda Yakin?')">Hapus</a>
-                                        </div> 
-                                        <div class="btn-group" role="group">
-                                            @if($data->status_akun == 1)
-                                            <a href="{{ url('/admin/users/'.$data->id_users.'/status-users') }}" title="Status" class="btn btn-primary waves-effect">Nonaktifkan</a>
-                                            @else
-                                            <a href="{{ url('/admin/users/'.$data->id_users.'/status-users') }}" title="Status" class="btn btn-success waves-effect">Aktifkan</a>
-                                            @endif
-                                        </div>
-                                    </td>
-                                </tr>
-                                @endforeach
+
                             </tbody>
                         </table>
                     </div>
@@ -73,5 +45,36 @@
 @endsection
 
 @section('custom_js')
-    
+<script>
+    $(function(){
+       var users = $('.users').DataTable({
+            processing:true,
+            serverSide:true,
+            ajax:"{{ url('/ajax/users') }}",
+            columns:[
+                {data:'id_users',searchable:false,render:function(data,type,row,meta){
+                    return meta.row + meta.settings._iDisplayStart+1;
+                    console.log(meta.row);
+                }},
+                {data:'name',name:'name'},
+                {data:'username',name:'username'},
+                {data:'status_akun',name:'status_akun'},
+                {data:'action',name:'action',searchable:false,orderable:false}
+            ],
+            scrollCollapse: true,
+            columnDefs: [{
+            sortable: true,
+            "class": "index",
+            targets: 0
+            }],
+            order: [[ 0, 'desc' ]],
+            // fixedColumns: true
+        });
+        users.on( 'order.dt search.dt', function () {
+        users.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+        cell.innerHTML = i+1;
+        });
+        }).draw();
+    });
+</script>
 @endsection

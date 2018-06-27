@@ -22,7 +22,7 @@
                     </div>
                     @endif
                     <div class="table-responsive">
-                        <table class="table table-hover dashboard-task-infos" id="table">
+                        <table class="table table-hover dashboard-task-infos kegiatan" id="table">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -33,28 +33,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($kegiatan as $key => $data)
-                                <tr>
-                                    <td>{{ $key+1 }}</td>
-                                    <td>{{ $data->nama_kegiatan }}</td>
-                                    <td>{{ explodeDate($data->tanggal_kegiatan) }}</td>
-                                    <td>{{ $data->lokasi_kegiatan }}</td>
-                                    <td>
-                                        <div class="btn-group" role="group">
-                                            <a href="{{ url('/petugas/kegiatan/'.$data->id_kegiatan.'/edit') }}" title="Edit" class="btn btn-warning waves-effect"><b>Edit</b></a>
-                                        </div>
-                                        <div class="btn-group" role="button">
-                                            <a href="{{ url('/petugas/kegiatan/'.$data->id_kegiatan.'/jadwal') }}" title="Lihat Peserta" class="btn btn-success waves-effect"><b>Jadwal</b></a>
-                                        </div>
-                                        <div class="btn-group" role="button">
-                                            <a href="{{ url('/petugas/kegiatan/'.$data->id_kegiatan.'/peserta') }}" title="Lihat Peserta" class="btn btn-primary waves-effect"><b>Lihat Peserta</b></a>
-                                        </div>
-                                        <div class="btn-group" role="button">
-                                            <a href="{{ url('/petugas/kegiatan/'.$data->id_kegiatan.'/delete') }}" title="Hapus" class="btn btn-danger waves-effect" onclick="return confirm('Anda Yakin?')"><b>Hapus</b></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                @endforeach
+
                             </tbody>
                         </table>
                     </div>
@@ -66,5 +45,36 @@
 @endsection
 
 @section('custom_js')
-    
+<script>
+    $(function(){
+        var kegiatan = $('.kegiatan').DataTable({
+            processing:true,
+            serverSide:true,
+            ajax:"{{ url('/ajax/kegiatan') }}",
+            columns:[
+                {data:'id_kegiatan',searchable:false,render:function(data,type,row,meta){
+                    return meta.row + meta.settings._iDisplayStart+1;
+                    console.log(data);
+                }},
+                {data:'nama_kegiatan',name:'nama_kegiatan'},
+                {data:'tanggal_kegiatan',name:'tanggal_kegiatan'},
+                {data:'lokasi_kegiatan',name:'lokasi_kegiatan'},
+                {data:'action',name:'action',searchable:false,orderable:false}
+            ],
+            scrollCollapse: true,
+            columnDefs: [ {
+            sortable: true,
+            "class": "index",
+            targets: 0
+            }],
+            order: [[ 2, 'desc' ]],
+            fixedColumns: true
+        });
+        kegiatan.on( 'order.dt search.dt', function () {
+        kegiatan.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+        cell.innerHTML = i+1;
+        });
+        }).draw();
+    });
+</script>
 @endsection

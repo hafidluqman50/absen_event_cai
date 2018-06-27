@@ -27,7 +27,7 @@
                     <div class="table-responsive">
                         <h5>Nama Kelompok : {{ $kelompok->nama_kelompok }}</h5>
                         <h5>Lokasi Kelompok : {{ $kelompok->lokasi_kelompok }}</h5>
-                        <table class="table table-hover dashboard-task-infos" id="table">
+                        <table class="table table-hover dashboard-task-infos anggota" id="table">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -46,30 +46,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($anggota as $key => $data)
-                                <tr>
-                                    <td>{{ $key+1 }}</td>
-                                    <td>{{ $data->ket_peserta }}</td>
-                                    <td>{{ $data->nama_anggota }}</td>
-                                    <td>{{ $data->tempat_lahir }}</td>
-                                    <td>{{ explodeDate($data->tgl_lahir) }}</td>
-                                    <td>{{ $data->no_telepon }}</td>
-                                    <td>{{ $data->email }}</td>
-                                    <td>{{ strtoupper($data->jenis_kelamin) }}</td>
-                                    <td>{{ $data->alamat }}</td>
-                                    <td>{{ $data->desa }}</td>
-                                    <td>{{ $data->dapukan }}</td>
-                                    <td>{{ $data->status_peserta }}</td>
-                                    <td>
-                                        <div class="btn-group" role="group">
-                                            <a href="{{ url('/admin/kelompok/'.$id.'/anggota/'.$data->id_anggota.'/edit') }}" title="Edit" class="btn btn-warning waves-effect"><b>Edit</b></a>
-                                        </div>
-                                        <div class="btn-group" role="button">
-                                            <a href="{{ url('/admin/kelompok/'.$id.'/anggota/'.$data->id_anggota.'/delete') }}" title="Hapus" class="btn btn-danger waves-effect" onclick="return confirm('Anda Yakin?')"><b>Hapus</b></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                @endforeach
+                                
                             </tbody>
                         </table>
                     </div>
@@ -81,5 +58,44 @@
 @endsection
 
 @section('custom_js')
-    
+<script>
+    $(function(){
+        var anggota = $('.anggota').DataTable({
+            processing:true,
+            serverSide:true,
+            ajax:"{{ url('/ajax/anggota/'.$id) }}",
+            columns:[
+                {data:'id_anggota',searchable:false,render:function(data,type,row,meta){
+                    return meta.row + meta.settings._iDisplayStart+1;
+                    console.log(data);
+                }},
+                {data:'ket_peserta',name:'ket_peserta'},
+                {data:'nama_anggota',name:'nama_anggota'},
+                {data:'tempat_lahir',name:'tempat_lahir'},
+                {data:'tgl_lahir',name:'tanggal_lahir'},
+                {data:'no_telepon',name:'no_telepon'},
+                {data:'email',name:'email'},
+                {data:'jenis_kelamin',name:'jenis_kelamin'},
+                {data:'alamat',name:'alamat'},
+                {data:'desa',name:'desa'},
+                {data:'dapukan',name:'dapukan'},
+                {data:'status_peserta',name:'status_peserta'},
+                {data:'action',name:'action',searchable:false,orderable:false}
+            ],
+            scrollCollapse: true,
+            columnDefs: [ {
+            sortable: true,
+            "class": "index",
+            targets: 0
+            }],
+            order: [[ 0, 'desc' ]],
+            fixedColumns: true
+        });
+        anggota.on( 'order.dt search.dt', function () {
+        anggota.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+        cell.innerHTML = i+1;
+        });
+        }).draw();
+    });
+</script>
 @endsection

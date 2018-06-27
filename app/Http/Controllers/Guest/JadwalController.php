@@ -12,7 +12,6 @@ class JadwalController extends Controller
     	$title = 'Jadwal';
     	$page = 'kegiatan';
     	$kegiatan = Kegiatan::where('id_kegiatan',$id)->firstOrFail();
-    	$jadwal = Jadwal::where('id_kegiatan',$id)->get();
-    	return view('Guest.jadwal.main',compact('title','page','kegiatan','jadwal','id'));
+    	return view('Guest.jadwal.main',compact('title','page','kegiatan','id'));
     }
 }

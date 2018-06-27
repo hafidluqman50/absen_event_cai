@@ -49,7 +49,7 @@
                         <h5>Tanggal Kegiatan : {{ explodeDate($jadwal->kegiatan->tanggal_kegiatan) }}</h5>
                         <h5>Lokasi Kegiatan : {{ $jadwal->kegiatan->lokasi_kegiatan }}</h5>
                         <h5>Jadwal : {{ $jadwal->nama_jadwal }}</h5>
-                        <table class="table table-hover dashboard-task-infos" id="table">
+                        <table class="table table-hover dashboard-task-infos absen" id="table">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -64,33 +64,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($absen as $key => $data)
-                                <tr>
-                                    <td>{{ $key+1 }}</td>
-                                    <td>{{ $data->code_barcode }}</td>
-                                    <td>{{ $data->nama_anggota }}</td>
-                                    <td>{{ $data->nama_kelompok }}</td>
-                                    <td>
-                                        @if($data->ket == 'panitia')
-                                        <span class="badge label-danger">
-                                            {{ ucwords($data->ket) }}
-                                        </span>
-                                        @else
-                                        <span class="badge label-success">
-                                            {{ ucwords($data->ket) }}
-                                        </span>
-                                        @endif
-                                    </td>
-                                    <td>{{ $data->ket_peserta }}</td>
-                                    <td>{{ $data->waktu_absen }}</td>
-                                    <td>{{ $data->name }}</td>
-                                    <td>
-                                        <div class="btn-group" role="button">
-                                            <a href="{{ url('/admin/kegiatan/'.$id.'/jadwal/'.$id_jadwal.'/absen/'.$data->id_absen.'/delete') }}" title="Hapus" class="btn btn-danger waves-effect" onclick="return confirm('Anda Yakin?')"><b>Hapus</b></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                @endforeach
+                                
                             </tbody>
                         </table>
                     </div>
@@ -102,5 +76,41 @@
 @endsection
 
 @section('custom_js')
-    
+<script>
+    $(function(){
+
+        var absen = $('.absen').DataTable({
+            processing:true,
+            serverSide:true,
+            ajax:"{{ url('/ajax/absen/'.$id.'/'.$id_jadwal) }}",
+            columns:[
+                {data:'id_absen',searchable:false,render:function(data,type,row,meta){
+                    return meta.row + meta.settings._iDisplayStart+1;
+                    console.log(data);
+                }},
+                {data:'code_barcode',name:'code_barcode'},
+                {data:'nama_anggota',name:'nama_anggota'},
+                {data:'nama_kelompok',name:'nama_kelompok'},
+                {data:'ket',name:'ket'},
+                {data:'ket_peserta',name:'ket_peserta'},
+                {data:'waktu_absen',name:'waktu_absen'},
+                {data:'name',name:'name'},
+                {data:'action',name:'action',searchable:false,orderable:false}
+            ],
+            scrollCollapse: true,
+            columnDefs: [ {
+            sortable: true,
+            "class": "index",
+            targets: 0
+            }],
+            order: [[ 6, 'desc' ]],
+            fixedColumns: true
+        });
+        absen.on( 'order.dt search.dt', function () {
+        absen.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+        cell.innerHTML = i+1;
+        });
+        }).draw();
+    });
+</script>
 @endsection

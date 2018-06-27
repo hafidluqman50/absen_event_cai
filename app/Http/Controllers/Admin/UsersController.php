@@ -11,8 +11,7 @@ class UsersController extends Controller
     public function index() {
     	$title = 'Users';
     	$page = 'user';
-    	$users = User::where('status_delete',0)->whereIn('level',[1,0])->get();
-    	return view('Admin.user.main',compact('title','page','users'));
+    	return view('Admin.user.main',compact('title','page'));
     }
 
     public function tambah() {

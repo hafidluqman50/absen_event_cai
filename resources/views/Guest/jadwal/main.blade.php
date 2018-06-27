@@ -20,7 +20,7 @@
                     <h5>Tanggal Kegiatan : {{ explodeDate($kegiatan->tanggal_kegiatan) }}</h5>
                     <h5>Lokasi Kegiatan : {{ $kegiatan->lokasi_kegiatan }}</h5>
                     <div class="table-responsive">
-                        <table class="table table-hover dashboard-task-infos" id="table">
+                        <table class="table table-hover dashboard-task-infos jadwal" id="table">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -30,17 +30,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($jadwal as $key => $data)
-                                <tr>
-                                    <td>{{ $key+1 }}</td>
-                                    <td>{{ $data->nama_jadwal }}</td>
-                                    <td>{{ $data->keterangan }}</td>
-                                    <td>
-                                        <div class="btn-group" role="button">
-                                            <a href="{{ url('/guest/kegiatan/'.$data->id_kegiatan.'/jadwal/'.$data->id_jadwal.'/absen') }}" title="Lihat Peserta" class="btn btn-success waves-effect"><b>Lihat Absen</b></a>
-                                        </div></td>
-                                </tr>
-                                @endforeach
+
                             </tbody>
                         </table>
                     </div>
@@ -52,5 +42,35 @@
 @endsection
 
 @section('custom_js')
-    
+<script>
+    $(function(){
+        var jadwal = $('.jadwal').DataTable({
+            processing:true,
+            serverSide:true,
+            ajax:"{{ url('/ajax/jadwal/'.$id) }}",
+            columns:[
+                {data:'id_jadwal',searchable:false,render:function(data,type,row,meta){
+                    return meta.row + meta.settings._iDisplayStart+1;
+                    console.log(data);
+                }},
+                {data:'nama_jadwal',name:'nama_jadwal'},
+                {data:'keterangan',name:'keterangan'},
+                {data:'action',name:'action',searchable:false,orderable:false}
+            ],
+            scrollCollapse: true,
+            columnDefs: [ {
+            sortable: true,
+            "class": "index",
+            targets: 0
+            }],
+            order: [[ 0, 'desc' ]],
+            fixedColumns: true
+        });
+        jadwal.on( 'order.dt search.dt', function () {
+        jadwal.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+        cell.innerHTML = i+1;
+        });
+        }).draw();
+    });
+</script>
 @endsection
