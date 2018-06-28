@@ -18,9 +18,6 @@
                         <i class="material-icons">keyboard_backspace</i>
                     </a>
                     <h2>FORM USER</h2>
-                    <a href="{{ url('/admin/users') }}" style="float: right; margin-top:-2.8rem" class="btn btn-default btn-circle waves-effect waves-circle waves-float">
-                        <i class="material-icons">person</i>
-                    </a>
                 </div>
                 <div class="body">
                     @if(session()->has('log'))

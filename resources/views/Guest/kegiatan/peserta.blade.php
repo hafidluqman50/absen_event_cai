@@ -55,7 +55,6 @@
             columns:[
                 {data:'id_anggota',searchable:false,render:function(data,type,row,meta){
                     return meta.row + meta.settings._iDisplayStart+1;
-                    console.log(data);
                 }},
                 {data:'code_barcode',name:'code_barcode'},
                 {data:'nama_anggota',name:'nama_anggota'},
@@ -72,7 +71,7 @@
             "class": "index",
             targets: 0
             }],
-            order: [[ 0, 'desc' ]],
+            order: [[ 1, 'desc' ]],
             fixedColumns: true
         });
         peserta.on( 'order.dt search.dt', function () {

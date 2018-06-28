@@ -80,7 +80,7 @@
             targets: 0
             }],
             order: [[ 0, 'desc' ]],
-            // fixedColumns: true
+            fixedColumns: true
         });
         kelompok.on( 'order.dt search.dt', function () {
         kelompok.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {

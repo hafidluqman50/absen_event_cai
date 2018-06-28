@@ -74,8 +74,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'isAdmin'], function () {
     Route::get('/kegiatan/{id}/jadwal/tambah',['as' => 'jadwal-tambah-admin', 'uses' => 'Admin\JadwalController@tambah']);
     Route::get('/kegiatan/{id}/jadwal/{id_jadwal}/edit',['as' => 'jadwal-edit-admin', 'uses' => 'Admin\JadwalController@edit']);
     Route::get('/kegiatan/{id}/jadwal/{id_jadwal}/delete',['as' => 'jadwal-delete-admin', 'uses' => 'Admin\JadwalController@delete']);
-    Route::get('/kegiatan/{id}/jadwal/{id_jadwal}/cetak-excel',['as' => 'jadwal-cetak-admin', 'uses' => 'Admin\JadwalController@cetakExcel']);
-    Route::get('/kegiatan/{id}/jadwal/cetak-semua-excel', ['as' => 'cetak-kegiatan-admin', 'uses' => 'Admin\JadwalController@cetakExcelAll']);
+    Route::get('/kegiatan/{id}/jadwal/{id_jadwal}/cetak-excel',['as' => 'jadwal-cetak-admin', 'uses' => 'Admin\JadwalController@cetakLaporan']);
+    Route::get('/kegiatan/{id}/jadwal/cetak-semua-excel', ['as' => 'cetak-kegiatan-admin', 'uses' => 'Admin\JadwalController@cetakLaporanAll']);
     Route::get('/kegiatan/{id}/jadwal/{id_jadwal}/absen/{id_absen}/delete',['as' => 'absen-admin-page', 'uses' => 'Admin\AbsenController@delete']);
 
     Route::get('/kelompok/tambah', ['as' => 'kelompok-tambah-admin', 'uses' => 'Admin\KelompokController@tambah']);

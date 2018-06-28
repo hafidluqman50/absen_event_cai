@@ -9,7 +9,6 @@ use App\Model\KelompokModel as Kelompok;
 use App\Model\KegiatanDetailModel as KegiatanDetail;
 use CodeItNow\BarcodeBundle\Utils\BarcodeGenerator;
 use DB;
-use Excel;
 use Auth;
 
 class KegiatanController extends Controller
@@ -127,43 +126,6 @@ class KegiatanController extends Controller
             }
             return redirect('/admin/kegiatan/'.$id_kegiatan.'/peserta')->with('message',$message);
         }
-    }
-
-    public function importExcel(Request $request) {
-        $file = $request->excel;
-        if (!empty($file)) {
-            $kelompok = Excel::selectSheetsByIndex(0)->load($file,function(){})->get();
-            $anggota = Excel::selectSheetsByIndex(1)->load($file,function(){})->get();
-            foreach ($kelompok as $key => $value) {
-                $var[] = [
-                    'nama_kelompok'   => $value->nama_kelompok,
-                    'lokasi_kelompok' => $value->lokasi_kelompok,
-                    'created_at'      => date('Y-m-d H:i:s'),
-                    'updated_at'      => date('Y-m-d H:i:s')
-                ];
-            }
-            Kelompok::insert($var);
-            foreach ($anggota as $num => $val) {
-                $id_kelompok = Kelompok::where('nama_kelompok',$val->nama_kelompok)->firstOrFail();
-                $var2[] = [
-                    'nama_anggota'   => $val->nama_anggota,
-                    'id_kelompok'    => $id_kelompok,
-                    'tgl_lahir'      => $val->tanggal_lahir,
-                    'tempat_lahir'   => $val->tempat_lahir,
-                    'desa'           => $val->desa,
-                    'jenis_kelamin'  => $val->jenis_kelamin,
-                    'no_telepon'     => $val->no_telepon,
-                    'email'          => $val->email,
-                    'alamat'         => $val->alamat,
-                    'ket_peserta'    => $val->ket_peserta,
-                    'ukuran_baju'    => $val->ukuran_baju,
-                    'dapukan'        => $val->dapukan,
-                    'status_peserta' => $val->status_peserta
-                ];
-            }
-            Anggota::insert($var2);
-        }
-        return redirect('/admin/kelompok')->with('message','Berhasil Import');
     }
 
     public function cetakBet($id,$id_detail) {

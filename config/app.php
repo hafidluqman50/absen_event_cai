@@ -150,6 +150,7 @@ return [
         Telegram\Bot\Laravel\TelegramServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         Yajra\DataTables\HtmlServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -215,6 +216,7 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Telegram'  => Telegram\Bot\Laravel\Facades\Telegram::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class
     ],
 
 ];

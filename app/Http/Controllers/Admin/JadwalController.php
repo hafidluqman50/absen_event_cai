@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\JadwalModel as Jadwal;
 use App\Model\KegiatanModel as Kegiatan;
+use PDF;
+use Excel;
+
 class JadwalController extends Controller
 {
     public function index($id) {
@@ -50,11 +53,35 @@ class JadwalController extends Controller
 		return redirect('/admin/kegiatan/'.$id_kegiatan.'/jadwal')->with('message',$message);
     }
 
-    public function cetakExcel($id,$id_jadwal) {
-    	echo "<h1>Coming Soon Hehe :) </h1>";
+    public function cetakLaporan($id,$id_jadwal) {
+        $kegiatan = DB::table('jadwal')->join('kegiatan','jadwal.id_kegiatan','=','kegiatan.id_kegiatan')->where('id_kegiatan',$id)->where('id_jadwal',$id_jadwal)->firstOrFail();
+        Excel::create('Laporan Kegiatan '.$kegiatan->nama_kegiatan.' '.explodeDate($kegiatan->tanggal_kegiatan).' '.$kegiatan->nama_jadwal,function($excel){
+            $excel->sheet('Laporan',function($sheet){
+                // $sheet->setCellValue('A1','No.');
+                // $sheet->setCellValue('B1','');
+            });
+            $excel->sheet('Daftar Peserta',function($sheet){
+
+            });
+        })->download('xlsx');
+        $data = '';
+        PDF::loadView('laporan',$data)->download('Laporan Kegiatan '.$kegiatan->nama_kegiatan.' '.explodeDate($kegiatan->tanggal_kegiatan).'.pdf');
+        // echo "<h1>Coming Soon Hehe :) </h1>";
     }
 
-    public function cetakExcelAll($id) {
-    	echo "<h1>Coming Soon Hehe :) </h1>";
+    public function cetakLaporanAll($id) {
+        $kegiatan = Kegiatan::where('id_kegiatan',$id)->firstOrFail();
+        Excel::create('Laporan Kegiatan '.$kegiatan->nama_kegiatan.' '.explodeDate($kegiatan->tanggal_kegiatan),function($excel){
+            $excel->sheet('Laporan',function($sheet){
+                // $sheet->setCellValue('A1','No.');
+                // $sheet->setCellValue('B1','');
+            });
+            $excel->sheet('Daftar Peserta',function($sheet){
+
+            });
+        })->download('xlsx');
+        $data = '';
+        PDF::loadView('laporan',$data)->download('Laporan Kegiatan '.$kegiatan->nama_kegiatan.' '.explodeDate($kegiatan->tanggal_kegiatan).'.pdf');
+    	// echo "<h1>Coming Soon Hehe :) </h1>";
     }
 }

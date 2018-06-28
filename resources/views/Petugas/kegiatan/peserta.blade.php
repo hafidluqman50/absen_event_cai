@@ -52,7 +52,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
+
                             </tbody>
                         </table>
                     </div>
@@ -91,7 +91,7 @@
             "class": "index",
             targets: 0
             }],
-            order: [[ 0, 'desc' ]],
+            order: [[ 1, 'desc' ]],
             fixedColumns: true
         });
         peserta.on( 'order.dt search.dt', function () {

@@ -50,11 +50,11 @@ class JadwalController extends Controller
 		return redirect('/petugas/kegiatan/'.$id_kegiatan.'/jadwal')->with('message',$message);
     }
 
-    public function cetakExcel($id,$id_jadwal) {
+    public function cetakLaporan($id,$id_jadwal) {
     	echo "<h1>Coming Soon Hehe :) </h1>";
     }
 
-    public function cetakExcelAll($id) {
+    public function cetakLaporanAll($id) {
     	
     }
 }
