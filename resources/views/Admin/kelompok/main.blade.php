@@ -69,13 +69,15 @@
                     return meta.row + meta.settings._iDisplayStart+1;
                     console.log(meta.row);
                 }},
+                // {data:'row',name:'row'},
                 {data:'nama_kelompok',name:'nama_kelompok'},
                 {data:'lokasi_kelompok',name:'lokasi_kelompok'},
                 {data:'action',name:'action',searchable:false,orderable:false}
             ],
             scrollCollapse: true,
             columnDefs: [{
-            sortable: true,
+            // sortable: false,
+            orderable:true,
             "class": "index",
             targets: 0
             }],

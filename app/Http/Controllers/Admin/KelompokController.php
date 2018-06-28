@@ -146,21 +146,22 @@ class KelompokController extends Controller
         $fileName = uniqid().'_'.$file->getClientOriginalName();
         $file->move(storage_path('file/'),$fileName);
         if (!empty($file)) {
-            Excel::selectSheetsByIndex(0,1)->filter('chunk')->load(storage_path('/file/'.$fileName))->chunk(1000000,function($xlsx){
+            Excel::selectSheetsByIndex(0,1)->filter('chunk')->load(storage_path('/file/'.$fileName))->chunk(10000,function($xlsx){
+
             foreach ($xlsx[0] as $key => $value) {
-                $var[] = [
+                $data_kelompok[] = [
                     'nama_kelompok'   => strtoupper($value->nama_kelompok),
                     'lokasi_kelompok' => strtoupper($value->lokasi_kelompok),
                     'created_at'      => date('Y-m-d H:i:s'),
                     'updated_at'      => date('Y-m-d H:i:s')
                 ];
             }
-            Kelompok::insert($var);
+            Kelompok::insert($data_kelompok);
             foreach ($xlsx[1] as $num => $val) {
                 $unix_date = ($val->tanggal_lahir - 25569) * 86400;
                 $date = gmdate('Y-m-d',$unix_date);
-                $id_kelompok = Kelompok::where('nama_kelompok',$val->kelompok)->firstOrFail()->id_kelompok;
-                $var2[] = [
+                $id_kelompok = Kelompok::where('nama_kelompok',strtoupper($val->kelompok))->firstOrFail()->id_kelompok;
+                $data_anggota[] = [
                     'nama_anggota'   => strtoupper($val->nama_lengkap_peserta),
                     'id_kelompok'    => $id_kelompok,
                     'tgl_lahir'      => $date,
@@ -178,8 +179,7 @@ class KelompokController extends Controller
                     'updated_at'     => date('Y-m-d H:i:s'),
                 ];
             }
-            // dd($var2);
-            Anggota::insert($var2);
+            Anggota::insert($data_anggota);
             });
         }
         return redirect('/admin/kelompok')->with('message','Berhasil Import');

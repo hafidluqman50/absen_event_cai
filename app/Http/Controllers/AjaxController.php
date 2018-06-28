@@ -37,6 +37,12 @@ class AjaxController extends Controller
 
     public function dataKelompok(Request $request) {
         // DB::statement(DB::raw('set @rownum=0'));
+        // $kelompok = Kelompok::select([
+        //     DB::raw('@rownum:=@rownum+1 AS row'),
+        //     'id_kelompok',
+        //     'nama_kelompok',
+        //     'lokasi_kelompok'
+        // ])->orderBy('id_kelompok','desc');
         $kelompok = Kelompok::all();
         $datatables = Datatables::of($kelompok)->addColumn('action',function($action){
             $button = '
@@ -184,16 +190,17 @@ class AjaxController extends Controller
     }
 
     public function dataAbsen($id,$id_jadwal) {
+        DB::statement(DB::raw('set @rownum = 0'));
         $absen = DB::table('absen')
                     ->join('jadwal','absen.id_jadwal','=','jadwal.id_jadwal')
                     ->join('kegiatan_detail','absen.id_detail','=','kegiatan_detail.id_detail')
                     ->join('anggota','kegiatan_detail.id_anggota','=','anggota.id_anggota')
                     ->join('kelompok','anggota.id_kelompok','=','kelompok.id_kelompok')
                     ->join('users','absen.id_users','=','users.id_users')
-                    ->select('anggota.nama_anggota','anggota.ket_peserta','kelompok.nama_kelompok','kegiatan_detail.id_kegiatan','kegiatan_detail.code_barcode','kegiatan_detail.ket','users.name','absen.id_absen','absen.waktu_absen','jadwal.id_jadwal')
+                    ->select(DB::raw('@rownum:=@rownum+1 AS row'),'anggota.nama_anggota','anggota.ket_peserta','kelompok.nama_kelompok','kegiatan_detail.id_kegiatan','kegiatan_detail.code_barcode','kegiatan_detail.ket','users.name','absen.id_absen','absen.waktu_absen','jadwal.id_jadwal')
                     ->where('kegiatan_detail.id_kegiatan',$id)
                     ->where('absen.id_jadwal',$id_jadwal)
-                    // ->orderBy('waktu_absen','desc')
+                    ->orderBy('waktu_absen','desc')
                     ->get();
         return Datatables::of($absen)->addColumn('action',function($action){
             $level = Auth::user()->level==2?'admin':(Auth::user()->level==1?'petugas':'');
