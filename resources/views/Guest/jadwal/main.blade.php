@@ -25,6 +25,7 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Jadwal</th>
+                                    <th>Hari</th>
                                     <th>Keterangan</th>
                                     <th>#</th>
                                 </tr>
@@ -53,6 +54,7 @@
                     return meta.row + meta.settings._iDisplayStart+1;
                     console.log(data);
                 }},
+                {data:'hari',name:'hari'},
                 {data:'nama_jadwal',name:'nama_jadwal'},
                 {data:'keterangan',name:'keterangan'},
                 {data:'action',name:'action',searchable:false,orderable:false}

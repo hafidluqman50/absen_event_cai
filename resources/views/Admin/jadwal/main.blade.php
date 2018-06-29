@@ -28,13 +28,23 @@
                     <h5>Tanggal Kegiatan : {{ explodeDate($kegiatan->tanggal_kegiatan) }}</h5>
                     <h5>Lokasi Kegiatan : {{ $kegiatan->lokasi_kegiatan }}</h5>
 	                <div class="btn-group mg" role="button">
-	                    <a href="{{ url('/admin/kegiatan/'.$id.'/jadwal/cetak-semua-excel') }}" title="Cetak" class="btn btn-info waves-effect btn-lg" target="_blank"><b>
-	                        Cetak Semua Laporan
+	                    <a href="{{ url('/admin/kegiatan/'.$id.'/jadwal/peserta/cetak-semua-excel') }}" title="Cetak" class="btn btn-info waves-effect btn-lg" target="_blank"><b>
+	                        Cetak Semua Laporan Peserta
 	                    </b></a>
 	                </div>
                     <div class="btn-group mg" role="button">
-                        <a href="{{ url('/admin/kegiatan/'.$id.'/jadwal/download-semua-pdf') }}" title="Download" class="btn btn-danger waves-effect btn-lg" target="_blank"><b>
-                            Download Semua Laporan
+                        <a href="{{ url('/admin/kegiatan/'.$id.'/jadwal/peserta/download-semua-pdf') }}" title="Download" class="btn btn-danger waves-effect btn-lg" target="_blank"><b>
+                            Download Semua Laporan Peserta
+                        </b></a>
+                    </div>
+                    <div class="btn-group mg" role="button">
+                        <a href="{{ url('/admin/kegiatan/'.$id.'/jadwal/panitia/cetak-semua-excel') }}" title="Cetak" class="btn btn-info waves-effect btn-lg" target="_blank"><b>
+                            Cetak Semua Laporan Panitia
+                        </b></a>
+                    </div>
+                    <div class="btn-group mg" role="button">
+                        <a href="{{ url('/admin/kegiatan/'.$id.'/jadwal/panitia/download-semua-pdf') }}" title="Download" class="btn btn-danger waves-effect btn-lg" target="_blank"><b>
+                            Download Semua Laporan Panitia
                         </b></a>
                     </div>
                     <div class="table-responsive">
@@ -43,6 +53,7 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Jadwal</th>
+                                    <th>Hari</th>
                                     <th>Keterangan</th>
                                     <th>#</th>
                                 </tr>
@@ -72,6 +83,7 @@
                     console.log(data);
                 }},
                 {data:'nama_jadwal',name:'nama_jadwal'},
+                {data:'hari',name:'hari'},
                 {data:'keterangan',name:'keterangan'},
                 {data:'action',name:'action',searchable:false,orderable:false}
             ],

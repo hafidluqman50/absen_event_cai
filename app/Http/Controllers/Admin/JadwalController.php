@@ -69,7 +69,7 @@ class JadwalController extends Controller
         })->download('xlsx');
     }
 
-    public function cetakLaporanExcelAll($id) {
+    public function cetakLaporanExcelAll($id,$ket) {
         $kegiatan = Kegiatan::where('id_kegiatan',$id)->firstOrFail();
         $jadwal   = Jadwal::where('id_kegiatan',$id)->get();
         $absen    = new Absen;
@@ -84,22 +84,22 @@ class JadwalController extends Controller
         // })->download('xlsx');
     }
 
-    public function cetakLaporanPdfAll($id) {
+    public function cetakLaporanPdfAll($id,$ket) {
         $kegiatan = Kegiatan::where('id_kegiatan',$id)->firstOrFail();
         $jadwal   = Jadwal::where('id_kegiatan',$id)->get();
         $absen    = new Absen;
-        $pdf = PDF::loadView('laporan-all',compact('kegiatan','jadwal','absen'))->setPaper('letter','landscape');
+        $pdf = PDF::loadView('laporan-all',compact('kegiatan','jadwal','absen','ket'))->setPaper('letter','landscape');
         return $pdf->download('Laporan Kegiatan '.$kegiatan->nama_kegiatan.' '.explodeDate($kegiatan->tanggal_kegiatan).'.pdf');
     }
 
-    public function coba($id) {
+    public function coba($id,$ket) {
         $kegiatan = Kegiatan::where('id_kegiatan',$id)->firstOrFail();
         $jadwal   = Jadwal::where('id_kegiatan',$id)->get();
         $absen    = new Absen;
-        return view('laporan-all',compact('kegiatan','jadwal','absen'));
+        return view('laporan-all',compact('kegiatan','jadwal','absen','ket'));
     }
 
-    public function cetakLaporanPdf($id,$id_jadwal) {
+    public function cetakLaporanPdf($id,$id_jadwal,$ket) {
         $kegiatan = DB::table('jadwal')->join('kegiatan','jadwal.id_kegiatan','=','kegiatan.id_kegiatan')->where('id_kegiatan',$id)->where('id_jadwal',$id_jadwal)->firstOrFail();
         $data = '';
         PDF::loadView('laporan',$data)->download('Laporan Kegiatan '.$kegiatan->nama_kegiatan.' '.explodeDate($kegiatan->tanggal_kegiatan).'.pdf');

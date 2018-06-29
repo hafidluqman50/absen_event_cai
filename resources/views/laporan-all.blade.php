@@ -25,7 +25,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				@forelse($absen->absenHadirAll($value->id_kegiatan,$value->id_jadwal) as $key => $data)
+				@forelse($absen->absenHadir($value->id_kegiatan,$value->id_jadwal,$ket) as $key => $data)
 				<tr align="center">
 					<th scope="row">{{ $key+1 }}</th>
 					<td>{{ $data->ket_peserta }}</td>
@@ -47,7 +47,7 @@
 				@endforelse
 				<tr>
 					<td colspan="6"><b>Jumlah Hadir</b></td>
-					<td>{{ count($absen->absenHadirAll($value->id_kegiatan,$value->id_jadwal)) }}</td>
+					<td>{{ count($absen->absenHadir($value->id_kegiatan,$value->id_jadwal,$ket)) }}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -69,7 +69,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				@forelse($absen->absenTidakHadirAll($value->id_kegiatan,$value->id_jadwal) as $key => $val)
+				@forelse($absen->absenTidakHadir($value->id_kegiatan,$value->id_jadwal,$ket) as $key => $val)
 				<tr align="center">
 					<th scope="row">{{ $key+1 }}</th>
 					<td>{{ $val->ket_peserta }}</td>
@@ -91,7 +91,7 @@
 				@endforelse
 				<tr>
 					<td colspan="6"><b>Jumlah Tidak Hadir</b></td>
-					<td>{{ count($absen->absenTidakHadirAll($value->id_kegiatan,$value->id_jadwal)) }}</td>
+					<td>{{ count($absen->absenTidakHadir($value->id_kegiatan,$value->id_jadwal,$ket)) }}</td>
 				</tr>
 			</tbody>
 		</table>
