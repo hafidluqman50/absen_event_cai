@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css?family=Libre+Barcode+128+Text|Lobster|Montserrat|Source+Sans+Pro:700');
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
+.bgpeserta{
+    background: linear-gradient(0deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%),url('../images/bgpeserta.jpg');
+    background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.bgpanitia{
+    background: linear-gradient(0deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%),url('../images/bgpanitia.jpg');
+    background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.text-shadow { 
+    color:#fff; Text-Shadow:0px 0px 0 rgb(226, 226, 226),1px 1px 0 rgb(218, 218, 218),2px 2px 0 rgb(210, 210, 210),3px 3px 0 rgb(201, 201, 201),4px 4px 0 rgb(193, 193, 193),5px 5px 0 rgb(185, 185, 185),6px 6px 0 rgb(177, 177, 177), 7px 7px 0 rgb(169, 169, 169),8px 8px 7px rgba(0, 0, 0, 0.4),8px 8px 1px rgba(0, 0, 0, 0.5),0px 0px 7px rgba(0, 0, 0, 0.2); 
+}
+
+.judul{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 22px;
+    color: red;
+    /* color:#fff;  */
+    Text-Shadow:0px 0px 0 rgb(197, 20, 20),1px 1px 0 rgb(191, 21, 21),2px 2px 0 rgb(127, 7, 7);
+}
+
+.ket{
+    font-family: 'Source Sans Pro', sans-serif;
+    margin-top:-1.5rem;
+    font-size: 15px;
+    color: red;
+    /* color:#fff;  */
+    /* Text-Shadow:0px 0px 0 rgb(197, 20, 20),0px 1px 0px rgb(115, 21, 21); */
+    Text-Shadow:0px 0px 0 rgb(197, 20, 20),1px 1px 0 rgb(191, 21, 21),2px 2px 0 rgb(127, 7, 7);
+}
+
+.thn{
+    font-family: 'Source Sans Pro', sans-serif;
+    margin-top:-1.5rem;
+    font-size: 15px;
+    letter-spacing: 15px;
+    color: red;
+    /* color:#fff;  */
+    Text-Shadow:0px 0px 0 rgb(197, 20, 20),1px 1px 0 rgb(191, 21, 21),2px 2px 0 rgb(127, 7, 7);
+}
+
+.status{
+    /* font-family: 'Lobster', cursive; */
+    font-family: 'Pacifico', cursive;
+    font-size:55px;
+    font-style: italic;
+    font-weight: bold;
+    margin-top:0.8rem;
+    margin-left:-0.4rem;
+    color: #FEFC1A;
+}
+
+.kotak{
+    background: #999999;
+    border-radius: 50%;
+    height: 130px;
+    width: 230px;
+    border:4px solid #FEFC1A;
+}
+
+.inp{
+    font-family: 'Source Sans Pro', sans-serif;
+    padding: 0.2rem;
+    font-size:18px;
+    background: white;
+    border-radius:12px;
+    width: 100%;
+    color:#2D3575;
+}
+
+.inp-kel{
+    font-family: 'Source Sans Pro', sans-serif;
+    padding: 0.2rem;
+    font-size:18px;
+    background: white;
+    border-radius:12px;
+    width: 80%;
+    color:#2D3575;
+}
+
+.inp-bar{
+    font-family: 'Libre Barcode 128 Text', cursive;
+    /* padding: 0.rem; */
+    font-size:30px;
+    background: white;
+    border-radius:12px;
+    width: 55%;
+    color:#2D3575;
+}
+
+.inp-pan{
+    font-family: 'Source Sans Pro', sans-serif;
+    padding: 0.2rem;
+    font-size:18px;
+    background: white;
+    border-radius:12px;
+    width: 100%;
+    color:#005A2D;
+}
+
+.inp-kel-pan{
+    font-family: 'Source Sans Pro', sans-serif;
+    padding: 0.2rem;
+    font-size:18px;
+    background: white;
+    border-radius:12px;
+    width: 80%;
+    color:#005A2D;
+}
+
+.inp-bar-pan{
+    font-family: 'Libre Barcode 128 Text', cursive;
+    /* padding: 0.rem; */
+    font-size:30px;
+    background: white;
+    border-radius:12px;
+    width: 55%;
+    color:#005A2D;
+}
