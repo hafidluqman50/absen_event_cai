@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\JadwalModel as Jadwal;
 use App\Model\KegiatanModel as Kegiatan;
+use App\Model\AbsenModel as Absen;
 use DB;
 use PDF;
 use Excel;
@@ -40,9 +41,10 @@ class JadwalController extends Controller
     public function save(Request $request) {
         $jadwal      = $request->jadwal;
         $keterangan  = $request->keterangan;
+        $hari        = days(date('Y-m-d'));
         $id_jadwal   = $request->id_jadwal;
         $id_kegiatan = $request->id_kegiatan;
-		$array = ['nama_jadwal' => $jadwal,'id_kegiatan'=>$id_kegiatan,'keterangan' => $keterangan];
+		$array = ['nama_jadwal' => $jadwal,'hari'=>$hari,'id_kegiatan'=>$id_kegiatan,'keterangan' => $keterangan];
 		if ($id_jadwal == '') {
 			Jadwal::create($array);
 			$message = 'Berhasil Input Jadwal';
@@ -54,7 +56,7 @@ class JadwalController extends Controller
 		return redirect('/admin/kegiatan/'.$id_kegiatan.'/jadwal')->with('message',$message);
     }
 
-    public function cetakLaporan($id,$id_jadwal) {
+    public function cetakLaporanExcel($id,$id_jadwal) {
         $kegiatan = DB::table('jadwal')->join('kegiatan','jadwal.id_kegiatan','=','kegiatan.id_kegiatan')->where('id_kegiatan',$id)->where('id_jadwal',$id_jadwal)->firstOrFail();
         Excel::create('Laporan Kegiatan '.$kegiatan->nama_kegiatan.' '.explodeDate($kegiatan->tanggal_kegiatan).' '.$kegiatan->nama_jadwal,function($excel){
             $excel->sheet('Laporan',function($sheet){
@@ -65,24 +67,42 @@ class JadwalController extends Controller
 
             });
         })->download('xlsx');
+    }
+
+    public function cetakLaporanExcelAll($id) {
+        $kegiatan = Kegiatan::where('id_kegiatan',$id)->firstOrFail();
+        $jadwal   = Jadwal::where('id_kegiatan',$id)->get();
+        $absen    = new Absen;
+        // Excel::create('Laporan Kegiatan '.$kegiatan->nama_kegiatan.' '.explodeDate($kegiatan->tanggal_kegiatan),function($excel){
+        //     $excel->sheet('Laporan',function($sheet){
+        //         // $sheet->setCellValue('A1','No.');
+        //         // $sheet->setCellValue('B1','');
+        //     });
+        //     $excel->sheet('Daftar Peserta',function($sheet){
+
+        //     });
+        // })->download('xlsx');
+    }
+
+    public function cetakLaporanPdfAll($id) {
+        $kegiatan = Kegiatan::where('id_kegiatan',$id)->firstOrFail();
+        $jadwal   = Jadwal::where('id_kegiatan',$id)->get();
+        $absen    = new Absen;
+        $pdf = PDF::loadView('laporan-all',compact('kegiatan','jadwal','absen'))->setPaper('letter','landscape');
+        return $pdf->download('Laporan Kegiatan '.$kegiatan->nama_kegiatan.' '.explodeDate($kegiatan->tanggal_kegiatan).'.pdf');
+    }
+
+    public function coba($id) {
+        $kegiatan = Kegiatan::where('id_kegiatan',$id)->firstOrFail();
+        $jadwal   = Jadwal::where('id_kegiatan',$id)->get();
+        $absen    = new Absen;
+        return view('laporan-all',compact('kegiatan','jadwal','absen'));
+    }
+
+    public function cetakLaporanPdf($id,$id_jadwal) {
+        $kegiatan = DB::table('jadwal')->join('kegiatan','jadwal.id_kegiatan','=','kegiatan.id_kegiatan')->where('id_kegiatan',$id)->where('id_jadwal',$id_jadwal)->firstOrFail();
         $data = '';
         PDF::loadView('laporan',$data)->download('Laporan Kegiatan '.$kegiatan->nama_kegiatan.' '.explodeDate($kegiatan->tanggal_kegiatan).'.pdf');
         // echo "<h1>Coming Soon Hehe :) </h1>";
-    }
-
-    public function cetakLaporanAll($id) {
-        $kegiatan = Kegiatan::where('id_kegiatan',$id)->firstOrFail();
-        Excel::create('Laporan Kegiatan '.$kegiatan->nama_kegiatan.' '.explodeDate($kegiatan->tanggal_kegiatan),function($excel){
-            $excel->sheet('Laporan',function($sheet){
-                // $sheet->setCellValue('A1','No.');
-                // $sheet->setCellValue('B1','');
-            });
-            $excel->sheet('Daftar Peserta',function($sheet){
-
-            });
-        })->download('xlsx');
-        $data = '';
-        PDF::loadView('laporan',$data)->download('Laporan Kegiatan '.$kegiatan->nama_kegiatan.' '.explodeDate($kegiatan->tanggal_kegiatan).'.pdf');
-    	// echo "<h1>Coming Soon Hehe :) </h1>";
     }
 }

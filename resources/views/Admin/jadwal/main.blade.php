@@ -32,6 +32,11 @@
 	                        Cetak Semua Laporan
 	                    </b></a>
 	                </div>
+                    <div class="btn-group mg" role="button">
+                        <a href="{{ url('/admin/kegiatan/'.$id.'/jadwal/download-semua-pdf') }}" title="Download" class="btn btn-danger waves-effect btn-lg" target="_blank"><b>
+                            Download Semua Laporan
+                        </b></a>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-hover dashboard-task-infos jadwal" id="table">
                             <thead>

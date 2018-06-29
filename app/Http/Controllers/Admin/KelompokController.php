@@ -77,7 +77,7 @@ class KelompokController extends Controller
                 $sheet->setCellValue('C2','DIMENSI SASUKE');
 
                 $sheet->setCellValue('A3','2');
-                $sheet->setCellValue('B3','DEWA SHINOBI');
+                $sheet->setCellValue('B3','PENDIRI NINSHU');
                 $sheet->setCellValue('C3','DUNIA HAGOROMO');
                 // END DATA //
             });

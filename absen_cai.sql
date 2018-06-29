@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 26, 2018 at 07:12 PM
+-- Generation Time: Jun 29, 2018 at 05:19 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -45,8 +45,8 @@ CREATE TABLE `absen` (
 INSERT INTO `absen` (`id_absen`, `id_detail`, `waktu_absen`, `id_jadwal`, `id_users`, `created_at`, `updated_at`) VALUES
 (2, 1, '2018-06-25 05:12:36', 1, 1, '2018-06-26 01:32:20', '2018-06-24 21:12:36'),
 (3, 3, '2018-06-26 06:54:30', 1, 1, '2018-06-25 22:54:30', '2018-06-25 22:54:30'),
-(4, 4, '2018-06-26 07:10:55', 2, 1, '2018-06-25 23:10:55', '2018-06-25 23:10:55'),
-(5, 5, '2018-06-27 00:49:14', 1, 1, '2018-06-26 16:49:14', '2018-06-26 16:49:14');
+(6, 6, '2018-06-27 08:46:07', 1, 1, '2018-06-27 00:46:07', '2018-06-27 00:46:07'),
+(8, 7, '2018-06-27 13:00:24', 1, 1, '2018-06-27 05:00:24', '2018-06-27 05:00:24');
 
 -- --------------------------------------------------------
 
@@ -61,7 +61,7 @@ CREATE TABLE `anggota` (
   `tgl_lahir` date NOT NULL,
   `tempat_lahir` varchar(70) NOT NULL,
   `desa` varchar(50) NOT NULL,
-  `jenis_kelamin` enum('laki-laki','perempuan') NOT NULL,
+  `jenis_kelamin` varchar(50) NOT NULL,
   `no_telepon` varchar(20) NOT NULL,
   `email` varchar(100) NOT NULL,
   `alamat` text NOT NULL,
@@ -88,7 +88,9 @@ INSERT INTO `anggota` (`id_anggota`, `nama_anggota`, `id_kelompok`, `tgl_lahir`,
 (8, 'MUHAMMAD NUR HUDA', 5, '1996-11-01', 'SAMARINDA', 'SAMBUTAN', 'laki-laki', '0823 0148 2826', '-', '-', 'KIRIMAN', 'L', 'ROKYAH', 'KERJA', '2018-06-26 07:26:13', '2018-06-26 07:26:13'),
 (9, 'FADLI UMAR HAMDAN', 6, '2000-04-26', 'SAMARINDA', 'SAMBUTAN', 'laki-laki', '0823 5306 8300', 'fedli354@gmail.com', '-', 'KIRIMAN', 'M', 'WAKIL KETUA MUDA MUDI', 'PELAJAR', '2018-06-26 07:26:13', '2018-06-26 07:26:13'),
 (10, 'BAGUSTO PRANTAU PRATMAJAYA', 5, '1998-11-28', 'BALIKPAPAN', 'SAMARINDA SEBERANG', 'laki-laki', '0821 3963 7760', 'Bagussatrya2898@gmail.com', '-', 'KIRIMAN', 'XL', 'WAKIL KETUA MUDA/I', 'MAHASISWA', '2018-06-26 07:26:13', '2018-06-26 07:26:13'),
-(11, 'IRVAN JAENUDIN', 3, '1998-05-28', 'BITUNG', 'SAMARINDA SEBERANG', 'laki-laki', '-', '-', '-', 'KIRIMAN', 'L', 'MUBALLIGH TUGASAN', 'MUBALLIGH TUGASAN', '2018-06-26 07:26:13', '2018-06-26 07:26:13');
+(11, 'IRVAN JAENUDIN', 3, '1998-05-28', 'BITUNG', 'SAMARINDA SEBERANG', 'laki-laki', '-', '-', '-', 'KIRIMAN', 'L', 'MUBALLIGH TUGASAN', 'MUBALLIGH TUGASAN', '2018-06-26 07:26:13', '2018-06-26 07:26:13'),
+(12, 'UCHIHA SASUKE', 7, '1997-06-23', 'KONOHAGAKURE', 'KONOHA', 'laki-laki', '0888 8888 8888', 'sasukegagah@gmail.com', 'JLN. PERUM UCHIHA BLOK 1', 'KIRIMAN', 'XL', 'FREELANCER', 'VETERAN PERANG', '2018-06-28 22:20:15', '2018-06-28 22:20:15'),
+(14, 'HAGOROMO OTSUTSUKI', 8, '1290-06-23', 'BUMI', 'DEWA SHINOBI', 'perempuan', '0888 8888 8888', 'hagoromonakmamah@gmail.com', 'JLN. SETAPAK DI SEBUAH DESA', 'PENDATANG', 'XL', 'GURU', 'TUKANG SEGEL', '2018-06-28 22:21:20', '2018-06-28 22:21:20');
 
 -- --------------------------------------------------------
 
@@ -100,6 +102,7 @@ CREATE TABLE `jadwal` (
   `id_jadwal` int(11) NOT NULL,
   `id_kegiatan` int(11) NOT NULL,
   `nama_jadwal` varchar(50) NOT NULL,
+  `hari` varchar(35) NOT NULL,
   `keterangan` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -109,9 +112,9 @@ CREATE TABLE `jadwal` (
 -- Dumping data for table `jadwal`
 --
 
-INSERT INTO `jadwal` (`id_jadwal`, `id_kegiatan`, `nama_jadwal`, `keterangan`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Pagi', 'Ustadz Satria Ramadhani Gosal, Lc.Ma', NULL, '2018-06-25 20:27:10'),
-(2, 2, 'Pagi', 'King T\'Chaka', '2018-06-25 23:03:32', '2018-06-25 23:03:32');
+INSERT INTO `jadwal` (`id_jadwal`, `id_kegiatan`, `nama_jadwal`, `hari`, `keterangan`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Pagi', 'Jumat, 29 Juni 2018', 'Ustadz Satria Ramadhani Gosal, Lc.Ma', NULL, '2018-06-29 05:23:18'),
+(2, 1, 'Siang', 'Jumat, 29 Juni 2018', '-', '2018-06-29 05:22:11', '2018-06-29 05:22:11');
 
 -- --------------------------------------------------------
 
@@ -133,8 +136,7 @@ CREATE TABLE `kegiatan` (
 --
 
 INSERT INTO `kegiatan` (`id_kegiatan`, `nama_kegiatan`, `tanggal_kegiatan`, `lokasi_kegiatan`, `created_at`, `updated_at`) VALUES
-(1, 'CAI', '2018-06-19', 'Jln. Lambung Mangkurat', '2018-06-24 04:21:55', '2018-06-24 04:32:35'),
-(2, 'Cagar Alam', '2018-06-30', 'Wakanda', '2018-06-25 23:00:04', '2018-06-25 23:00:04');
+(1, 'CAI', '2018-06-19', 'Jln. Lambung Mangkurat', '2018-06-24 04:21:55', '2018-06-24 04:32:35');
 
 -- --------------------------------------------------------
 
@@ -160,9 +162,13 @@ CREATE TABLE `kegiatan_detail` (
 INSERT INTO `kegiatan_detail` (`id_detail`, `id_kegiatan`, `code_barcode`, `id_anggota`, `ket`, `id_users`, `created_at`, `updated_at`) VALUES
 (1, 1, '2941533150001', 1, 'panitia', 1, '2018-06-24 18:15:12', '2018-06-24 22:05:41'),
 (3, 1, '2941533150002', 2, 'panitia', 1, '2018-06-25 22:41:23', '2018-06-25 22:41:23'),
-(4, 2, '2941533150001', 1, 'peserta', 1, '2018-06-25 23:10:40', '2018-06-25 23:10:40'),
 (5, 1, '2941533150003', 3, 'peserta', 1, '2018-06-26 08:48:28', '2018-06-26 08:48:28'),
-(6, 1, '2941533150004', 11, 'peserta', 1, '2018-06-26 08:48:57', '2018-06-26 08:48:57');
+(6, 1, '2941533150004', 11, 'peserta', 1, '2018-06-26 08:48:57', '2018-06-26 08:48:57'),
+(7, 1, '2941533150005', 9, 'peserta', 1, '2018-06-26 20:56:14', '2018-06-26 20:56:14'),
+(8, 1, '2941533150006', 4, 'panitia', 1, '2018-06-29 07:18:15', '2018-06-29 07:18:15'),
+(9, 1, '2941533150007', 6, 'panitia', 1, '2018-06-29 07:18:16', '2018-06-29 07:18:16'),
+(10, 1, '2941533150008', 8, 'panitia', 1, '2018-06-29 07:18:16', '2018-06-29 07:18:16'),
+(11, 1, '2941533150009', 10, 'panitia', 1, '2018-06-29 07:18:16', '2018-06-29 07:18:16');
 
 -- --------------------------------------------------------
 
@@ -188,7 +194,9 @@ INSERT INTO `kelompok` (`id_kelompok`, `nama_kelompok`, `lokasi_kelompok`, `crea
 (3, 'KONOHA', 'KONOHAGAKURE', '2018-06-26 07:26:12', '2018-06-26 07:26:12'),
 (4, 'HOKAGE', 'SUNAGAKURE', '2018-06-26 07:26:12', '2018-06-26 07:26:12'),
 (5, 'UCHIHA', 'INDRA', '2018-06-26 07:26:12', '2018-06-26 07:26:12'),
-(6, 'UZUMAKI', 'ASHURA', '2018-06-26 07:26:12', '2018-06-26 07:26:12');
+(6, 'UZUMAKI', 'ASHURA', '2018-06-26 07:26:12', '2018-06-26 07:26:12'),
+(7, 'PELINDUNG KONOHA', 'DIMENSI SASUKE', '2018-06-28 22:17:40', '2018-06-28 22:17:40'),
+(8, 'DEWA SHINOBI', 'DUNIA HAGOROMO', '2018-06-28 22:17:41', '2018-06-28 22:17:41');
 
 -- --------------------------------------------------------
 
@@ -233,9 +241,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_users`, `name`, `username`, `password`, `level`, `status_akun`, `last_login`, `remember_token`, `status_delete`, `deleted_at`) VALUES
-(1, 'Administrator', 'admin', '$2y$10$SSTPVCNQM60/kGfdCO8eEO0PLdDekSpAVsMdD4x9bhOPvjHBBrZ0G', 2, 1, NULL, '9ou4IM0ox9sKjGPEktsBa4PDN8l50p4QSGg2Tj9GCL44ljVvUxm6xNVmWb35', 0, NULL),
-(3, 'Daguy', 'daguy', '$2y$10$x/DtXp.55nXXBnNXEwk5fuE1nDqgAxog7zdUrBARoa2SDIX3QWaHm', 0, 1, NULL, 'oHF8L0oVLZUTnuUHTsd3Qb2QQ2YfJ82V4ky3BaZt9ltrkgfSOJTZ05GulH1H', 1, '2018-06-26 00:03:08'),
-(4, 'Petugas', 'petugas', '$2y$10$WhLIk9dJYCt.YZ0iXc6Uy.tpvAOqgz8rBVl8I3dsVcM1TT3ZzSdwy', 1, 1, NULL, 'AEAEjXfSQZJPOiMI06kEzsl7UhvbKJgKTDJ4V8PiQuQPCdci39Bp6eG0WX4t', 0, NULL);
+(1, 'Administrator', 'admin', '$2y$10$SSTPVCNQM60/kGfdCO8eEO0PLdDekSpAVsMdD4x9bhOPvjHBBrZ0G', 2, 1, NULL, 'xtMcpktBSpWnwglZKUNalZyVWgm7hx4eIh6nXe5obkbWCQpMlp6HWxMyHQzb', 0, NULL),
+(3, 'Daguy', 'daguy', '$2y$10$x/DtXp.55nXXBnNXEwk5fuE1nDqgAxog7zdUrBARoa2SDIX3QWaHm', 0, 1, NULL, 'kl03Y14v9P0AIziSTwBX36xqiLKnQOWWv07MW290DkeoFUQNCHaLOPI66rjb', 0, '2018-06-26 00:03:08'),
+(4, 'Petugas', 'petugas', '$2y$10$WhLIk9dJYCt.YZ0iXc6Uy.tpvAOqgz8rBVl8I3dsVcM1TT3ZzSdwy', 1, 1, NULL, 'YJADoFQRSkvo1JalTRgXkVbohDmCoE5igLTjudFDqGPwFa7NEbPPsjBWryvo', 0, '2018-06-27 18:19:04');
 
 --
 -- Indexes for dumped tables
@@ -305,13 +313,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `absen`
 --
 ALTER TABLE `absen`
-  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `anggota`
 --
 ALTER TABLE `anggota`
-  MODIFY `id_anggota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_anggota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `jadwal`
@@ -323,19 +331,19 @@ ALTER TABLE `jadwal`
 -- AUTO_INCREMENT for table `kegiatan`
 --
 ALTER TABLE `kegiatan`
-  MODIFY `id_kegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_kegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `kegiatan_detail`
 --
 ALTER TABLE `kegiatan_detail`
-  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `kelompok`
 --
 ALTER TABLE `kelompok`
-  MODIFY `id_kelompok` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_kelompok` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `migrations`

@@ -38,8 +38,7 @@
                         <div class="form-group form-float">
                             <label class="form-label" for="">Nama Peserta</label>
                             <div class="form-line">
-                                <select name="peserta" class="form-control show-tick" data-live-search="true" required="required" {{ isset($row) ? '' : 'disabled="disabled"' }}>
-                                    <option selected="selected" disabled="disabled">=== Pilih Peserta ===</option>
+                                <select name="peserta[]" class="form-control show-tick" data-live-search="true" required="required" {{ isset($row) ? '' : 'disabled="disabled"' }} multiple="multiple" title="=== Pilih Peserta ===">
                                     @if(isset($row))
                                         @foreach($peserta as $data)
                                         <option value="{{ $data->id_anggota }}" {{$row->id_anggota == $data->id_anggota ? 'selected="selected"' : ''}} >Nama : {{ $data->nama_anggota }} | Tanggal Lahir : {{ explodeDate($data->tgl_lahir) }}</option>
@@ -83,12 +82,12 @@
                 .done(function(done) {
                     if (done.message == 'No Rows') {
                         $('.alert').show();
-                        $('select[name="peserta"]').attr('disabled',true);
-                        $('select[name="peserta"]').html(done.anggota).selectpicker('refresh');
+                        $('select[name="peserta[]"]').attr('disabled',true);
+                        $('select[name="peserta[]"]').html(done.anggota).selectpicker('refresh');
                     }
                     else {
-                        $('select[name="peserta"]').removeAttr('disabled');
-                        $('select[name="peserta"]').html(done.anggota).selectpicker('refresh');
+                        $('select[name="peserta[]"]').removeAttr('disabled');
+                        $('select[name="peserta[]"]').html(done.anggota).selectpicker('refresh');
                     }
                     console.log(done.message);
                 })

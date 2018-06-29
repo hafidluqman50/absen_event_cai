@@ -35,7 +35,12 @@
                             <a href="{{ url('/admin/kegiatan/'.$id.'/peserta/cetak-semua-bet') }}" class="btn btn-primary btn-lg waves-effect" target="_blank">
                                 <b>Cetak Semua Bet</b>
                             </a>
-                        </div>
+                        </div>{{-- 
+                        <div class="btn-group mg">
+                            <a href="{{ url('/admin/kegiatan/'.$id.'/peserta/download-semua-bet') }}" class="btn btn-danger btn-lg waves-effect" target="_blank">
+                                <b>Download Semua Bet</b>
+                            </a>
+                        </div> --}}
                         <table class="table table-hover dashboard-task-infos peserta" id="table">
                             <thead>
                                 <tr>

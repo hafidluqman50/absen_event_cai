@@ -23,7 +23,7 @@ class AjaxController extends Controller
 	    		return response()->json(['message'=>'No Rows','anggota'=>$var],200);
 	    	}
 	    	else {
-		    	$var[] =  '<option selected="selected" disabled="disabled">=== Pilih Peserta ===</option>';
+		    	// $var[] =  '<option selected="selected" disabled="disabled">=== Pilih Peserta ===</option>';
 		    	foreach ($anggota->get() as $key => $value) {
 		    		$var[] = '<option value="'.$value->id_anggota.'"> Nama : '.$value->nama_anggota.' Tanggal Lahir : '.explodeDate($value->tgl_lahir).'</option>';
 		    	}
@@ -143,6 +143,9 @@ class AjaxController extends Controller
                         <div class="btn-group" role="button">
                             <a href="'.url("/$level/kegiatan/$action->id_kegiatan/peserta/$action->id_detail/cetak-bet").'" class="btn btn-info waves-effect" target="_blank"><b>Cetak Bet</b></a>
                         </div>';
+                        // <div class="btn-group" role="button">
+                        //     <a href="'.url("/$level/kegiatan/$action->id_kegiatan/peserta/$action->id_detail/download-bet").'" class="btn btn-danger waves-effect" target="_blank"><b>Download Bet</b></a>
+                        // </div>
             return $button;
         })
         ->editColumn('tgl_lahir',function($edit){
@@ -190,17 +193,16 @@ class AjaxController extends Controller
     }
 
     public function dataAbsen($id,$id_jadwal) {
-        DB::statement(DB::raw('set @rownum = 0'));
+        // DB::statement(DB::raw('set @rownum = 0'));
         $absen = DB::table('absen')
                     ->join('jadwal','absen.id_jadwal','=','jadwal.id_jadwal')
                     ->join('kegiatan_detail','absen.id_detail','=','kegiatan_detail.id_detail')
                     ->join('anggota','kegiatan_detail.id_anggota','=','anggota.id_anggota')
                     ->join('kelompok','anggota.id_kelompok','=','kelompok.id_kelompok')
                     ->join('users','absen.id_users','=','users.id_users')
-                    ->select(DB::raw('@rownum:=@rownum+1 AS row'),'anggota.nama_anggota','anggota.ket_peserta','kelompok.nama_kelompok','kegiatan_detail.id_kegiatan','kegiatan_detail.code_barcode','kegiatan_detail.ket','users.name','absen.id_absen','absen.waktu_absen','jadwal.id_jadwal')
+                    ->select('anggota.nama_anggota','anggota.ket_peserta','kelompok.nama_kelompok','kegiatan_detail.id_kegiatan','kegiatan_detail.code_barcode','kegiatan_detail.ket','users.name','absen.id_absen','absen.waktu_absen','jadwal.id_jadwal')
                     ->where('kegiatan_detail.id_kegiatan',$id)
                     ->where('absen.id_jadwal',$id_jadwal)
-                    ->orderBy('waktu_absen','desc')
                     ->get();
         return Datatables::of($absen)->addColumn('action',function($action){
             $level = Auth::user()->level==2?'admin':(Auth::user()->level==1?'petugas':'');

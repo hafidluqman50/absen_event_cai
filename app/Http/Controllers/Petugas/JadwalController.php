@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\JadwalModel as Jadwal;
 use App\Model\KegiatanModel as Kegiatan;
+use PDF;
+use Excel;
+
 class JadwalController extends Controller
 {
     public function index($id) {

@@ -66,3 +66,18 @@ function year($date) {
 	$explode = explode('-',$date);
 	return $explode[0];
 }
+
+function days($date) {
+	$get = date('D',strtotime($date));
+	$array = [
+		'Sun' => 'Minggu',
+		'Mon' => 'Senin',
+		'Tue' => 'Selasa',
+		'Wed' => 'Rabu',
+		'Thu' => 'Kamis',
+		'Fri' => "Jumat",
+		'Sat' => 'Sabtu'
+	];
+
+	return $array[$get].', '.explodeDate($date);
+}

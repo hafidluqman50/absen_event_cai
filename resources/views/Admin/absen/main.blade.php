@@ -84,11 +84,10 @@
             serverSide:true,
             ajax:"{{ url('/ajax/absen/'.$id.'/'.$id_jadwal) }}",
             columns:[
-                // {data:'id_absen',searchable:false,render:function(data,type,row,meta){
-                //     return meta.row + meta.settings._iDisplayStart+1;
-                //     console.log(data);
-                // }},
-                {data:'row',name:'row'},
+                {data:'id_absen',searchable:false,render:function(data,type,row,meta){
+                    return meta.row + meta.settings._iDisplayStart+1;
+                    console.log(data);
+                }},
                 {data:'code_barcode',name:'code_barcode'},
                 {data:'nama_anggota',name:'nama_anggota'},
                 {data:'nama_kelompok',name:'nama_kelompok'},
@@ -98,21 +97,20 @@
                 {data:'name',name:'name'},
                 {data:'action',name:'action',searchable:false,orderable:false}
             ],
-            // scrollCollapse: true,
-            // columnDefs: [ {
-            // sortable: true,
-            // "class": "index",
-            // targets: 0
-            // }],
+            scrollCollapse: true,
+            columnDefs: [ {
+            sortable: true,
+            "class": "index",
+            targets: 0
+            }],
             order: [[ 6, 'desc' ]],
+            fixedColumns: true
         });
-        //     fixedColumns: true
-        // });
-        // absen.on( 'order.dt search.dt', function () {
-        // absen.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-        // cell.innerHTML = i+1;
-        // });
-        // }).draw();
+        absen.on( 'order.dt search.dt', function () {
+        absen.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+        cell.innerHTML = i+1;
+        });
+        }).draw();
     });
 </script>
 @endsection
