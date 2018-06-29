@@ -9,6 +9,7 @@ use App\Model\KelompokModel as Kelompok;
 use App\Model\KegiatanDetailModel as KegiatanDetail;
 use CodeItNow\BarcodeBundle\Utils\BarcodeGenerator;
 use DB;
+// use DNS2D;
 use Auth;
 
 class KegiatanController extends Controller
@@ -129,20 +130,22 @@ class KegiatanController extends Controller
     }
 
     public function cetakBet($id,$id_detail) {
-    	$get = DB::table('kegiatan_detail')
-    			->join('anggota','kegiatan_detail.id_anggota','=','anggota.id_anggota')
-    			->select('anggota.*','kegiatan_detail.code_barcode')
-    			->where('id_kegiatan',$id)
-    			->where('id_detail',$id_detail)
-    			->first();
+        $get = DB::table('kegiatan_detail')
+                ->join('anggota','kegiatan_detail.id_anggota','=','anggota.id_anggota')
+                ->join('kegiatan','kegiatan_detail.id_kegiatan','=','kegiatan.id_kegiatan')
+                ->select('anggota.*','kegiatan_detail.*','kegiatan.*')
+                ->where('kegiatan_detail.id_kegiatan',$id)
+                ->where('id_detail',$id_detail)
+                ->first();
 
-    	$barcode = new BarcodeGenerator();
-		$barcode->setText($get->code_barcode);
-		$barcode->setType(BarcodeGenerator::Code128);
-		$barcode->setScale(2);
-		$barcode->setThickness(25);
-		$barcode->setFontSize(10);
-		$code = $barcode->generate();
+        $barcode = new BarcodeGenerator();
+        $barcode->setText($get->code_barcode);
+        $barcode->setType(BarcodeGenerator::Code128);
+        $barcode->setScale(1);
+        $barcode->setThickness(25);
+        $barcode->setFontSize(10);
+        $code = $barcode->generate();
+        // $code = DNS2D::getBarcodePNG($get->code_barcode,'C128');
     	return view('bet',compact('get','code'));
     }
 
@@ -153,8 +156,9 @@ class KegiatanController extends Controller
         else {
             $get = DB::table('kegiatan_detail')
                     ->join('anggota','kegiatan_detail.id_anggota','=','anggota.id_anggota')
-                    ->select('anggota.*','kegiatan_detail.code_barcode')
-                    ->where('id_kegiatan',$id)
+                    ->join('kegiatan','kegiatan_detail.id_kegiatan','=','kegiatan.id_kegiatan')
+                    ->select('anggota.*','kegiatan_detail.*','kegiatan.*')
+                    ->where('kegiatan.id_kegiatan',$id)
                     ->get();
             $barcode = new KegiatanDetail;
             return view('bet-all',compact('get','barcode'));

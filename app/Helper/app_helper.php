@@ -61,3 +61,8 @@ function explodeDate($date) {
 
 	return $tanggal.' '.$bulanan.' '.$tahun;
 }
+
+function year($date) {
+	$explode = explode('-',$date);
+	return $explode[0];
+}

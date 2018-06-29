@@ -4,76 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Bet | Ansensi Online</title>
+    <title>Bet Peserta | Ansensi Online</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    <link href="{{asset('frontend/custom/style.css')}}" rel="stylesheet">
+    <link href="{{asset('frontend/custom/peserta.css')}}" rel="stylesheet">
     <link rel="stylesheet" src="{{asset('frontend/custom/print.css')}}" type="text/css" media="print" />
     <style type="text/css" media="print">
         @media print{
-             *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+            *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
             @page {
+                page-break-after: always
             } 
 
-            .bg{
+            /* *{
                 -webkit-print-color-adjust: exact!important;
-                /* color-adjust: exact!important; */
-            }
-
-            .jabatan{
-                margin-left:-6rem;
-            }
-
-            .lokasi{
-                margin-left:3rem;
-            }
-
-            .nama{
-                font-size:20px;
-            }
+            } */
         }
     </style>
 </head>
 <body>
-    {{-- <div class="container-fluid"></div> --}}
-    <div class="row" style="margin:0px!important" style="margi">
-        @foreach($get as $key => $data)
-        <div class="col-md-6" style="margin-top:1rem">
-            <div class="container-fluid bg" style="border:1px solid black">
-                <br>
-                <div class="row">
-                    <div class="col-md-6">
-                        <img class="img" src="{{ asset('frontend/images/cai.png') }}" alt="" width="70%">
+    <div class="container-fluid">
+        <div class="row text-align">
+            {{-- <div class="col-md-3">
+                <div class="bgpeserta" style="width:302.3622047244088px; height:377.952755905511px; margin:0.5rem">
+                    <div class="col-md-12 row" style="top:1rem; left:0.7rem">
+                        <div class="col-md-3 text-center">
+                            <img class="img" src="{{ asset('frontend/images/cai.png') }}" alt="" width="220%">
+                        </div>
+                        <div class="col-md-9 text-center" style="left:0.8rem">
+                            <p class="judul">PERMATA XXXIX</p>
+                            <p class="ket">CINTA ALAM INDONESIA</p>
+                            <p class="thn">2018</p>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <p class="jabatan">PESERTA</p>
-                        <p class="tmpt">at</p>
+                    <div class="col-md-12 text-center" style="left:1rem; top:1rem">
+                        <div class="kotak text-center">
+                            <label class="status">Peserta</label>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-12" style="margin-top:-1.7rem; margin-left:-1.5rem">
-                    <p class="lokasi col text-right">PONPES AL-AZIZIAH SAMARINDA</p>
-                    <p class="lokasi col text-right" style="margin-top:-1rem">12 - 15 Juli 2018</p>
-                </div>
-                <br><br><br>
-                <div class="col-md-12">
-                    <div class="box col-md-10 offset-md-1">
-                        <label class="nama">{{ $data->nama_anggota }}</label>
-                    </div>
-                </div>
-                <br>
-                <div class="col-md-12">
-                    <div class="box col-md-10 offset-md-1">
-                        <label class="nama">{{ $data->desa }}</label>
+                    <div class="col-md-12 text-center" style="top:2rem">
+                        <label class="inp">Khoirulli Nurul Fatimah</label>
+                        <label class="inp-kel">Sambutan</label>
+                        <label class="inp-bar">165634689567</label>
                     </div>
                 </div>
-                <div class="col-md-12">
-                    <div class="text-left">
-                        {{-- <label class="barcode">{{ $get->code_barcode }}</label> --}}
-                        <img class="barcode" src="data:image/png;base64,{{ $barcode->barcode($data->code_barcode) }}" />
+            </div> --}}
+            @foreach($get as $value)
+            <div class="{{ $value->ket == 'panitia' ? 'bgpanitia' : ($value->ket == 'peserta' ? 'bgpeserta' : '') }}" style="width:302.3622047244088px; height:377.952755905511px; margin-left:1.5rem; margin-top:6rem">
+                <div class="col-md-12 row" style="top:1rem; left:0.7rem">
+                    <div class="col-md-3 text-center">
+                        <img class="img" src="{{ asset('frontend/images/cai.png') }}" alt="" width="220%">
                     </div>
+                    <div class="col-md-9 text-center" style="left:0.8rem">
+                        <p class="judul">PERMATA XXXIX</p>
+                        <p class="ket">{{ $value->nama_kegiatan }}</p>
+                        <p class="thn">{{ year($value->tanggal_kegiatan) }}</p>
+                    </div>
+                </div>
+                <div class="col-md-12 text-center" style="left:1rem; top:1rem">
+                    <div class="kotak text-center">
+                        <label class="status">{{ $value->ket == 'panitia' ? 'Panitia' : ($value->ket == 'peserta' ? 'Peserta' : '') }}</label>
+                    </div>
+                </div>
+                <div class="col-md-12 text-center" style="top:2rem">
+                    <label class="inp">{{ $value->nama_anggota }}</label>
+                    <label class="inp-kel">{{ $value->desa }}</label>
+                    <label class="inp-bar"><img src="data:image/png;base64,{{$barcode->barcode($value->code_barcode)}}" alt="barcode"/></label>
                 </div>
             </div>
+            @endforeach
         </div>
-        @endforeach
     </div>
 </body>
 </html>

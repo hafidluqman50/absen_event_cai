@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Model\KelompokModel as Kelompok;
 use App\Model\AnggotaModel as Anggota;
 use Box\Spout\Reader\ReaderFactory;
-use Box\Spout\Writer\WriterFactory;
 use Box\Spout\Common\Type;
 use DB;
 use Excel;
@@ -143,88 +142,51 @@ class KelompokController extends Controller
     }
 
     public function importExcel(Request $request) {
-        $file = $request->excel;
-        $fileName = uniqid().'_'.$file->getClientOriginalName();
-        $file->move(storage_path('file/'),$fileName);
+        $file = $request->file('excel');
         if (!empty($file)) {
-            Excel::selectSheetsByIndex(0,1)->load(storage_path('/file/'.$fileName))->chunk(10000,function($xlsx){
-            // dd($sheet1);
-            $array = [];
-            foreach ($xlsx[0] as $key => $value) {
-                $data_kelompok[] = [
-                    'nama_kelompok'   => strtoupper($value->nama_kelompok),
-                    'lokasi_kelompok' => strtoupper($value->lokasi_kelompok),
-                    'created_at'      => date('Y-m-d H:i:s'),
-                    'updated_at'      => date('Y-m-d H:i:s')
-                ];
-                // }
+            $reader = ReaderFactory::create(Type::XLSX);
+            $reader->open($file);
+            foreach ($reader->getSheetIterator() as $value) {
+                if ($value->getIndex() == 0) {
+                    foreach ($value->getRowIterator() as $num => $val) {
+                        if ($num > 1) {
+                            Kelompok::firstOrCreate([
+                                'nama_kelompok'   => strtoupper($val[1]),
+                                'lokasi_kelompok' => strtoupper($val[2]),
+                            ]);
+                            $get = Kelompok::where('nama_kelompok',$val[1])->firstOrFail();
+                            $id = $get->id_kelompok;
+                            $slug = str_slug($get->nama_kelompok,'-');
+                            $array[$id] = $slug;
+                        }
+                    }   
+                }
+                if ($value->getIndex() == 1) {
+                    foreach ($value->getRowIterator() as $key => $data) {
+                        if ($key > 1) {
+                            $id_kelompok = array_search(str_slug($data[9],'-'),$array);
+                            $explode = explode('/',$data[4]);
+                            $tanggal = $explode[2].'-'.$explode[1].'-'.$explode[0];
+                            Anggota::firstOrCreate([
+                                'nama_anggota'   => $data[2],
+                                'id_kelompok'    => $id_kelompok,
+                                'tgl_lahir'      => $tanggal,
+                                'tempat_lahir'   => $data[3],
+                                'desa'           => $data[10],
+                                'jenis_kelamin'  => strtolower($data[6]),
+                                'no_telepon'     => $data[7],
+                                'email'          => $data[8],
+                                'alamat'         => $data[5],
+                                'ket_peserta'    => $data[1],
+                                'ukuran_baju'    => $data[12],
+                                'dapukan'        => $data[11],
+                                'status_peserta' => $data[13],
+                            ]);
+                        }
+                    }
+                }
             }
-            foreach ($xlsx[1] as $num => $val) {
-                $explode = explode('/',$val->tanggal_lahir);
-                $date = $explode[2].'-'.$explode[1].'-'.$explode[0];
-                $val_anggota[] = [
-                    'nama_anggota'   => strtoupper($val->nama_lengkap_peserta),
-                    'kelompok'       => strtoupper($val->kelompok),
-                    'tgl_lahir'      => $date,
-                    'tempat_lahir'   => strtoupper($val->tempat_lahir),
-                    'desa'           => strtoupper($val->desa),
-                    'jenis_kelamin'  => strtolower($val->jenis_kelamin),
-                    'no_telepon'     => $val->nomor_telepon,
-                    'email'          => $val->email_peserta,
-                    'alamat'         => strtoupper($val->alamat),
-                    'ket_peserta'    => strtoupper($val->peserta),
-                    'ukuran_baju'    => strtoupper($val->ukuran_baju),
-                    'dapukan'        => strtoupper($val->dapukan_muda_mudi),
-                    'status_peserta' => strtoupper($val->status),
-                ];
-                array_push($array,$val_anggota);
-            }
-            // dd($array);
-            for ($i=0; $i < count($array); $i++) {
-                // dd($array);
-                $id_kelompok = DB::table('kelompok')->where('nama_kelompok',$array[1][$i]['kelompok'])->first()->id_kelompok;
-                echo $id_kelompok;
-                $data_anggota[] = [
-                    'nama_anggota'   => $array[1][$i]['nama_anggota'],
-                    'id_kelompok'    => $id_kelompok,
-                    'tgl_lahir'      => $array[1][$i]['tgl_lahir'],
-                    'tempat_lahir'   => $array[1][$i]['tempat_lahir'],
-                    'desa'           => $array[1][$i]['desa'],
-                    'jenis_kelamin'  => $array[1][$i]['jenis_kelamin'],
-                    'no_telepon'     => $array[1][$i]['no_telepon'],
-                    'email'          => $array[1][$i]['email'],
-                    'alamat'         => $array[1][$i]['alamat'],
-                    'ket_peserta'    => $array[1][$i]['ket_peserta'],
-                    'ukuran_baju'    => $array[1][$i]['ukuran_baju'],
-                    'dapukan'        => $array[1][$i]['dapukan'],
-                    'status_peserta' => $array[1][$i]['status_peserta'],
-                    'created_at'     => date('Y-m-d H:i:s'),
-                    'updated_at'     => date('Y-m-d H:i:s')
-                ];
-            }
-            // foreach($val_anggota as $key => $value) {
-            //     $id_kelompok = Kelompok::getIdKelompok($value['kelompok']);
-            //     $data_anggota[] = [
-            //         'nama_anggota'   => $value['nama_anggota'],
-            //         'id_kelompok'    => $id_kelompok,
-            //         'tgl_lahir'      => $value['tgl_lahir'],
-            //         'tempat_lahir'   => $value['tempat_lahir'],
-            //         'desa'           => $value['desa'],
-            //         'jenis_kelamin'  => $value['jenis_kelamin'],
-            //         'no_telepon'     => $value['no_telepon'],
-            //         'email'          => $value['email'],
-            //         'alamat'         => $value['alamat'],
-            //         'ket_peserta'    => $value['ket_peserta'],
-            //         'ukuran_baju'    => $value['ukuran_baju'],
-            //         'dapukan'        => $value['dapukan'],
-            //         'status_peserta' => $value['status_peserta'],
-            //         'created_at'     => date('Y-m-d H:i:s'),
-            //         'updated_at'     => date('Y-m-d H:i:s')
-            //     ];
-            // }
-                // DB::table('anggota')->insert($data_anggota);
-            });
+            return redirect('/admin/kelompok')->with('message','Berhasil Import Data Kelompok Dan Anggota');
         }
-        // return redirect('/admin/kelompok')->with('message','Berhasil Import');
     }
 }
