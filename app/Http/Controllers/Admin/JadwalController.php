@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\JadwalModel as Jadwal;
 use App\Model\KegiatanModel as Kegiatan;
+use DB;
 use PDF;
 use Excel;
 
