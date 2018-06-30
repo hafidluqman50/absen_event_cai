@@ -311,11 +311,13 @@ class JadwalController extends Controller
                 }
             });
             $excel->sheet('Daftar Peserta',function($sheet){
-                // $sheet->setCellValue('A:1','No.');
-                // $sheet->setCellValue('A:1','Peserta');
-                // $sheet->setCellValue('A:1','Nama Lengkap Peserta');
-                // $sheet->setCellValue('A:1','Tempat Lahir');
-                // $sheet->setCellValue('','Tanggal Lahir');
+                $sheet->setCellValue('A:1','No.');
+                $sheet->setCellValue('B:1','Peserta');
+                $sheet->setCellValue('C:1','Nama Lengkap Peserta');
+                $sheet->setCellValue('D:1','Tempat Lahir');
+                $sheet->setCellValue('E:1','Tanggal Lahir');
+                $sheet->setCellValue('F:1','Alamat');
+                // $sheet->setCellValue('')
                 
                 // foreach ($peserta as $key => $value) {
                 //     # code...

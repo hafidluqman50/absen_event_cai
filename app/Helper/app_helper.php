@@ -1,65 +1,70 @@
 <?php 
 function explodeDate($date) {
-	$get = explode('-',$date);
-	$tanggal = $get[2];
-	$bulan = $get[1];
-	$tahun = $get[0];
-
-	switch ($bulan) {
-		case '1':
-			$bulanan = 'Januari';
-			break;
-
-		case '2':
-			$bulanan = 'Februari';
-			break;
-
-		case '3':
-			$bulanan = 'Maret';
-			break;
-
-		case '4':
-			$bulanan = 'April';
-			break;
-
-		case '5':
-			$bulanan = 'Mei';
-			break;
-
-		case '6':
-			$bulanan = 'Juni';
-			break;
-
-		case '7':
-			$bulanan = 'Juli';
-			break;
-
-		case '8':
-			$bulanan = 'Agustus';
-			break;
-
-		case '9':
-			$bulanan = 'September';
-			break;
-
-		case '10':
-			$bulanan = 'Oktober';
-			break;
-
-		case '11':
-			$bulanan = 'November';
-			break;
-
-		case '12':
-			$bulanan = 'Desember';
-			break;
-		
-		default:
-			$bulanan = 'Hayo';
-			break;
+	if ($date == null || $date == '-') {
+		return '0000-00-00';
 	}
+	else {
+		$get = explode('-',$date);
+		$tanggal = $get[2];
+		$bulan = $get[1];
+		$tahun = $get[0];
 
-	return $tanggal.' '.$bulanan.' '.$tahun;
+		switch ($bulan) {
+			case '1':
+				$bulanan = 'Januari';
+				break;
+
+			case '2':
+				$bulanan = 'Februari';
+				break;
+
+			case '3':
+				$bulanan = 'Maret';
+				break;
+
+			case '4':
+				$bulanan = 'April';
+				break;
+
+			case '5':
+				$bulanan = 'Mei';
+				break;
+
+			case '6':
+				$bulanan = 'Juni';
+				break;
+
+			case '7':
+				$bulanan = 'Juli';
+				break;
+
+			case '8':
+				$bulanan = 'Agustus';
+				break;
+
+			case '9':
+				$bulanan = 'September';
+				break;
+
+			case '10':
+				$bulanan = 'Oktober';
+				break;
+
+			case '11':
+				$bulanan = 'November';
+				break;
+
+			case '12':
+				$bulanan = 'Desember';
+				break;
+			
+			default:
+				$bulanan = 'Hayo';
+				break;
+		}
+
+		return $tanggal.' '.$bulanan.' '.$tahun;
+	}
 }
 
 function year($date) {
