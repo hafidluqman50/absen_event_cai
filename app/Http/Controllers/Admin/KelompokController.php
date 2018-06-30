@@ -172,7 +172,10 @@ class KelompokController extends Controller
                             if (strlen($explode[0]) == '1') {
                                 $date = '0'.$explode[0];
                             }
-                            $tanggal = $date.'-'.$explode[1].'-'.$explode[0];
+                            else {
+                                $data = explode[0];
+                            }
+                            $tanggal = $explode[2].'-'.$explode[1].'-'.$date;
                             Anggota::firstOrCreate([
                                 'nama_anggota'   => $data[2],
                                 'id_kelompok'    => $id_kelompok,
