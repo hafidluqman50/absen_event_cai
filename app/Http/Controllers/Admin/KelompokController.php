@@ -169,8 +169,8 @@ class KelompokController extends Controller
                                 $tanggal = '0000-00-00';
                             }
                             $explode = explode('/',$data[4]);
-                            if (strlen($explode[2]) == '1') {
-                                $date = '0'.$explode[2];
+                            if (strlen($explode[0]) == '1') {
+                                $date = '0'.$explode[0];
                             }
                             $tanggal = $date.'-'.$explode[1].'-'.$explode[0];
                             Anggota::firstOrCreate([
