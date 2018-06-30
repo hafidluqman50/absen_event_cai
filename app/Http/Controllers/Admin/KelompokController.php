@@ -175,38 +175,28 @@ class KelompokController extends Controller
                 if ($value->getIndex() == 1) {
                     foreach ($value->getRowIterator() as $key => $data) {
                         if ($key > 1) {
-                            // d$data[4]->format('Y-m-d'
+                            if (end($data)) {
+                                break;
+                            }
                             $id_kelompok = array_search(str_slug($data[9], '-'), $array);
-                            // if ($data[4] == '' || $data[4] == '-') {
-                            //     $tanggal = '0000-00-00';
-                            // }
-                            // $explode = explode('/',$data[4]);
-                            // if (strlen($explode[0]) == '1') {
-                            //     $date = '0'.$explode[0];
-                            // }
-                            // else {
-                            //     $date = explode[0];
-                            // }
-                            // $tanggal = $explode[2].'-'.$explode[1].'-'.$date;
-                            // $tanggal = $data[4]->format('Y-m-d');
                             if ($data[4] == '-' || $data[4] == null) {
                                 $tanggal = null;
                             } else {
                                 $tanggal = $data[4]->format('Y-m-d');
                             }
                             Anggota::firstOrCreate([
-                                'nama_anggota' => $data[2],
-                                'id_kelompok' => $id_kelompok,
-                                'tgl_lahir' => $tanggal,
-                                'tempat_lahir' => $data[3],
-                                'desa' => $data[10],
-                                'jenis_kelamin' => strtolower($data[6]),
-                                'no_telepon' => $data[7],
-                                'email' => $data[8],
-                                'alamat' => $data[5],
-                                'ket_peserta' => $data[1],
-                                'ukuran_baju' => $data[12],
-                                'dapukan' => $data[11],
+                                'nama_anggota'   => $data[2],
+                                'id_kelompok'    => $id_kelompok,
+                                'tgl_lahir'      => $tanggal,
+                                'tempat_lahir'   => $data[3],
+                                'desa'           => $data[10],
+                                'jenis_kelamin'  => strtolower($data[6]),
+                                'no_telepon'     => $data[7],
+                                'email'          => $data[8],
+                                'alamat'         => $data[5],
+                                'ket_peserta'    => $data[1],
+                                'ukuran_baju'    => $data[12],
+                                'dapukan'        => $data[11],
                                 'status_peserta' => $data[13],
                             ]);
                         }
