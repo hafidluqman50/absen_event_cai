@@ -86,6 +86,9 @@ class AjaxController extends Controller
             if ($edit->tgl_lahir == null) {
                 return '-';
             }
+            elseif ($edit->tgl_lahir == '0000-00-00') {
+                return '0000-00-00';
+            }
             else {
                 return explodeDate($edit->tgl_lahir);
             }

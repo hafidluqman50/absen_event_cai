@@ -161,7 +161,7 @@ class KelompokController extends Controller
                 if ($value->getIndex() == 0) {
                     foreach ($value->getRowIterator() as $num => $val) {
                         if ($num > 1) {
-                            Kelompok::firstOrCreate([
+                            Kelompok::updateOrCreate([
                                 'nama_kelompok' => strtoupper($val[1]),
                                 'lokasi_kelompok' => strtoupper($val[2]),
                             ]);
@@ -192,7 +192,7 @@ class KelompokController extends Controller
                                     $tanggal = $explode[2].'-'.$explode[1].'-'.$explode[0];
                                 }
                             }
-                            Anggota::firstOrCreate([
+                            Anggota::updateOrCreate([
                                 'nama_anggota'   => $data[2],
                                 'id_kelompok'    => $id_kelompok,
                                 'tgl_lahir'      => $tanggal,
