@@ -8,6 +8,7 @@ use App\Model\KelompokModel as Kelompok;
 use App\Model\AnggotaModel as Anggota;
 use Box\Spout\Reader\ReaderFactory;
 use Box\Spout\Common\Type;
+use DateTime;
 use DB;
 use Excel;
 
@@ -164,18 +165,20 @@ class KelompokController extends Controller
                 if ($value->getIndex() == 1) {
                     foreach ($value->getRowIterator() as $key => $data) {
                         if ($key > 1) {
+                            // d$data[4]->format('Y-m-d'
                             $id_kelompok = array_search(str_slug($data[9],'-'),$array);
-                            if ($data[4] == '' || $data[4] == '-') {
-                                $tanggal = '0000-00-00';
-                            }
-                            $explode = explode('/',$data[4]);
-                            if (strlen($explode[0]) == '1') {
-                                $date = '0'.$explode[0];
-                            }
-                            else {
-                                $date = explode[0];
-                            }
-                            $tanggal = $explode[2].'-'.$explode[1].'-'.$date;
+                            // if ($data[4] == '' || $data[4] == '-') {
+                            //     $tanggal = '0000-00-00';
+                            // }
+                            // $explode = explode('/',$data[4]);
+                            // if (strlen($explode[0]) == '1') {
+                            //     $date = '0'.$explode[0];
+                            // }
+                            // else {
+                            //     $date = explode[0];
+                            // }
+                            // $tanggal = $explode[2].'-'.$explode[1].'-'.$date;
+                            $tanggal = $data[4]->format('Y-m-d');
                             Anggota::firstOrCreate([
                                 'nama_anggota'   => $data[2],
                                 'id_kelompok'    => $id_kelompok,
