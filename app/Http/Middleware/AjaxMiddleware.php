@@ -15,9 +15,9 @@ class AjaxMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (!$request->ajax()) {
-            return response()->json('Your Request Not AJAX',400);
-        }
+        // if (!$request->ajax()) {
+        //     return response()->json('Your Request Not AJAX',400);
+        // }
         return $next($request);
     }
 }

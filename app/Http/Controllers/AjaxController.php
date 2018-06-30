@@ -83,7 +83,12 @@ class AjaxController extends Controller
             return $button; 
         })
         ->editColumn('tgl_lahir',function($edit){
-            return explodeDate($edit->tgl_lahir);
+            if ($edit->tgl_lahir == null) {
+                return '-';
+            }
+            else {
+                return explodeDate($edit->tgl_lahir);
+            }
         })
         ->editColumn('jenis_kelamin',function($edit){
             return strtoupper($edit->jenis_kelamin);
