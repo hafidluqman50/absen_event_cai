@@ -12,6 +12,7 @@ use PDF;
 use Excel;
 use PHPExcel_Style_Alignment;
 use PHPExcel_Style_Border;
+use PHPExcel_Style_Fill;
 
 class JadwalController extends Controller
 {
@@ -63,7 +64,7 @@ class JadwalController extends Controller
         $jadwal = Jadwal::where('id_kegiatan',$id)->where('id_jadwal',$id_jadwal)->firstOrFail();
         $peserta = DB::table('kegiatan_detail')
                     ->join('anggota','kegiatan_detail.id_anggota','=','anggota.id_anggota')
-                    ->join('kelompok','kegiatan_detail.id_kelompok','=','kelompok.id_kelompok')
+                    ->join('kelompok','anggota.id_kelompok','=','kelompok.id_kelompok')
                     ->where('id_kegiatan',$id)
                     ->select('anggota.*','kelompok.nama_kelompok')
                     ->get();
@@ -178,9 +179,61 @@ class JadwalController extends Controller
                     ]
                 ]);
             });
-            $excel->sheet('Daftar Peserta',function($sheet)use($peserta){
-
-            });
+            // $excel->sheet('Daftar Peserta',function($sheet)use($peserta){
+            //     $sheet->setCellValue('A1','No.');
+            //     $sheet->setCellValue('B1','Peserta');
+            //     $sheet->setCellValue('C1','Nama Lengkap Peserta');
+            //     $sheet->setCellValue('D1','Tempat Lahir');
+            //     $sheet->setCellValue('E1','Tanggal Lahir');
+            //     $sheet->setCellValue('F1','Alamat');
+            //     $sheet->setCellValue('G1','Jenis Kelamin');
+            //     $sheet->setCellValue('H1','Nomor Telepon');
+            //     $sheet->setCellValue('I1','Email Peserta');
+            //     $sheet->setCellValue('J1','Kelompok');
+            //     $sheet->setCellValue('K1','Desa');
+            //     $sheet->setCellValue('L1','Dapukan Muda Mudi');
+            //     $sheet->setCellValue('M1','Ukuran Baju');
+            //     $sheet->setCellValue('N1','Status');
+            //     $sheet->getRowDimension('1')->setRowHeight(20);
+            //     $sheet->getStyle('A:N')->applyFromArray([
+            //         'alignment' => [
+            //             'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER
+            //         ],
+            //         'borders' => [
+            //             'allborders' => [
+            //                 'style' => PHPExcel_Style_Border::BORDER_THIN
+            //             ]
+            //         ]
+            //     ]);
+            //     $sheet->getStyle('A1:N1')->applyFromArray([
+            //         'fill' => [
+            //             'type' => PHPExcel_Style_Fill::FILL_SOLID,
+            //             'color' => ['rgb'=>41, 128, 185]
+            //         ],
+            //         'alignment' => [
+            //             'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+            //             'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+            //         ]
+            //     ]);
+            //     $countRows = 2;
+            //     foreach ($peserta as $key => $value) {
+            //         $sheet->setCellValue('A'.$countRows,$key+1);
+            //         $sheet->setCellValue('B'.$countRows,$value->ket_peserta);
+            //         $sheet->setCellValue('C'.$countRows,$value->nama_anggota);
+            //         $sheet->setCellValue('D'.$countRows,$value->tempat_lahir);
+            //         $sheet->setCellValue('E'.$countRows,$value->tgl_lahir);
+            //         $sheet->setCellValue('F'.$countRows,$value->alamat);
+            //         $sheet->setCellValue('G'.$countRows,strtoupper($value->jenis_kelamin));
+            //         $sheet->setCellValue('H'.$countRows,$value->no_telepon);
+            //         $sheet->setCellValue('I'.$countRows,$value->email);
+            //         $sheet->setCellValue('J'.$countRows,$value->nama_kelompok);
+            //         $sheet->setCellValue('K'.$countRows,$value->desa);
+            //         $sheet->setCellValue('L'.$countRows,$value->dapukan);
+            //         $sheet->setCellValue('M'.$countRows,$value->ukuran_baju);
+            //         $sheet->setCellValue('N'.$countRows,$value->status_peserta);
+            //         $countRows++;
+            //     }
+            // });
         })->download('xlsx');
     }
 
@@ -189,7 +242,7 @@ class JadwalController extends Controller
         $jadwal   = Jadwal::where('id_kegiatan',$id)->get();
         $peserta = DB::table('kegiatan_detail')
                     ->join('anggota','kegiatan_detail.id_anggota','=','anggota.id_anggota')
-                    ->join('kelompok','kegiatan_detail.id_kelompok','=','kelompok.id_kelompok')
+                    ->join('kelompok','anggota.id_kelompok','=','kelompok.id_kelompok')
                     ->where('id_kegiatan',$id)
                     ->select('anggota.*','kelompok.nama_kelompok')
                     ->get();
@@ -310,19 +363,60 @@ class JadwalController extends Controller
                     $counterRows = $counterTable+1;
                 }
             });
-            $excel->sheet('Daftar Peserta',function($sheet){
-                $sheet->setCellValue('A:1','No.');
-                $sheet->setCellValue('B:1','Peserta');
-                $sheet->setCellValue('C:1','Nama Lengkap Peserta');
-                $sheet->setCellValue('D:1','Tempat Lahir');
-                $sheet->setCellValue('E:1','Tanggal Lahir');
-                $sheet->setCellValue('F:1','Alamat');
-                // $sheet->setCellValue('')
-                
-                // foreach ($peserta as $key => $value) {
-                //     # code...
-                // }
-            });
+            // $excel->sheet('Daftar Peserta',function($sheet)use($peserta){
+            //     $sheet->setCellValue('A1','No.');
+            //     $sheet->setCellValue('B1','Peserta');
+            //     $sheet->setCellValue('C1','Nama Lengkap Peserta');
+            //     $sheet->setCellValue('D1','Tempat Lahir');
+            //     $sheet->setCellValue('E1','Tanggal Lahir');
+            //     $sheet->setCellValue('F1','Alamat');
+            //     $sheet->setCellValue('G1','Jenis Kelamin');
+            //     $sheet->setCellValue('H1','Nomor Telepon');
+            //     $sheet->setCellValue('I1','Email Peserta');
+            //     $sheet->setCellValue('J1','Kelompok');
+            //     $sheet->setCellValue('K1','Desa');
+            //     $sheet->setCellValue('L1','Dapukan Muda Mudi');
+            //     $sheet->setCellValue('M1','Ukuran Baju');
+            //     $sheet->setCellValue('N1','Status');
+            //     $sheet->getRowDimension('1')->setRowHeight(20);
+            //     $sheet->getStyle('A:N')->applyFromArray([
+            //         'alignment' => [
+            //             'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER
+            //         ],
+            //         'borders' => [
+            //             'allborders' => [
+            //                 'style' => PHPExcel_Style_Border::BORDER_THIN
+            //             ]
+            //         ]
+            //     ]);
+            //     $sheet->getStyle('A1:N1')->applyFromArray([
+            //         'fill' => [
+            //             'type' => PHPExcel_Style_Fill::FILL_SOLID,
+            //             'color' => ['rgb'=>41, 128, 185]
+            //         ],
+            //         'alignment' => [
+            //             'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+            //         ]
+            //     ]);
+            //     $countRows = 2;
+            //     foreach ($peserta as $key => $value) {
+            //         $sheet->setCellValue('A'.$countRows,$key+1);
+            //         $sheet->setCellValue('B'.$countRows,$value->ket_peserta);
+            //         $sheet->setCellValue('C'.$countRows,$value->nama_anggota);
+            //         $sheet->setCellValue('D'.$countRows,$value->tempat_lahir);
+            //         $sheet->setCellValue('E'.$countRows,$value->tgl_lahir);
+            //         $sheet->setCellValue('F'.$countRows,$value->alamat);
+            //         $sheet->setCellValue('G'.$countRows,strtoupper($value->jenis_kelamin));
+            //         $sheet->setCellValue('H'.$countRows,$value->no_telepon);
+            //         $sheet->setCellValue('I'.$countRows,$value->email);
+            //         $sheet->setCellValue('J'.$countRows,$value->nama_kelompok);
+            //         $sheet->setCellValue('K'.$countRows,$value->desa);
+            //         $sheet->setCellValue('L'.$countRows,$value->dapukan);
+            //         $sheet->setCellValue('M'.$countRows,$value->ukuran_baju);
+            //         $sheet->setCellValue('N'.$countRows,$value->status_peserta);
+            //         $countRows++;
+            //     }
+            // });
         })->download('xlsx');
     }
 
