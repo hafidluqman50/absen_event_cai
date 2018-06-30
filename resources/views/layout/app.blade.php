@@ -349,6 +349,7 @@
 
     <!-- Demo Js -->
     <script src="{{ asset('frontend/js/demo.js') }}"></script>
+    <script src="{{ asset('frontend/js/script.js') }}"></script>
     @yield('custom_js')
 </body>
 

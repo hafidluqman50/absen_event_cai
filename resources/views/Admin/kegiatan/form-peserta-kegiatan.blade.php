@@ -22,6 +22,13 @@
                     <div class="alert alert-danger alert-dismissible yeah">
                         Data Tidak Ada <button class="close" data-dismiss="alert">x</button>
                     </div>
+                    <div class="alert alert-warning">
+                        <code>*</code> <b>Note:</b>
+                        <br>
+                        <code>*</code> <b>Input panitia atau peserta saja jangan campur panitia dan peserta</b>
+                        <br>
+                        <code>*</code> <b>Ketika input panita atau peserta secara banyak isi kolom keterangan dengan panitia saja jangan dengan <code>panitia,panitia</code> cukup dengan <code>panitia</code></b>
+                    </div>
                     <form action="{{ url('/admin/kegiatan/peserta/save') }}" method="POST">
                         @csrf
                         <div class="form-group form-float">
