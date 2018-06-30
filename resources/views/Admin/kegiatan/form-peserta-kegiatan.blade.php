@@ -48,7 +48,7 @@
                                 <select name="peserta[]" class="form-control show-tick" data-live-search="true" required="required" {{ isset($row) ? '' : 'disabled="disabled"' }} multiple="multiple" title="=== Pilih Peserta ===">
                                     @if(isset($row))
                                         @foreach($peserta as $data)
-                                        <option value="{{ $data->id_anggota }}" {{$row->id_anggota == $data->id_anggota ? 'selected="selected"' : ''}} >Nama : {{ $data->nama_anggota }} | Tanggal Lahir : {{ explodeDate($data->tgl_lahir) }}</option>
+                                        <option value="{{ $data->id_anggota }}" {{$row->id_anggota == $data->id_anggota ? 'selected="selected"' : ''}} >Nama : {{ $data->nama_anggota }} | Tanggal Lahir : {{ $row->tgl_lahir != null ? explodeDate($row->tgl_lahir) : '' }}</option>
                                         @endforeach
                                     @endif
                                 </select>

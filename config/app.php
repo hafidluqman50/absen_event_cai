@@ -151,7 +151,6 @@ return [
         Yajra\DataTables\DataTablesServiceProvider::class,
         Yajra\DataTables\HtmlServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-
         /*
          * Package Service Providers...
          */
