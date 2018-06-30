@@ -74,8 +74,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'isAdmin'], function () {
     Route::get('/kegiatan/{id}/peserta/{id_detail}/delete', ['as' => 'peserta-tambah-admin', 'uses' => 'Admin\KegiatanController@deletePeserta']);
     Route::get('/kegiatan/{id}/peserta/{id_detail}/cetak-bet', ['as' => 'cetak-bet-admin', 'uses' => 'Admin\KegiatanController@cetakBet']);
     Route::get('/kegiatan/{id}/peserta/cetak-semua-bet', ['as' => 'cetak-bet-semua-admin', 'uses' => 'Admin\KegiatanController@cetakBetAll']);
-    Route::get('/kegiatan/{id}/peserta/{id_detail}/download-bet',['as' => 'download-bet-admin', 'uses' => 'Admin\KegiatanController@cetakBetPdf']);
-    Route::get('/kegiatan/{id}/peserta/download-semua-bet', ['as' => 'download-bet-semua-admin', 'uses' => 'Admin\KegiatanController@cetakBetPdfAll']);
+    // Route::get('/kegiatan/{id}/peserta/{id_detail}/download-bet',['as' => 'download-bet-admin', 'uses' => 'Admin\KegiatanController@cetakBetPdf']);
+    // Route::get('/kegiatan/{id}/peserta/download-semua-bet', ['as' => 'download-bet-semua-admin', 'uses' => 'Admin\KegiatanController@cetakBetPdfAll']);
 
     Route::get('/kegiatan/{id}/jadwal/tambah', ['as' => 'jadwal-tambah-admin', 'uses' => 'Admin\JadwalController@tambah']);
     Route::get('/kegiatan/{id}/jadwal/{id_jadwal}/edit', ['as' => 'jadwal-edit-admin', 'uses' => 'Admin\JadwalController@edit']);
@@ -139,15 +139,16 @@ Route::group(['prefix' => 'petugas', 'middleware' => 'isPetugas'], function () {
     Route::get('/kegiatan/{id}/peserta/{id_detail}/delete', ['as' => 'peserta-tambah-admin', 'uses' => 'Petugas\KegiatanController@deletePeserta']);
     Route::get('/kegiatan/{id}/peserta/{id_detail}/cetak-bet', ['as' => 'cetak-bet-admin', 'uses' => 'Petugas\KegiatanController@cetakBet']);
     Route::get('/kegiatan/{id}/peserta/cetak-semua-bet', ['as' => 'cetak-bet-semua-admin', 'uses' => 'Petugas\KegiatanController@cetakBetAll']);
-    Route::get('/kegiatan/{id}/peserta/{id_detail}/download-bet',['as' => 'download-bet-admin', 'uses' => 'Admin\KegiatanController@cetakBetPdf']);
-    Route::get('/kegiatan/{id}/peserta/download-semua-bet', ['as' => 'download-bet-semua-admin', 'uses' => 'Admin\KegiatanController@cetakBetPdfAll']);
+    // Route::get('/kegiatan/{id}/peserta/{id_detail}/download-bet',['as' => 'download-bet-admin', 'uses' => 'Petugas\KegiatanController@cetakBetPdf']);
+    // Route::get('/kegiatan/{id}/peserta/download-semua-bet', ['as' => 'download-bet-semua-admin', 'uses' => 'Admin\KegiatanController@cetakBetPdfAll']);
 
     Route::get('/kegiatan/{id}/jadwal/tambah', ['as' => 'jadwal-tambah-admin', 'uses' => 'Petugas\JadwalController@tambah']);
     Route::get('/kegiatan/{id}/jadwal/{id_jadwal}/edit', ['as' => 'jadwal-edit-admin', 'uses' => 'Petugas\JadwalController@edit']);
     Route::get('/kegiatan/{id}/jadwal/{id_jadwal}/delete', ['as' => 'jadwal-delete-admin', 'uses' => 'Petugas\JadwalController@delete']);
-    Route::get('/kegiatan/{id}/jadwal/{id_jadwal}/cetak-excel', ['as' => 'jadwal-cetak-admin', 'uses' => 'Petugas\JadwalController@cetakExcel']);
-    Route::get('/kegiatan/{id}/jadwal/{ket}/cetak-semua-excel', ['as' => 'cetak-kegiatan-admin', 'uses' => 'Petugas\JadwalController@cetakExcelAll']);
-    Route::get('/kegiatan/{id}/jadwal/{ket}/download-semua-pdf', ['as' => 'cetak-kegiatan-admin', 'uses' => 'Petugas\JadwalController@cetakPdfAll']);
+    Route::get('/kegiatan/{id}/jadwal/{id_jadwal}/cetak-excel', ['as' => 'jadwal-cetak-admin', 'uses' => 'Petugas\JadwalController@cetakLaporanExcel']);
+    Route::get('/kegiatan/{id}/jadwal/{id_jadwal}/{ket}/download-pdf', ['as' => 'jadwal-cetak-admin', 'uses' => 'Petugas\JadwalController@cetakLaporanPdf']);
+    Route::get('/kegiatan/{id}/jadwal/{ket}/cetak-semua-excel', ['as' => 'cetak-kegiatan-admin', 'uses' => 'Petugas\JadwalController@cetakLaporanExcelAll']);
+    Route::get('/kegiatan/{id}/jadwal/{ket}/download-semua-pdf', ['as' => 'cetak-kegiatan-admin', 'uses' => 'Petugas\JadwalController@cetakLaporanPdfAll']);
     Route::get('/kegiatan/{id}/jadwal/{id_jadwal}/absen/{id_absen}/delete', ['as' => 'absen-admin-page', 'uses' => 'Petugas\AbsenController@delete']);
     // END ACTION //
 

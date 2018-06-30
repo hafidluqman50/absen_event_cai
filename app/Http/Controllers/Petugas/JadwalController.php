@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\JadwalModel as Jadwal;
 use App\Model\KegiatanModel as Kegiatan;
+use App\Model\AbsenModel as Absen;
 use PDF;
 use Excel;
 
@@ -53,11 +54,62 @@ class JadwalController extends Controller
 		return redirect('/petugas/kegiatan/'.$id_kegiatan.'/jadwal')->with('message',$message);
     }
 
-    public function cetakLaporan($id,$id_jadwal) {
-    	echo "<h1>Coming Soon Hehe :) </h1>";
+    public function cetakLaporanExcel($id,$id_jadwal) {
+        $kegiatan = DB::table('jadwal')->join('kegiatan','jadwal.id_kegiatan','=','kegiatan.id_kegiatan')->where('id_kegiatan',$id)->where('id_jadwal',$id_jadwal)->firstOrFail();
+        Excel::create('Laporan Kegiatan '.$kegiatan->nama_kegiatan.' '.explodeDate($kegiatan->tanggal_kegiatan).' '.$kegiatan->nama_jadwal,function($excel){
+            $excel->sheet('Laporan',function($sheet){
+                // $sheet->setCellValue('A1','No.');
+                // $sheet->setCellValue('B1','');
+            });
+            $excel->sheet('Daftar Peserta',function($sheet){
+
+            });
+        })->download('xlsx');
     }
 
-    public function cetakLaporanAll($id) {
-    	
+    public function cetakLaporanExcelAll($id,$ket) {
+        $kegiatan = Kegiatan::where('id_kegiatan',$id)->firstOrFail();
+        $jadwal   = Jadwal::where('id_kegiatan',$id)->get();
+        $absen    = new Absen;
+        // Excel::create('Laporan Kegiatan '.$kegiatan->nama_kegiatan.' '.explodeDate($kegiatan->tanggal_kegiatan),function($excel){
+        //     $excel->sheet('Laporan',function($sheet){
+        //         // $sheet->setCellValue('A1','No.');
+        //         // $sheet->setCellValue('B1','');
+        //     });
+        //     $excel->sheet('Daftar Peserta',function($sheet){
+
+        //     });
+        // })->download('xlsx');
+    }
+
+    public function cetakLaporanPdfAll($id,$ket) {
+        $kegiatan = Kegiatan::where('id_kegiatan',$id)->firstOrFail();
+        $jadwal   = Jadwal::where('id_kegiatan',$id)->get();
+        $absen    = new Absen;
+        $pdf = PDF::loadView('laporan-all',compact('kegiatan','jadwal','absen','ket'))->setPaper('letter','landscape');
+        return $pdf->download('Laporan Kegiatan '.$kegiatan->nama_kegiatan.'-'.explodeDate($kegiatan->tanggal_kegiatan).'-Semua-'.ucwords($ket).'.pdf');
+    }
+
+    public function coba($id,$ket) {
+        $kegiatan = Kegiatan::where('id_kegiatan',$id)->firstOrFail();
+        $jadwal   = Jadwal::where('id_kegiatan',$id)->get();
+        $absen    = new Absen;
+        return view('laporan-all',compact('kegiatan','jadwal','absen','ket'));
+    }
+
+    public function cobai($id,$id_jadwal,$ket) {
+        $kegiatan = Kegiatan::where('id_kegiatan',$id)->firstOrFail();
+        $jadwal = Jadwal::where('id_kegiatan',$id)->where('id_jadwal',$id_jadwal)->firstOrFail();
+        $absen = new Absen;
+        return view('laporan',compact('kegiatan','jadwal','ket','absen'));
+    }
+
+    public function cetakLaporanPdf($id,$id_jadwal,$ket) {
+        $kegiatan = Kegiatan::where('id_kegiatan',$id)->firstOrFail();
+        $jadwal = Jadwal::where('id_kegiatan',$id)->where('id_jadwal',$id_jadwal)->firstOrFail();
+        $absen = new Absen;
+        $pdf = PDF::loadView('laporan',compact('kegiatan','jadwal','absen','ket'));
+        return $pdf->download('Laporan Kegiatan '.$kegiatan->nama_kegiatan.'-'.explodeDate($kegiatan->tanggal_kegiatan).'-'.$jadwal->nama_jadwal.'-'.ucwords($ket).'.pdf');
+        // echo "<h1>Coming Soon Hehe :) </h1>";
     }
 }

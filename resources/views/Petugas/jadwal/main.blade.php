@@ -27,11 +27,26 @@
                     <h5>Nama Kegiatan : {{ $kegiatan->nama_kegiatan }}</h5>
                     <h5>Tanggal Kegiatan : {{ explodeDate($kegiatan->tanggal_kegiatan) }}</h5>
                     <h5>Lokasi Kegiatan : {{ $kegiatan->lokasi_kegiatan }}</h5>
-	                <div class="btn-group mg" role="button">
-	                    <a href="{{ url('/petugas/kegiatan/'.$id.'/jadwal/cetak-semua-excel') }}" title="Cetak" class="btn btn-info waves-effect btn-lg" target="_blank"><b>
-	                        Cetak Semua Laporan
-	                    </b></a>
-	                </div>
+                    <div class="btn-group mg" role="button">
+                        <a href="{{ url('/petugas/kegiatan/'.$id.'/jadwal/peserta/cetak-semua-excel') }}" title="Cetak" class="btn btn-info waves-effect btn-lg" target="_blank"><b>
+                            Cetak Semua Laporan Peserta
+                        </b></a>
+                    </div>
+                    <div class="btn-group mg" role="button">
+                        <a href="{{ url('/petugas/kegiatan/'.$id.'/jadwal/peserta/download-semua-pdf') }}" title="Download" class="btn btn-danger waves-effect btn-lg" target="_blank"><b>
+                            Download Semua Laporan Peserta
+                        </b></a>
+                    </div>
+                    <div class="btn-group mg" role="button">
+                        <a href="{{ url('/petugas/kegiatan/'.$id.'/jadwal/panitia/cetak-semua-excel') }}" title="Cetak" class="btn btn-info waves-effect btn-lg" target="_blank"><b>
+                            Cetak Semua Laporan Panitia
+                        </b></a>
+                    </div>
+                    <div class="btn-group mg" role="button">
+                        <a href="{{ url('/petugas/kegiatan/'.$id.'/jadwal/panitia/download-semua-pdf') }}" title="Download" class="btn btn-danger waves-effect btn-lg" target="_blank"><b>
+                            Download Semua Laporan Panitia
+                        </b></a>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-hover dashboard-task-infos jadwal" id="table">
                             <thead>
