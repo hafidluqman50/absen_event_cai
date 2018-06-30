@@ -182,7 +182,13 @@ class KelompokController extends Controller
                             if ($data[4] == '-' || $data[4] == null) {
                                 $tanggal = null;
                             } else {
-                                $tanggal = $data[4]->format('Y-m-d');
+                                if ($data[4] instanceof DateTime) {
+                                    $tanggal = $data[4]->format('Y-m-d');
+                                }
+                                else {
+                                    $explode = explode('/',$data[4]);
+                                    $tanggal = $explode[2].'-'.$explode[1].'-'.$explode[0];
+                                }
                             }
                             Anggota::firstOrCreate([
                                 'nama_anggota'   => $data[2],
