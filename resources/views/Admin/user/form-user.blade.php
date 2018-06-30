@@ -35,10 +35,11 @@
                         </div>
                         <div class="form-group form-float">
                             <div class="form-line">
-                                <input type="text" name="username" class="form-control" value="{{ isset($row) ? $row->username : '' }}" required="required">
+                                <input type="text" name="username" class="username form-control" value="{{ isset($row) ? $row->username : '' }}" required="required" {{ isset($row) ? 'disabled="disabled"' : '' }}>
                                 <label class="form-label">Username</label>
                             </div>
                         </div>
+                        {!! isset($row) ? '<input type="checkbox" id="sip"><label for="sip">Ubah Username</label>' : '' !!}
                         <div class="form-group form-float">
                             <div class="form-line">
                                 <input type="password" name="password" class="form-control">

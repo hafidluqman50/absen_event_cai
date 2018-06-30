@@ -178,8 +178,23 @@ class AjaxController extends Controller
                                 <a href="'.url("/$level/kegiatan/$action->id_kegiatan/jadwal/$action->id_jadwal/delete").'" title="Hapus" class="btn btn-danger waves-effect" onclick="return confirm(\'Anda Yakin?\')"><b>Hapus</b></a>
                             </div>
                             <div class="btn-group" role="button">
-                                <a href="'.url("/$level/kegiatan/$action->id_kegiatan/jadwal/$action->id_jadwal/cetak-excel").'" title="Cetak" class="btn btn-info" target="_blank"><b>
-                                    Cetak Laporan
+                                <a href="'.url("/$level/kegiatan/$action->id_kegiatan/jadwal/$action->id_jadwal/peserta/cetak-excel").'" title="Cetak" class="btn btn-info" target="_blank"><b>
+                                    Cetak Laporan Peserta
+                                </b></a>
+                            </div>
+                            <div class="btn-group" role="button">
+                                <a href="'.url("/$level/kegiatan/$action->id_kegiatan/jadwal/$action->id_jadwal/peserta/download-pdf").'" title="Cetak" class="btn btn-danger" target="_blank"><b>
+                                    Download Laporan Peserta
+                                </b></a>
+                            </div>
+                            <div class="btn-group" role="button">
+                                <a href="'.url("/$level/kegiatan/$action->id_kegiatan/jadwal/$action->id_jadwal/panitia/download-pdf").'" title="Cetak" class="btn btn-info" target="_blank"><b>
+                                    Cetak Laporan Panitia
+                                </b></a>
+                            </div>
+                            <div class="btn-group" role="button">
+                                <a href="'.url("/$level/kegiatan/$action->id_kegiatan/jadwal/$action->id_jadwal/panitia/download-pdf").'" title="Cetak" class="btn btn-danger" target="_blank"><b>
+                                    Download Laporan Panitia
                                 </b></a>
                             </div>';
             }

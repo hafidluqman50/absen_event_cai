@@ -15,7 +15,6 @@
 
     <!-- Bootstrap Core Css -->
     <link href="{{ asset('frontend/plugins/bootstrap/css/bootstrap.css') }}" rel="stylesheet">
-
     <link href="{{ asset('frontend/plugins/bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet" />
     <!-- Waves Effect Css -->
     <link href="{{ asset('frontend/plugins/node-waves/waves.css') }}" rel="stylesheet" />
@@ -342,7 +341,9 @@
     <script src="{{ asset('frontend/plugins/node-waves/waves.js') }}"></script>
 
     <!-- Custom Js -->
+    {{-- <script src="{{ asset('frontend/plugins/autosize/autosize.js') }}"></script> --}}
     <script src="{{ asset('frontend/js/admin.js') }}"></script>
+    {{-- <script src="{{ asset('frontend/js/pages/forms/basic-form-elements.js') }}"></script> --}}
     <script src="{{ asset('frontend/datatables/DataTables-1.10.16/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('frontend/datatables/DataTables-1.10.16/js/dataTables.bootstrap.min.js') }}"></script>
 

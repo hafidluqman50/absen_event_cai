@@ -25,12 +25,22 @@ class DashboardController extends Controller
     public function save(Request $request) {
 		$username = $request->username;
 		$password = $request->password;
-		// dd($password);
 		$name     = $request->name;
-		// if (User::where('username',$username)->count() == 1) {
-		// 	return redirect('/petugas/profile')->with('log','Maaf User Sudah Ada');
-		// }
-		if ($password == '') {
+		if ($username == '' && User::where('username',$username)->count() == 1) {
+			return redirect('/petugas/profile')->with('log','Maaf User Sudah Ada');
+		}
+		if ($username == '' && $password == '') {
+			$array = [
+				'name' => $name
+			];
+		}
+		elseif ($username == '') {
+			$array = [
+				'password' => bcrypt($password),
+				'name' => $name
+			];
+		}
+		elseif($password == '') {
 			$array = [
 				'username' => $username,
 				'name' => $name

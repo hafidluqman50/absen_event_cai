@@ -19,7 +19,7 @@
                     </a>
                 </div>
                 <div class="body">
-                    <div class="alert alert-danger alert-dismissible">
+                    <div class="alert alert-danger alert-dismissible yeah">
                         Data Tidak Ada <button class="close" data-dismiss="alert">x</button>
                     </div>
                     <form action="{{ url('/admin/kegiatan/peserta/save') }}" method="POST">
@@ -70,32 +70,5 @@
 @endsection
 
 @section('custom_js')
-    <script>
-        $(function(){
-            $('.alert').hide();
-            $('select[name="kelompok"]').change(function(){
-                var val = $(this).val();
-                $.ajax({
-                    url: window.location.origin+'/get-anggota/'+val,
-                    type:'GET',
-                })
-                .done(function(done) {
-                    if (done.message == 'No Rows') {
-                        $('.alert').show();
-                        $('select[name="peserta[]"]').attr('disabled',true);
-                        $('select[name="peserta[]"]').html(done.anggota).selectpicker('refresh');
-                    }
-                    else {
-                        $('select[name="peserta[]"]').removeAttr('disabled');
-                        $('select[name="peserta[]"]').html(done.anggota).selectpicker('refresh');
-                    }
-                    console.log(done.message);
-                })
-                .fail(function(error) {
-                    console.log(error);
-                });
-                
-            });
-        });
-    </script>
+
 @endsection

@@ -4,6 +4,14 @@
 	<meta charset="UTF-8">
 	<title>Laporan Kegiatan {{ $kegiatan->nama_kegiatan.' '.explodeDate($kegiatan->tanggal_kegiatan) }}</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<style>
+		.page {
+			page-break-after:always;
+		}
+		.avoid {
+			page-break-after:avoid!important;
+		}
+	</style>
 </head>
 <body>
 	<h2 align="center"><b>Laporan Kegiatan {{ $kegiatan->nama_kegiatan }} Tanggal {{ explodeDate($kegiatan->tanggal_kegiatan) }}</b></h2>
@@ -53,6 +61,7 @@
 		</table>
 		{{-- <hr color="black"> --}}
 		<br>
+		<div class="page"></div>
 		<table class="table table-bordered">
 			<thead>
 				<tr align="center">
@@ -96,6 +105,9 @@
 			</tbody>
 		</table>
 		<br>
+		@if(!$loop->last)
+		<div class="page"></div>
+		@endif
 	@endforeach
 </body>
 </html>

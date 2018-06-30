@@ -35,10 +35,10 @@ class UsersController extends Controller
     public function save(Request $request) {
     	$name = $request->name;
     	$username = $request->username;
-    	// if (User::where('username',$username)->count() == 1) {
-    	// 	return redirect('')->with('log','Maaf User Sudah Ada');
-    	// }
-    	$password = $request->password;
+        if ($username != '' && User::where('username',$username)->count() == 1) {
+            return redirect('')->with('log','Maaf User Sudah Ada');
+        }
+        $password = $request->password;
     	$level = $request->level;
     	$status_akun = 1;
     	$id_users = $request->id_users;
@@ -54,14 +54,29 @@ class UsersController extends Controller
 	    	$message = 'Berhasil Input User';
     	}
     	else {
-    		if ($password == '') {
-		    	$array = [
-		    		'name' => $name,
-		    		'username' => $username,
-		    		'level' => $level,
-		    		'status_akun' => $status_akun
-		    	];
-    		}
+            if ($username == '' && $password == '') {
+                $array = [
+                    'name'=>$name,
+                    'level' => $level,
+                    'status_akun' => $status_akun
+                ];
+            }
+    		elseif ($password == '') {
+                $array = [
+                    'name' => $name,
+                    'username' => $username,
+                    'level' => $level,
+                    'status_akun' => $status_akun
+                ];
+            }
+            elseif ($username == '') {
+                $array = [
+                    'name' => $name,
+                    'password' => bcrypt($password),
+                    'level' => $level,
+                    'status_akun' => $status_akun
+                ];
+            }
     		else {
 		    	$array = [
 		    		'name' => $name,

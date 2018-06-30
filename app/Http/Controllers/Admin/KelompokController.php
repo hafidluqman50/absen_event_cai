@@ -165,6 +165,9 @@ class KelompokController extends Controller
                     foreach ($value->getRowIterator() as $key => $data) {
                         if ($key > 1) {
                             $id_kelompok = array_search(str_slug($data[9],'-'),$array);
+                            if ($data[4] == '' || $data[4] == '-') {
+                                $tanggal = '0000-00-00';
+                            }
                             $explode = explode('/',$data[4]);
                             $tanggal = $explode[2].'-'.$explode[1].'-'.$explode[0];
                             Anggota::firstOrCreate([

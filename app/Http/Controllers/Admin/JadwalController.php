@@ -89,7 +89,7 @@ class JadwalController extends Controller
         $jadwal   = Jadwal::where('id_kegiatan',$id)->get();
         $absen    = new Absen;
         $pdf = PDF::loadView('laporan-all',compact('kegiatan','jadwal','absen','ket'))->setPaper('letter','landscape');
-        return $pdf->download('Laporan Kegiatan '.$kegiatan->nama_kegiatan.' '.explodeDate($kegiatan->tanggal_kegiatan).'.pdf');
+        return $pdf->download('Laporan Kegiatan '.$kegiatan->nama_kegiatan.'-'.explodeDate($kegiatan->tanggal_kegiatan).'-Semua-'.ucwords($ket).'.pdf');
     }
 
     public function coba($id,$ket) {
@@ -99,10 +99,19 @@ class JadwalController extends Controller
         return view('laporan-all',compact('kegiatan','jadwal','absen','ket'));
     }
 
+    public function cobai($id,$id_jadwal,$ket) {
+        $kegiatan = Kegiatan::where('id_kegiatan',$id)->firstOrFail();
+        $jadwal = Jadwal::where('id_kegiatan',$id)->where('id_jadwal',$id_jadwal)->firstOrFail();
+        $absen = new Absen;
+        return view('laporan',compact('kegiatan','jadwal','ket','absen'));
+    }
+
     public function cetakLaporanPdf($id,$id_jadwal,$ket) {
-        $kegiatan = DB::table('jadwal')->join('kegiatan','jadwal.id_kegiatan','=','kegiatan.id_kegiatan')->where('id_kegiatan',$id)->where('id_jadwal',$id_jadwal)->firstOrFail();
-        $data = '';
-        PDF::loadView('laporan',$data)->download('Laporan Kegiatan '.$kegiatan->nama_kegiatan.' '.explodeDate($kegiatan->tanggal_kegiatan).'.pdf');
+        $kegiatan = Kegiatan::where('id_kegiatan',$id)->firstOrFail();
+        $jadwal = Jadwal::where('id_kegiatan',$id)->where('id_jadwal',$id_jadwal)->firstOrFail();
+        $absen = new Absen;
+        $pdf = PDF::loadView('laporan',compact('kegiatan','jadwal','absen','ket'));
+        return $pdf->download('Laporan Kegiatan '.$kegiatan->nama_kegiatan.'-'.explodeDate($kegiatan->tanggal_kegiatan).'-'.$jadwal->nama_jadwal.'-'.ucwords($ket).'.pdf');
         // echo "<h1>Coming Soon Hehe :) </h1>";
     }
 }

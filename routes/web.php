@@ -81,7 +81,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'isAdmin'], function () {
     Route::get('/kegiatan/{id}/jadwal/{id_jadwal}/edit', ['as' => 'jadwal-edit-admin', 'uses' => 'Admin\JadwalController@edit']);
     Route::get('/kegiatan/{id}/jadwal/{id_jadwal}/delete', ['as' => 'jadwal-delete-admin', 'uses' => 'Admin\JadwalController@delete']);
     Route::get('/kegiatan/{id}/jadwal/{id_jadwal}/cetak-excel', ['as' => 'jadwal-cetak-admin', 'uses' => 'Admin\JadwalController@cetakLaporanExcel']);
-    Route::get('/kegiatan/{id}/jadwal/{id_jadwal}/download-pdf', ['as' => 'jadwal-cetak-admin', 'uses' => 'Admin\JadwalController@cetakLaporanPdf']);
+    Route::get('/kegiatan/{id}/jadwal/{id_jadwal}/{ket}/download-pdf', ['as' => 'jadwal-cetak-admin', 'uses' => 'Admin\JadwalController@cetakLaporanPdf']);
     Route::get('/kegiatan/{id}/jadwal/{ket}/cetak-semua-excel', ['as' => 'cetak-kegiatan-admin', 'uses' => 'Admin\JadwalController@cetakLaporanExcelAll']);
     Route::get('/kegiatan/{id}/jadwal/{ket}/download-semua-pdf', ['as' => 'cetak-kegiatan-admin', 'uses' => 'Admin\JadwalController@cetakLaporanPdfAll']);
     Route::get('/kegiatan/{id}/jadwal/{id_jadwal}/absen/{id_absen}/delete', ['as' => 'absen-admin-page', 'uses' => 'Admin\AbsenController@delete']);
