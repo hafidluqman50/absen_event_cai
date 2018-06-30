@@ -175,14 +175,11 @@ class KelompokController extends Controller
                 if ($value->getIndex() == 1) {
                     foreach ($value->getRowIterator() as $key => $data) {
                         if ($key > 1) {
-                            if (end($data)) {
-                                break;
-                            }
                             $id_kelompok = array_search(str_slug($data[9], '-'), $array);
                             if ($data[4] == '-' || $data[4] == null) {
                                 $tanggal = null;
                             } else {
-                                if ($data[4] instanceof DateTime) {
+                                if (is_a($data[4],'DateTime')) {
                                     $tanggal = $data[4]->format('Y-m-d');
                                 }
                                 else {
@@ -209,6 +206,7 @@ class KelompokController extends Controller
                     }
                 }
             }
+            $reader->close();
 
             return redirect('/admin/kelompok')->with('message', 'Berhasil Import Data Kelompok Dan Anggota');
         }
