@@ -175,6 +175,11 @@ class KelompokController extends Controller
                 if ($value->getIndex() == 1) {
                     foreach ($value->getRowIterator() as $key => $data) {
                         if ($key > 1) {
+                            for ($i=0; $i <= 13; $i++) { 
+                                if (!isset($data[$i])) {
+                                    dd($data);
+                                }
+                            }
                             $id_kelompok = array_search(str_slug($data[9], '-'), $array);
                             if ($data[4] == '-' || $data[4] == null) {
                                 $tanggal = null;
