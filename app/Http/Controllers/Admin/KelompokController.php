@@ -173,7 +173,7 @@ class KelompokController extends Controller
                                 $date = '0'.$explode[0];
                             }
                             else {
-                                $data = explode[0];
+                                $date = explode[0];
                             }
                             $tanggal = $explode[2].'-'.$explode[1].'-'.$date;
                             Anggota::firstOrCreate([
