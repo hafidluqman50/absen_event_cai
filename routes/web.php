@@ -80,7 +80,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'isAdmin'], function () {
     Route::get('/kegiatan/{id}/jadwal/tambah', ['as' => 'jadwal-tambah-admin', 'uses' => 'Admin\JadwalController@tambah']);
     Route::get('/kegiatan/{id}/jadwal/{id_jadwal}/edit', ['as' => 'jadwal-edit-admin', 'uses' => 'Admin\JadwalController@edit']);
     Route::get('/kegiatan/{id}/jadwal/{id_jadwal}/delete', ['as' => 'jadwal-delete-admin', 'uses' => 'Admin\JadwalController@delete']);
-    Route::get('/kegiatan/{id}/jadwal/{id_jadwal}/cetak-excel', ['as' => 'jadwal-cetak-admin', 'uses' => 'Admin\JadwalController@cetakLaporanExcel']);
+    Route::get('/kegiatan/{id}/jadwal/{id_jadwal}/{ket}/cetak-excel', ['as' => 'jadwal-cetak-admin', 'uses' => 'Admin\JadwalController@cetakLaporanExcel']);
     Route::get('/kegiatan/{id}/jadwal/{id_jadwal}/{ket}/download-pdf', ['as' => 'jadwal-cetak-admin', 'uses' => 'Admin\JadwalController@cetakLaporanPdf']);
     Route::get('/kegiatan/{id}/jadwal/{ket}/cetak-semua-excel', ['as' => 'cetak-kegiatan-admin', 'uses' => 'Admin\JadwalController@cetakLaporanExcelAll']);
     Route::get('/kegiatan/{id}/jadwal/{ket}/download-semua-pdf', ['as' => 'cetak-kegiatan-admin', 'uses' => 'Admin\JadwalController@cetakLaporanPdfAll']);
@@ -145,7 +145,7 @@ Route::group(['prefix' => 'petugas', 'middleware' => 'isPetugas'], function () {
     Route::get('/kegiatan/{id}/jadwal/tambah', ['as' => 'jadwal-tambah-admin', 'uses' => 'Petugas\JadwalController@tambah']);
     Route::get('/kegiatan/{id}/jadwal/{id_jadwal}/edit', ['as' => 'jadwal-edit-admin', 'uses' => 'Petugas\JadwalController@edit']);
     Route::get('/kegiatan/{id}/jadwal/{id_jadwal}/delete', ['as' => 'jadwal-delete-admin', 'uses' => 'Petugas\JadwalController@delete']);
-    Route::get('/kegiatan/{id}/jadwal/{id_jadwal}/cetak-excel', ['as' => 'jadwal-cetak-admin', 'uses' => 'Petugas\JadwalController@cetakLaporanExcel']);
+    Route::get('/kegiatan/{id}/jadwal/{id_jadwal}/{ket}/cetak-excel', ['as' => 'jadwal-cetak-admin', 'uses' => 'Petugas\JadwalController@cetakLaporanExcel']);
     Route::get('/kegiatan/{id}/jadwal/{id_jadwal}/{ket}/download-pdf', ['as' => 'jadwal-cetak-admin', 'uses' => 'Petugas\JadwalController@cetakLaporanPdf']);
     Route::get('/kegiatan/{id}/jadwal/{ket}/cetak-semua-excel', ['as' => 'cetak-kegiatan-admin', 'uses' => 'Petugas\JadwalController@cetakLaporanExcelAll']);
     Route::get('/kegiatan/{id}/jadwal/{ket}/download-semua-pdf', ['as' => 'cetak-kegiatan-admin', 'uses' => 'Petugas\JadwalController@cetakLaporanPdfAll']);

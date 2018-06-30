@@ -196,7 +196,7 @@ class AjaxController extends Controller
                                 </b></a>
                             </div>
                             <div class="btn-group" role="button">
-                                <a href="'.url("/$level/kegiatan/$action->id_kegiatan/jadwal/$action->id_jadwal/panitia/download-pdf").'" title="Cetak" class="btn btn-info" target="_blank"><b>
+                                <a href="'.url("/$level/kegiatan/$action->id_kegiatan/jadwal/$action->id_jadwal/panitia/cetak-excel").'" title="Cetak" class="btn btn-info" target="_blank"><b>
                                     Cetak Laporan Panitia
                                 </b></a>
                             </div>

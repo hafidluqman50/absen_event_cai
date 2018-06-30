@@ -9,6 +9,8 @@ use App\Model\KegiatanModel as Kegiatan;
 use App\Model\AbsenModel as Absen;
 use PDF;
 use Excel;
+use PHPExcel_Style_Alignment;
+use PHPExcel_Style_Border;
 
 class JadwalController extends Controller
 {
@@ -54,12 +56,125 @@ class JadwalController extends Controller
 		return redirect('/petugas/kegiatan/'.$id_kegiatan.'/jadwal')->with('message',$message);
     }
 
-    public function cetakLaporanExcel($id,$id_jadwal) {
-        $kegiatan = DB::table('jadwal')->join('kegiatan','jadwal.id_kegiatan','=','kegiatan.id_kegiatan')->where('id_kegiatan',$id)->where('id_jadwal',$id_jadwal)->firstOrFail();
-        Excel::create('Laporan Kegiatan '.$kegiatan->nama_kegiatan.' '.explodeDate($kegiatan->tanggal_kegiatan).' '.$kegiatan->nama_jadwal,function($excel){
-            $excel->sheet('Laporan',function($sheet){
-                // $sheet->setCellValue('A1','No.');
-                // $sheet->setCellValue('B1','');
+    public function cetakLaporanExcel($id,$id_jadwal,$ket) {
+        $kegiatan = Kegiatan::where('id_kegiatan',$id)->firstOrFail();
+        $jadwal = Jadwal::where('id_kegiatan',$id)->where('id_jadwal',$id_jadwal)->firstOrFail();
+        $peserta = DB::table('kegiatan_detail')
+                    ->join('anggota','kegiatan_detail.id_anggota','=','anggota.id_anggota')
+                    ->join('kelompok','kegiatan_detail.id_kelompok','=','kelompok.id_kelompok')
+                    ->where('id_kegiatan',$id)
+                    ->select('anggota.*','kelompok.nama_kelompok')
+                    ->get();
+        $absen = new Absen;
+        Excel::create('Laporan Kegiatan '.ucwords($ket).' '.$kegiatan->nama_kegiatan.' '.explodeDate($kegiatan->tanggal_kegiatan).' '.$kegiatan->nama_jadwal,function($excel)use($kegiatan,$jadwal,$absen,$ket,$peserta){
+            $excel->sheet('Laporan',function($sheet)use($kegiatan,$jadwal,$absen,$ket){
+                $sheet->setCellValue('A1','Laporan Kegiatan '.$kegiatan->nama_kegiatan.' '.explodeDate($kegiatan->tanggal_kegiatan));
+                $sheet->mergeCells('A1:G1');
+                $sheet->getStyle('A:G')->applyFromArray([
+                    'alignment' => [
+                        'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                    ],
+                ]);
+                $sheet->getStyle('A1:G1')->applyFromArray(
+                    [
+                        'alignment' => [
+                            'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                        ],
+                        'font' => [
+                            'size' => 16
+                        ]
+                    ]
+                );
+                $counterJadwal = 3;
+                $counterKet = $counterJadwal+2;
+                $counterTable = $counterKet+1;
+                $counterRows = $counterTable+1;
+                $sheet->setCellValue('A'.$counterJadwal,$jadwal->nama_jadwal.' Hari '.$jadwal->hari);
+                $sheet->mergeCells('A'.$counterJadwal.':G'.$counterJadwal);
+                $sheet->getStyle('A'.$counterJadwal.':G'.$counterJadwal)->applyFromArray([
+                    'alignment' => [
+                        'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                    ],
+                    'font' => [
+                        'size' => 13
+                    ]
+                ]);
+                $hadir = $absen->absenHadir($kegiatan->id_kegiatan,$jadwal->id_jadwal,$ket);
+                $tidak_hadir = $absen->absenTidakHadir($kegiatan->id_kegiatan,$jadwal->id_jadwal,$ket);
+                $sheet->setCellValue('A'.$counterKet,'Hadir');
+                $sheet->mergeCells('A'.$counterKet.':G'.$counterKet);
+                $sheet->getStyle('A'.$counterKet.':G'.$counterKet)->applyFromArray([
+                    'alignment' => [
+                        'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                    ],
+                ]);
+                $sheet->setCellValue('A'.$counterTable,'No.');
+                $sheet->setCellValue('B'.$counterTable,'Peserta');
+                $sheet->setCellValue('C'.$counterTable,'Nama Anggota');
+                $sheet->setCellValue('D'.$counterTable,'Nama Kelompok');
+                $sheet->setCellValue('E'.$counterTable,'Jabatan');
+                $sheet->setCellValue('F'.$counterTable,'Waktu Absen');
+                $sheet->setCellValue('G'.$counterTable,'Input By');
+
+                    foreach ($hadir as $key => $data) {
+                        $sheet->setCellValue('A'.$counterRows,$key+1);
+                        $sheet->setCellValue('B'.$counterRows,$data->ket_peserta);
+                        $sheet->setCellValue('C'.$counterRows,$data->nama_anggota);
+                        $sheet->setCellValue('D'.$counterRows,$data->nama_kelompok);
+                        $sheet->setCellValue('E'.$counterRows,ucwords($data->ket));
+                        $sheet->setCellValue('F'.$counterRows,$data->waktu_absen);
+                        $sheet->setCellValue('G'.$counterRows,$data->name);
+                        $counterRows++;
+                    }
+                    $sheet->setCellValue('A'.$counterRows,'Jumlah Hadir');
+                    $sheet->mergeCells('A'.$counterRows.':F'.$counterRows);
+                    $sheet->setCellValue('G'.$counterRows,count($hadir));
+                    $sheet->getStyle('A'.$counterKet.':G'.$counterRows)->applyFromArray([
+                        'borders' => [
+                            'allborders' => [
+                                'style' => PHPExcel_Style_Border::BORDER_THIN
+                            ]
+                        ]
+                    ]);
+                $counterKet = $counterRows+2;
+                $counterTable = $counterKet+1;
+                $counterRows = $counterTable+1;
+
+                $sheet->mergeCells('A'.$counterKet.':G'.$counterKet);
+                $sheet->setCellValue('A'.$counterTable,'No.');
+                $sheet->setCellValue('B'.$counterTable,'Peserta');
+                $sheet->setCellValue('C'.$counterTable,'Nama Anggota');
+                $sheet->setCellValue('D'.$counterTable,'Nama Kelompok');
+                $sheet->setCellValue('E'.$counterTable,'Jabatan');
+                $sheet->setCellValue('F'.$counterTable,'Waktu Absen');
+                $sheet->setCellValue('G'.$counterTable,'Input By');
+                $sheet->setCellValue('A'.$counterKet,'Tidak Hadir');
+                $sheet->getStyle('A'.$counterKet.':G'.$counterKet)->applyFromArray([
+                    'alignment' => [
+                        'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                    ],
+                ]);
+
+                foreach ($tidak_hadir as $num => $val) {
+                    $sheet->setCellValue('A'.$counterRows,$num+1);
+                    $sheet->setCellValue('B'.$counterRows,$val->ket_peserta);
+                    $sheet->setCellValue('C'.$counterRows,$val->nama_anggota);
+                    $sheet->setCellValue('D'.$counterRows,$val->nama_kelompok);
+                    $sheet->setCellValue('E'.$counterRows,ucwords($val->ket));
+                    $sheet->setCellValue('F'.$counterRows,'-');
+                    $sheet->setCellValue('G'.$counterRows,'-');
+                    $counterRows++;
+                }
+                $sheet->setCellValue('A'.$counterRows,'Jumlah Tidak Hadir');
+                $sheet->mergeCells('A'.$counterRows.':F'.$counterRows);
+                $sheet->setCellValue('G'.$counterRows,count($tidak_hadir));
+                $sheet->getStyle('A'.$counterKet.':G'.$counterRows)->applyFromArray([
+                    'borders' => [
+                        'allborders' => [
+                            'style' => PHPExcel_Style_Border::BORDER_THIN
+                        ]
+                    ]
+                ]);
             });
             $excel->sheet('Daftar Peserta',function($sheet){
 
@@ -70,16 +185,135 @@ class JadwalController extends Controller
     public function cetakLaporanExcelAll($id,$ket) {
         $kegiatan = Kegiatan::where('id_kegiatan',$id)->firstOrFail();
         $jadwal   = Jadwal::where('id_kegiatan',$id)->get();
+        $peserta = DB::table('kegiatan_detail')
+                    ->join('anggota','kegiatan_detail.id_anggota','=','anggota.id_anggota')
+                    ->join('kelompok','kegiatan_detail.id_kelompok','=','kelompok.id_kelompok')
+                    ->where('id_kegiatan',$id)
+                    ->select('anggota.*','kelompok.nama_kelompok')
+                    ->get();
         $absen    = new Absen;
-        // Excel::create('Laporan Kegiatan '.$kegiatan->nama_kegiatan.' '.explodeDate($kegiatan->tanggal_kegiatan),function($excel){
-        //     $excel->sheet('Laporan',function($sheet){
-        //         // $sheet->setCellValue('A1','No.');
-        //         // $sheet->setCellValue('B1','');
-        //     });
-        //     $excel->sheet('Daftar Peserta',function($sheet){
+        Excel::create('Laporan Kegiatan '.$kegiatan->nama_kegiatan.'-'.explodeDate($kegiatan->tanggal_kegiatan).'-Semua-'.ucwords($ket),function($excel)use($kegiatan,$jadwal,$absen,$ket,$peserta){
+            $excel->sheet('Laporan',function($sheet)use($kegiatan,$jadwal,$absen,$ket){
+                $sheet->setCellValue('A1','Laporan Kegiatan '.$kegiatan->nama_kegiatan.' '.explodeDate($kegiatan->tanggal_kegiatan));
+                $sheet->mergeCells('A1:G1');
+                $sheet->getStyle('A:G')->applyFromArray([
+                    'alignment' => [
+                        'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                    ],
+                ]);
+                $sheet->getStyle('A1:G1')->applyFromArray(
+                    [
+                        'alignment' => [
+                            'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                        ],
+                        'font' => [
+                            'size' => 16
+                        ]
+                    ]
+                );
+                $counterJadwal = 3;
+                $counterKet = $counterJadwal+2;
+                $counterTable = $counterKet+1;
+                $counterRows = $counterTable+1;
+                foreach ($jadwal as $value) {
+                    $sheet->setCellValue('A'.$counterJadwal,$value->nama_jadwal.' Hari '.$value->hari);
+                    $sheet->mergeCells('A'.$counterJadwal.':G'.$counterJadwal);
+                    $sheet->getStyle('A'.$counterJadwal.':G'.$counterJadwal)->applyFromArray([
+                        'alignment' => [
+                            'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                        ],
+                        'font' => [
+                            'size' => 13
+                        ]
+                    ]);
+                    $hadir = $absen->absenHadir($value->id_kegiatan,$value->id_jadwal,$ket);
+                    $tidak_hadir = $absen->absenTidakHadir($value->id_kegiatan,$value->id_jadwal,$ket);
+                    $sheet->setCellValue('A'.$counterKet,'Hadir');
+                    $sheet->mergeCells('A'.$counterKet.':G'.$counterKet);
+                    $sheet->getStyle('A'.$counterKet.':G'.$counterKet)->applyFromArray([
+                        'alignment' => [
+                            'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                        ],
+                    ]);
+                    $sheet->setCellValue('A'.$counterTable,'No.');
+                    $sheet->setCellValue('B'.$counterTable,'Peserta');
+                    $sheet->setCellValue('C'.$counterTable,'Nama Anggota');
+                    $sheet->setCellValue('D'.$counterTable,'Nama Kelompok');
+                    $sheet->setCellValue('E'.$counterTable,'Jabatan');
+                    $sheet->setCellValue('F'.$counterTable,'Waktu Absen');
+                    $sheet->setCellValue('G'.$counterTable,'Input By');
 
-        //     });
-        // })->download('xlsx');
+                        foreach ($hadir as $key => $data) {
+                            $sheet->setCellValue('A'.$counterRows,$key+1);
+                            $sheet->setCellValue('B'.$counterRows,$data->ket_peserta);
+                            $sheet->setCellValue('C'.$counterRows,$data->nama_anggota);
+                            $sheet->setCellValue('D'.$counterRows,$data->nama_kelompok);
+                            $sheet->setCellValue('E'.$counterRows,ucwords($data->ket));
+                            $sheet->setCellValue('F'.$counterRows,$data->waktu_absen);
+                            $sheet->setCellValue('G'.$counterRows,$data->name);
+                            $counterRows++;
+                        }
+                        $sheet->setCellValue('A'.$counterRows,'Jumlah Hadir');
+                        $sheet->mergeCells('A'.$counterRows.':F'.$counterRows);
+                        $sheet->setCellValue('G'.$counterRows,count($hadir));
+                        $sheet->getStyle('A'.$counterKet.':G'.$counterRows)->applyFromArray([
+                            'borders' => [
+                                'allborders' => [
+                                    'style' => PHPExcel_Style_Border::BORDER_THIN
+                                ]
+                            ]
+                        ]);
+                    $counterKet = $counterRows+2;
+                    $counterTable = $counterKet+1;
+                    $counterRows = $counterTable+1;
+
+                    $sheet->mergeCells('A'.$counterKet.':G'.$counterKet);
+                    $sheet->setCellValue('A'.$counterTable,'No.');
+                    $sheet->setCellValue('B'.$counterTable,'Peserta');
+                    $sheet->setCellValue('C'.$counterTable,'Nama Anggota');
+                    $sheet->setCellValue('D'.$counterTable,'Nama Kelompok');
+                    $sheet->setCellValue('E'.$counterTable,'Jabatan');
+                    $sheet->setCellValue('F'.$counterTable,'Waktu Absen');
+                    $sheet->setCellValue('G'.$counterTable,'Input By');
+                    $sheet->setCellValue('A'.$counterKet,'Tidak Hadir');
+                    $sheet->getStyle('A'.$counterKet.':G'.$counterKet)->applyFromArray([
+                        'alignment' => [
+                            'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                        ],
+                    ]);
+
+                    foreach ($tidak_hadir as $num => $val) {
+                        $sheet->setCellValue('A'.$counterRows,$num+1);
+                        $sheet->setCellValue('B'.$counterRows,$val->ket_peserta);
+                        $sheet->setCellValue('C'.$counterRows,$val->nama_anggota);
+                        $sheet->setCellValue('D'.$counterRows,$val->nama_kelompok);
+                        $sheet->setCellValue('E'.$counterRows,ucwords($val->ket));
+                        $sheet->setCellValue('F'.$counterRows,'-');
+                        $sheet->setCellValue('G'.$counterRows,'-');
+                        $counterRows++;
+                    }
+                    $sheet->setCellValue('A'.$counterRows,'Jumlah Tidak Hadir');
+                    $sheet->mergeCells('A'.$counterRows.':F'.$counterRows);
+                    $sheet->setCellValue('G'.$counterRows,count($tidak_hadir));
+                    $sheet->getStyle('A'.$counterKet.':G'.$counterRows)->applyFromArray([
+                        'borders' => [
+                            'allborders' => [
+                                'style' => PHPExcel_Style_Border::BORDER_THIN
+                            ]
+                        ]
+                    ]);
+                    $counterJadwal = $counterRows+3;
+                    $counterKet = $counterJadwal+2;
+                    $counterTable = $counterKet+1;
+                    $counterRows = $counterTable+1;
+                }
+            });
+            $excel->sheet('Daftar Peserta',function($sheet)use($peserta){
+                // foreach ($variable as $key => $value) {
+
+                // }
+            });
+        })->download('xlsx');
     }
 
     public function cetakLaporanPdfAll($id,$ket) {
