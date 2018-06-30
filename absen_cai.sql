@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 29, 2018 at 05:19 PM
+-- Generation Time: Jun 30, 2018 at 04:59 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -46,7 +46,8 @@ INSERT INTO `absen` (`id_absen`, `id_detail`, `waktu_absen`, `id_jadwal`, `id_us
 (2, 1, '2018-06-25 05:12:36', 1, 1, '2018-06-26 01:32:20', '2018-06-24 21:12:36'),
 (3, 3, '2018-06-26 06:54:30', 1, 1, '2018-06-25 22:54:30', '2018-06-25 22:54:30'),
 (6, 6, '2018-06-27 08:46:07', 1, 1, '2018-06-27 00:46:07', '2018-06-27 00:46:07'),
-(8, 7, '2018-06-27 13:00:24', 1, 1, '2018-06-27 05:00:24', '2018-06-27 05:00:24');
+(8, 7, '2018-06-27 13:00:24', 1, 1, '2018-06-27 05:00:24', '2018-06-27 05:00:24'),
+(9, 9, '2018-06-30 00:46:54', 2, 1, '2018-06-29 16:46:54', '2018-06-29 16:46:54');
 
 -- --------------------------------------------------------
 
@@ -241,9 +242,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_users`, `name`, `username`, `password`, `level`, `status_akun`, `last_login`, `remember_token`, `status_delete`, `deleted_at`) VALUES
-(1, 'Administrator', 'admin', '$2y$10$SSTPVCNQM60/kGfdCO8eEO0PLdDekSpAVsMdD4x9bhOPvjHBBrZ0G', 2, 1, NULL, 'xtMcpktBSpWnwglZKUNalZyVWgm7hx4eIh6nXe5obkbWCQpMlp6HWxMyHQzb', 0, NULL),
+(1, 'Administrator', 'admin', '$2y$10$SSTPVCNQM60/kGfdCO8eEO0PLdDekSpAVsMdD4x9bhOPvjHBBrZ0G', 2, 1, NULL, 'LSKfPDLJOXDlAiWatL0K75Oxr41rAyhC95TiIIqPXHGQUp3uc1CegrPOMFWp', 0, NULL),
 (3, 'Daguy', 'daguy', '$2y$10$x/DtXp.55nXXBnNXEwk5fuE1nDqgAxog7zdUrBARoa2SDIX3QWaHm', 0, 1, NULL, 'kl03Y14v9P0AIziSTwBX36xqiLKnQOWWv07MW290DkeoFUQNCHaLOPI66rjb', 0, '2018-06-26 00:03:08'),
-(4, 'Petugas', 'petugas', '$2y$10$WhLIk9dJYCt.YZ0iXc6Uy.tpvAOqgz8rBVl8I3dsVcM1TT3ZzSdwy', 1, 1, NULL, 'YJADoFQRSkvo1JalTRgXkVbohDmCoE5igLTjudFDqGPwFa7NEbPPsjBWryvo', 0, '2018-06-27 18:19:04');
+(4, 'Petugas', 'petugas', '$2y$10$K7awF85IQO.3i8c..R76quoiNyhGaYd6b4MQlgpWbwR5FKLWUy7w6', 1, 1, NULL, 'zXH6NIkgOMogRO52wD0ITgj85yDFPbTOU8eqeAB2A2jMG0wRuQ2Kfzxh1HNA', 0, '2018-06-27 18:19:04');
 
 --
 -- Indexes for dumped tables
@@ -313,7 +314,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `absen`
 --
 ALTER TABLE `absen`
-  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `anggota`

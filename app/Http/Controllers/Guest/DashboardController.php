@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Guest;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\KegiatanModel as Kegiatan;
+use App\Model\AnggotaModel as Anggota;
+use App\Model\KelompokModel as Kelompok;
 use App\User;
 use Auth;
 
@@ -12,7 +15,10 @@ class DashboardController extends Controller
     public function index() {
     	$title = 'Dashboard';
     	$page = 'beranda';
-    	return view('Guest.dashboard',compact('title','page'));
+    	$kegiatan = Kegiatan::count();
+    	$kelompok = Kelompok::count();
+    	$anggota = Anggota::count();
+    	return view('Guest.dashboard',compact('title','page','kegiatan','kelompok','anggota','user'));
     }
 
     public function profile() {
