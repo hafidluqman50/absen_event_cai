@@ -94,12 +94,11 @@ class KegiatanController extends Controller
     }
 
     public function savePeserta(Request $request) {
-    	$code = 294153315;
-        $peserta     = $request->get('peserta');
-        // dd($peserta);
-        $keterangan  = $request->keterangan;
-        $id_kegiatan = $request->id_kegiatan;
-        $id_detail   = $request->id_detail;
+        $code           = 294153315;
+        $peserta        = $request->get('peserta');
+        $keterangan     = $request->keterangan;
+        $id_kegiatan    = $request->id_kegiatan;
+        $id_detail      = $request->id_detail;
         $kegiatanDetail = new KegiatanDetail;
         $count = $kegiatanDetail->where('id_kegiatan',$id_kegiatan)->where('id_anggota',$peserta)->count();
         if ($count != 0) {
@@ -107,7 +106,6 @@ class KegiatanController extends Controller
         }
         else {
             foreach ($peserta as $key => $value) {
-                // $num = $key-1;
                 $number = $kegiatanDetail->where('id_kegiatan',$id_kegiatan)->count();
                 if ($number <= 9999) {
                     $number++;
@@ -116,10 +114,10 @@ class KegiatanController extends Controller
                 $barcode = $request->code != '' ? $request->code : $code.$str;
                 $array = [
                     'code_barcode' => $barcode,
-                    'id_anggota' => $peserta[$key],
-                    'id_kegiatan' => $id_kegiatan,
-                    'id_users' => Auth::id(),
-                    'ket' => strtolower($keterangan)
+                    'id_anggota'   => $peserta[$key],
+                    'id_kegiatan'  => $id_kegiatan,
+                    'id_users'     => Auth::id(),
+                    'ket'          => strtolower($keterangan)
                 ];
                 if ($id_detail == '') {
                     KegiatanDetail::create($array);
@@ -169,41 +167,41 @@ class KegiatanController extends Controller
         }
     }
 
-    public function cetakBetPdf($id,$id_detail) {
-        $get = DB::table('kegiatan_detail')
-                ->join('anggota','kegiatan_detail.id_anggota','=','anggota.id_anggota')
-                ->join('kegiatan','kegiatan_detail.id_kegiatan','=','kegiatan.id_kegiatan')
-                ->select('anggota.*','kegiatan_detail.*','kegiatan.*')
-                ->where('kegiatan_detail.id_kegiatan',$id)
-                ->where('id_detail',$id_detail)
-                ->first();
-        $barcode = new BarcodeGenerator();
-        $barcode->setText($get->code_barcode);
-        $barcode->setType(BarcodeGenerator::Code128);
-        $barcode->setScale(1);
-        $barcode->setThickness(25);
-        $barcode->setFontSize(10);
-        $code = $barcode->generate();
-        $pdf = PDF::loadView('bet',compact('get','code'));
-        return $pdf->download('bet-'.str_slug($get->nama_anggota,'-').'.pdf');
-    }
+    // public function cetakBetPdf($id,$id_detail) {
+    //     $get = DB::table('kegiatan_detail')
+    //             ->join('anggota','kegiatan_detail.id_anggota','=','anggota.id_anggota')
+    //             ->join('kegiatan','kegiatan_detail.id_kegiatan','=','kegiatan.id_kegiatan')
+    //             ->select('anggota.*','kegiatan_detail.*','kegiatan.*')
+    //             ->where('kegiatan_detail.id_kegiatan',$id)
+    //             ->where('id_detail',$id_detail)
+    //             ->first();
+    //     $barcode = new BarcodeGenerator();
+    //     $barcode->setText($get->code_barcode);
+    //     $barcode->setType(BarcodeGenerator::Code128);
+    //     $barcode->setScale(1);
+    //     $barcode->setThickness(25);
+    //     $barcode->setFontSize(10);
+    //     $code = $barcode->generate();
+    //     $pdf = PDF::loadView('bet',compact('get','code'));
+    //     return $pdf->download('bet-'.str_slug($get->nama_anggota,'-').'.pdf');
+    // }
 
-    public function cetakBetPdfAll($id) {
-        if (KegiatanDetail::where('id_kegiatan',$id)->count() == 0) {
-            return redirect('/admin/kegiatan/'.$id.'/peserta')->with('log','Maaf Peserta Tidak Ada');
-        }
-        else {
-            $get = DB::table('kegiatan_detail')
-                    ->join('anggota','kegiatan_detail.id_anggota','=','anggota.id_anggota')
-                    ->join('kegiatan','kegiatan_detail.id_kegiatan','=','kegiatan.id_kegiatan')
-                    ->select('anggota.*','kegiatan_detail.*','kegiatan.*')
-                    ->where('kegiatan.id_kegiatan',$id)
-                    ->get();
-            $kegiatan = Kegiatan::where('id_kegiatan',$id)->firstOrFail();
-            $barcode = new KegiatanDetail;
-        $pdf = PDF::loadView('bet-all',compact('get','barcode'));
-            // $pdf = PDF::loadView('table');
-        return $pdf->download('Bet Kegiatan '.$kegiatan->nama_kegiatan.' '.explodeDate($kegiatan->tanggal_kegiatan).'.pdf');
-        }
-    }
+    // public function cetakBetPdfAll($id) {
+    //     if (KegiatanDetail::where('id_kegiatan',$id)->count() == 0) {
+    //         return redirect('/admin/kegiatan/'.$id.'/peserta')->with('log','Maaf Peserta Tidak Ada');
+    //     }
+    //     else {
+    //         $get = DB::table('kegiatan_detail')
+    //                 ->join('anggota','kegiatan_detail.id_anggota','=','anggota.id_anggota')
+    //                 ->join('kegiatan','kegiatan_detail.id_kegiatan','=','kegiatan.id_kegiatan')
+    //                 ->select('anggota.*','kegiatan_detail.*','kegiatan.*')
+    //                 ->where('kegiatan.id_kegiatan',$id)
+    //                 ->get();
+    //         $kegiatan = Kegiatan::where('id_kegiatan',$id)->firstOrFail();
+    //         $barcode = new KegiatanDetail;
+    //     $pdf = PDF::loadView('bet-all',compact('get','barcode'));
+    //         // $pdf = PDF::loadView('table');
+    //     return $pdf->download('Bet Kegiatan '.$kegiatan->nama_kegiatan.' '.explodeDate($kegiatan->tanggal_kegiatan).'.pdf');
+    //     }
+    // }
  }
