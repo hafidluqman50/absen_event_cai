@@ -48,7 +48,8 @@ class UsersController extends Controller
 	    		'username' => $username,
 	    		'password' => bcrypt($password),
 	    		'level' => $level,
-	    		'status_akun' => $status_akun
+	    		'status_akun' => $status_akun,
+                'status_delete' => 0
 	    	];
 	    	User::create($array);
 	    	$message = 'Berhasil Input User';
