@@ -75,11 +75,11 @@
                 <div class="col-md-12 text-center" style="top:4rem">
                     <label class="inp">{{ $get->nama_anggota }}</label>
                     <label class="inp-kel">{{ $get->nama_kelompok }}</label>
-                    <label class="inp-bar"><img src="data:image/png;base64,{{$code}}" alt="barcode"/>{{$get->code_barcode}}</label>
+                    <label class="inp-bar">{{-- <img src="data:image/png;base64,{{$code}}"> --}}
+                        {{ $get->code_barcode }}</label>
                 </div>
-            </div>
-{{-- 
-            <div class="bgpanitia" style="width:302.3622047244088px; height:377.952755905511px; margin-left:1.5rem; margin-top:6rem">
+            </div> 
+           {{-- <div class="bgpanitia" style="width:302.3622047244088px; height:377.952755905511px; margin-left:1.5rem; margin-top:6rem">
                 <div class="col-md-12 row" style="top:1rem; left:0.7rem">
                     <div class="col-md-3 text-center">
                         <img class="img" src="{{ asset('frontend/images/cai.png') }}" alt="" width="220%">

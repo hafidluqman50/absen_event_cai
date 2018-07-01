@@ -9,9 +9,20 @@ use App\Model\AnggotaModel as Anggota;
 use App\Model\KelompokModel as Kelompok;
 use App\User;
 use Auth;
+use Telegram\Bot\Laravel\Facades\Telegram;
 
 class DashboardController extends Controller
 {
+    public function tes()
+    {
+        // dd(Telegram::getUpdates());
+
+        Telegram::sendMessage([
+            'chat_id' => env('GROUP_ID'),
+            'text' => 'bismillah',
+        ]);
+    }
+    
     public function index() {
     	$title = 'Dashboard';
     	$page = 'beranda';

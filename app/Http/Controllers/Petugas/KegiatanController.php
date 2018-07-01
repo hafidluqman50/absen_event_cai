@@ -9,7 +9,7 @@ use App\Model\KelompokModel as Kelompok;
 use App\Model\KegiatanDetailModel as KegiatanDetail;
 use CodeItNow\BarcodeBundle\Utils\BarcodeGenerator;
 use DB;
-use Milon\Barcode\DNS1D;
+// use Milon\Barcode\DNS1D;
 // use DNS2D;
 use PDF;
 use Auth;
@@ -48,7 +48,8 @@ class KegiatanController extends Controller
         $array = [
             'nama_kegiatan' => $nama_kegiatan,
             'tanggal_kegiatan' => $tanggal_kegiatan,
-            'lokasi_kegiatan' => $lokasi_kegiatan
+            'lokasi_kegiatan' => $lokasi_kegiatan,
+            'status_kegiatan' => 0
         ];
         if ($id_kegiatan == '') {
             Kegiatan::create($array);
@@ -61,6 +62,25 @@ class KegiatanController extends Controller
         return redirect('/petugas/kegiatan')->with('message',$message);
     }
 
+    public function statusKegiatan($id) {
+        $kegiatan = Kegiatan::where('id_kegiatan',$id);
+            if($kegiatan->firstOrFail()->status_kegiatan == 0){
+                $status = Kegiatan::where('status_kegiatan',1);
+                if($status->count() > 0) {
+                    return redirect('/petugas/kegiatan')->with('log','Maaf Kegiatan '.$status->firstOrFail()->nama_kegiatan.' Harus ditutup terlebih dahulu');
+                }
+                else {
+                    $kegiatan->update(['status_kegiatan'=>1]);
+                    $message = 'Berhasil Membuka Data';
+                }
+            }
+            else {
+                $kegiatan->update(['status_kegiatan'=>0]);
+                $message = 'Berhasil Menutup Data';
+            }
+            return redirect('/petugas/kegiatan')->with('message',$message);
+    }
+    
     public function peserta($id) {
         $title = 'Peserta';
         $page = 'kegiatan';
@@ -148,7 +168,9 @@ class KegiatanController extends Controller
         // $barcode->setThickness(30);
         // $barcode->setFontSize(15);
         // $code = $barcode->generate();
-        $code = DNS1D::getBarcodePNG($get->code_barcode,'C39+',0.9,40,[0,0,0],true);
+        $code = KegiatanDetail::barcode($get->code_barcode);
+        // dd('<img src="data:image/png;base64,'.$code.'"');
+        // $code = DNS1D::getBarcodePNG($get->code_barcode,'C39+',0.9,40,[0,0,0],true);
     	return view('bet',compact('get','code'));
     }
 

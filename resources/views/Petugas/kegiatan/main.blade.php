@@ -20,6 +20,10 @@
                     <div class="alert alert-success alert-dismissible">
                         <b>{{ session('message') }}</b> <button class="close" data-dismiss="alert">x</button>
                     </div>
+                    @elseif(session()->has('log'))
+                    <div class="alert alert-danger alert-dismissible">
+                        <b>{{ session('log') }}</b> <button class="close" data-dismiss="alert">x</button>
+                    </div>
                     @endif
                     <div class="table-responsive">
                         <table class="table table-hover dashboard-task-infos kegiatan" id="table">

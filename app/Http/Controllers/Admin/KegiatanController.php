@@ -8,7 +8,7 @@ use App\Model\AnggotaModel as Anggota;
 use App\Model\KelompokModel as Kelompok;
 use App\Model\KegiatanDetailModel as KegiatanDetail;
 use CodeItNow\BarcodeBundle\Utils\BarcodeGenerator;
-use Milon\Barcode\DNS1D;
+// use Milon\Barcode\DNS1D;
 use DB;
 use PDF;
 use Auth;
@@ -64,10 +64,21 @@ class KegiatanController extends Controller
 
     public function statusKegiatan($id) {
         $kegiatan = Kegiatan::where('id_kegiatan',$id);
-        if ($kegiatan->firstOrFail()->status_kegiatan == 0) {
-            //
-        }
-        // Kegiatan::where('id_kegiatan',$id)->update(['status_kegiatan'=>1]);
+            if($kegiatan->firstOrFail()->status_kegiatan == 0){
+                $status = Kegiatan::where('status_kegiatan',1);
+                if($status->count() > 0) {
+                    return redirect('/admin/kegiatan')->with('log','Maaf Kegiatan '.$status->firstOrFail()->nama_kegiatan.' Harus ditutup terlebih dahulu');
+                }
+                else {
+                    $kegiatan->update(['status_kegiatan'=>1]);
+                    $message = 'Berhasil Membuka Data';
+                }
+            }
+            else {
+                $kegiatan->update(['status_kegiatan'=>0]);
+                $message = 'Berhasil Menutup Data';
+            }
+            return redirect('/admin/kegiatan')->with('message',$message);
     }
 
     public function peserta($id) {
@@ -152,14 +163,17 @@ class KegiatanController extends Controller
     			->where('id_detail',$id_detail)
     			->first();
 
-  //   	$barcode = new BarcodeGenerator();
-		// $barcode->setText($get->code_barcode);
-		// $barcode->setType(BarcodeGenerator::Code39);
-		// $barcode->setScale(1);
-		// $barcode->setThickness(30);
-		// $barcode->setFontSize(15);
-		// $code = $barcode->generate();
-        $code = DNS1D::getBarcodePNG($get->code_barcode,'C39+',0.9,40,[0,0,0],true);
+//      	$barcode = new BarcodeGenerator();
+// 		$barcode->setText($get->code_barcode);
+// 		$barcode->setType(BarcodeGenerator::Code39);
+// 		$barcode->setScale(1);
+// 		$barcode->setThickness(30);
+// 		$barcode->setFontSize(15);
+// 		$code = $barcode->generate();
+        $code = KegiatanDetail::barcode($get->code_barcode);
+        // dd($code);
+// 		dd($code);
+        // $code = DNS1D::getBarcodePNG($get->code_barcode,'C39+',0.9,40,[0,0,0],true);
     	return view('bet',compact('get','code'));
     }
 

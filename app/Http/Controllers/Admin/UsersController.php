@@ -49,7 +49,7 @@ class UsersController extends Controller
 	    		'password' => bcrypt($password),
 	    		'level' => $level,
 	    		'status_akun' => $status_akun,
-                'status_delete' => 0
+	    		'status_delete' => 0
 	    	];
 	    	User::create($array);
 	    	$message = 'Berhasil Input User';
@@ -59,7 +59,7 @@ class UsersController extends Controller
                 $array = [
                     'name'=>$name,
                     'level' => $level,
-                    'status_akun' => $status_akun
+                    'status_akun' => $status_akun,
                 ];
             }
     		elseif ($password == '') {
