@@ -103,6 +103,18 @@ class AjaxController extends Controller
         return Datatables::of($kegiatan)->addColumn('action',function($action){
             if (Auth::user()->level==2 || Auth::user()->level==1) {
                 $level = Auth::user()->level==2?'admin':(Auth::user()->level==1?'petugas':'');
+                $array = [
+                        0=>[
+                            'class' => 'btn btn-primary',
+                            'text' => 'Buka Data'
+                        ],
+                        1=>[
+                            'class' => 'btn btn-danger',
+                            'text' => 'Tutup Data'
+                        ]
+                    ];
+                $class = $array[$action->status_kegiatan]['class'];
+                $text = $array[$action->status_kegiatan]['text'];
                 $button = '<div class="btn-group" role="group">
                                 <a href="'.url("/$level/kegiatan/$action->id_kegiatan/edit").'" title="Edit" class="btn btn-warning waves-effect"><b>Edit</b></a>
                             </div>
@@ -114,6 +126,9 @@ class AjaxController extends Controller
                             </div>
                             <div class="btn-group" role="button">
                                 <a href="'.url("/$level/kegiatan/$action->id_kegiatan/delete").'" title="Hapus" class="btn btn-danger waves-effect" onclick="return confirm(\'Anda Yakin?\')"><b>Hapus</b></a>
+                            </div>
+                            <div class="btn-group" role="button">
+                                <a href="'.url("/$level/kegiatan/$action->id_kegiatan/status-kegiatan").'" title="Hapus" class="btn '.$class.' waves-effect"><b>'.$text.'</b></a>
                             </div>';
             }
             elseif(Auth::user()->level==0) {
