@@ -46,23 +46,23 @@
                     </div>
                 </div>
             </div> --}}
-            <div class="{{ $get->ket == 'panitia' ? 'bgpanitia' :($get->ket == 'peserta' ? 'bgpeserta' : '') }}" style="width:302.3622047244088px; height:377.952755905511px; margin-left:1.5rem; margin-top:6rem">
+            <div class="{{ $get->ket == 'panitia' ? 'bgpanitia' :($get->ket == 'peserta' ? 'bgpeserta' : '') }}" style="width:12cm; height:16cm; margin-left:1.5rem; margin-top:6rem">
                 <div class="col-md-12 row" style="top:1rem; left:0.7rem">
                     <div class="col-md-3 text-center">
                         <img class="img" src="{{ asset('frontend/images/cai.png') }}" alt="" width="220%">
                     </div>
-                    <div class="col-md-9 text-center" style="left:0.8rem">
+                    <div class="col-md-9 text-center" style="left:2rem; margin-top:0.5rem">
                         <p class="judul">PERMATA XXXIX</p>
                         <p class="ket">{{ $get->nama_kegiatan }}</p>
                         <p class="thn">{{ year($get->tanggal_kegiatan) }}</p>
                     </div>
                 </div>
-                <div class="col-md-12 text-center" style="left:1rem; top:1rem">
+                <div class="col-md-12 text-center" style="left:5rem; top:1.9rem">
                     <div class="kotak text-center">
                         <label class="status">{{ $get->ket == 'panitia' ? 'Panitia' :($get->ket == 'peserta' ? 'Peserta' : '') }}</label>
                     </div>
                 </div>
-                <div class="col-md-12 text-center" style="top:2rem">
+                <div class="col-md-12 text-center" style="top:4rem">
                     <label class="inp">{{ $get->nama_anggota }}</label>
                     <label class="inp-kel">{{ $get->nama_kelompok }}</label>
                     <label class="inp-bar"><img src="data:image/png;base64,{{$code}}" alt="barcode"/></label>

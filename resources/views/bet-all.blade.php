@@ -13,8 +13,10 @@
         @media print{
             *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
             @page {
-                page-break-after: always
-            } 
+                page-break-after: always;
+                margin
+            }
+            
 
             /* *{
                 -webkit-print-color-adjust: exact!important;
@@ -50,24 +52,25 @@
                 </div>
             </div> --}}
             @foreach($get as $value)
-            <div class="{{ $value->ket == 'panitia' ? 'bgpanitia' : ($value->ket == 'peserta' ? 'bgpeserta' : '') }}" style="width:302.3622047244088px; height:377.952755905511px; margin-left:1.5rem; margin-top:6rem">
+            <div class="{{ $value->ket == 'panitia' ? 'bgpanitia' : ($value->ket == 'peserta' ? 'bgpeserta' : '') }}" style="width:12cm; height:16cm; margin-left:1.5rem; margin-top:7rem">
                 <div class="col-md-12 row" style="top:1rem; left:0.7rem">
                     <div class="col-md-3 text-center">
                         <img class="img" src="{{ asset('frontend/images/cai.png') }}" alt="" width="220%">
                     </div>
-                    <div class="col-md-9 text-center" style="left:0.8rem">
+                    <div class="col-md-9 text-center" style="left:2rem; margin-top:0.5rem">
                         <p class="judul">PERMATA XXXIX</p>
                         <p class="ket">{{ $value->nama_kegiatan }}</p>
                         <p class="thn">{{ year($value->tanggal_kegiatan) }}</p>
                     </div>
                 </div>
-                <div class="col-md-12 text-center" style="left:1rem; top:1rem">
+                <div class="col-md-12 text-center" style="left:5rem; top:1.9rem">
                     <div class="kotak text-center">
                         <label class="status">{{ $value->ket == 'panitia' ? 'Panitia' : ($value->ket == 'peserta' ? 'Peserta' : '') }}</label>
                     </div>
                 </div>
+                <br>
                 <div class="col-md-12 text-center" style="top:2rem">
-                    <label class="inp">{{ $value->nama_anggota }}</label>
+                    <label class="inp   ">{{ $value->nama_anggota }}</label>
                     <label class="inp-kel">{{ $value->nama_kelompok }}</label>
                     <label class="inp-bar"><img src="data:image/png;base64,{{$barcode->barcode($value->code_barcode)}}" alt="barcode"/></label>
                 </div>

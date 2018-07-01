@@ -18,7 +18,7 @@
 
 .judul{
     font-family: 'Source Sans Pro', sans-serif;
-    font-size: 22px;
+    font-size: 28px;
     color: red;
     /* color:#fff;  */
     Text-Shadow:0px 0px 0 rgb(197, 20, 20),1px 1px 0 rgb(191, 21, 21),2px 2px 0 rgb(127, 7, 7);
@@ -27,7 +27,7 @@
 .ket{
     font-family: 'Source Sans Pro', sans-serif;
     margin-top:-1.5rem;
-    font-size: 15px;
+    font-size: 21px;
     color: red;
     /* color:#fff;  */
     /* Text-Shadow:0px 0px 0 rgb(197, 20, 20),0px 1px 0px rgb(115, 21, 21); */
@@ -37,7 +37,7 @@
 .thn{
     font-family: 'Source Sans Pro', sans-serif;
     margin-top:-1.5rem;
-    font-size: 15px;
+    font-size: 21px;
     letter-spacing: 15px;
     color: red;
     /* color:#fff;  */
@@ -47,10 +47,10 @@
 .status{
     /* font-family: 'Lobster', cursive; */
     font-family: 'Pacifico', cursive;
-    font-size:55px;
+    font-size:70px;
     font-style: italic;
     font-weight: bold;
-    margin-top:0.8rem;
+    margin-top:1.2rem;
     margin-left:-0.4rem;
     color: #FEFC1A;
 }
@@ -58,15 +58,15 @@
 .kotak{
     background: #999999;
     border-radius: 50%;
-    height: 130px;
-    width: 230px;
-    border:4px solid #FEFC1A;
+    height: 170px;
+    width: 270px;
+    border:5px solid #FEFC1A;
 }
 
 .inp{
     font-family: 'Source Sans Pro', sans-serif;
-    padding: 0.2rem;
-    font-size:18px;
+    padding: 0.7rem;
+    font-size:23px;
     background: white;
     border-radius:12px;
     width: 100%;
@@ -75,8 +75,8 @@
 
 .inp-kel{
     font-family: 'Source Sans Pro', sans-serif;
-    padding: 0.2rem;
-    font-size:18px;
+    padding: 0.7rem;
+    font-size:23px;
     background: white;
     border-radius:12px;
     width: 80%;
@@ -85,8 +85,8 @@
 
 .inp-bar{
     font-family: 'Libre Barcode 128 Text', cursive;
-    /* padding: 0.rem; */
-    font-size:30px;
+    padding: 0.6rem 0rem 0.2rem 0rem;
+    font-size:40px;
     background: white;
     border-radius:12px;
     width: 55%;
