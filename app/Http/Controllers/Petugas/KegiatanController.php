@@ -141,14 +141,14 @@ class KegiatanController extends Controller
                 ->where('id_detail',$id_detail)
                 ->first();
 
-        // $barcode = new BarcodeGenerator();
-        // $barcode->setText($get->code_barcode);
-        // $barcode->setType(BarcodeGenerator::Code39);
-        // $barcode->setScale(1);
-        // $barcode->setThickness(30);
-        // $barcode->setFontSize(15);
-        // $code = $barcode->generate();
-        $code = DNS1D::getBarcodePNG($get->code_barcode,'C39+',0.9,40,[0,0,0],true);
+        $barcode = new BarcodeGenerator();
+        $barcode->setText($get->code_barcode);
+        $barcode->setType(BarcodeGenerator::Code39);
+        $barcode->setScale(1);
+        $barcode->setThickness(30);
+        $barcode->setFontSize(15);
+        $code = $barcode->generate();
+        // $code = DNS1D::getBarcodePNG($get->code_barcode,'C39+',0.9,40,[0,0,0],true);
     	return view('bet',compact('get','code'));
     }
 
