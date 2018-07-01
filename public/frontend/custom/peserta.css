@@ -84,13 +84,13 @@
 }
 
 .inp-bar{
-    font-family: 'Libre Barcode 128 Text', cursive;
+    /*font-family: 'Libre Barcode 128 Text', cursive;*/
     padding: 0.6rem 0rem 0.2rem 0rem;
-    font-size:40px;
+    font-size:20px;
     background: white;
     border-radius:12px;
     width: 55%;
-    color:#2D3575;
+    color:/*#2D3575*/rgba(0,0,0,1);
 }
 
 .inp-pan{

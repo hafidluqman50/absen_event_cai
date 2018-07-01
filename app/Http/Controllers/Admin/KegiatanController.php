@@ -8,6 +8,7 @@ use App\Model\AnggotaModel as Anggota;
 use App\Model\KelompokModel as Kelompok;
 use App\Model\KegiatanDetailModel as KegiatanDetail;
 use CodeItNow\BarcodeBundle\Utils\BarcodeGenerator;
+use Milon\Barcode\DNS1D;
 use DB;
 use PDF;
 use Auth;
@@ -47,7 +48,8 @@ class KegiatanController extends Controller
         $array = [
             'nama_kegiatan' => $nama_kegiatan,
             'tanggal_kegiatan' => $tanggal_kegiatan,
-            'lokasi_kegiatan' => $lokasi_kegiatan
+            'lokasi_kegiatan' => $lokasi_kegiatan,
+            'status_kegiatan' => 0,
         ];
         if ($id_kegiatan == '') {
             Kegiatan::create($array);
@@ -58,6 +60,14 @@ class KegiatanController extends Controller
             $message = 'Berhasil Update Kegiatan';
         }
         return redirect('/admin/kegiatan')->with('message',$message);
+    }
+
+    public function statusKegiatan($id) {
+        $kegiatan = Kegiatan::where('id_kegiatan',$id);
+        if ($kegiatan->firstOrFail()->status_kegiatan == 0) {
+            //
+        }
+        // Kegiatan::where('id_kegiatan',$id)->update(['status_kegiatan'=>1]);
     }
 
     public function peserta($id) {
@@ -142,13 +152,14 @@ class KegiatanController extends Controller
     			->where('id_detail',$id_detail)
     			->first();
 
-    	$barcode = new BarcodeGenerator();
-		$barcode->setText($get->code_barcode);
-		$barcode->setType(BarcodeGenerator::Code39);
-		$barcode->setScale(1);
-		$barcode->setThickness(30);
-		$barcode->setFontSize(15);
-		$code = $barcode->generate();
+  //   	$barcode = new BarcodeGenerator();
+		// $barcode->setText($get->code_barcode);
+		// $barcode->setType(BarcodeGenerator::Code39);
+		// $barcode->setScale(1);
+		// $barcode->setThickness(30);
+		// $barcode->setFontSize(15);
+		// $code = $barcode->generate();
+        $code = DNS1D::getBarcodePNG($get->code_barcode,'C39+',0.9,40,[0,0,0],true);
     	return view('bet',compact('get','code'));
     }
 
