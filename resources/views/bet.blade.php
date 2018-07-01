@@ -65,7 +65,7 @@
                 <div class="col-md-12 text-center" style="top:4rem">
                     <label class="inp">{{ $get->nama_anggota }}</label>
                     <label class="inp-kel">{{ $get->nama_kelompok }}</label>
-                    <label class="inp-bar"><img src="data:image/png;base64,{{$code}}" alt="barcode"/></label>
+                    <label class="inp-bar"><img src="data:image/png;base64,{{$code}}" alt="barcode"/>{{$get->code_barcode}}</label>
                 </div>
             </div>
 {{-- 
