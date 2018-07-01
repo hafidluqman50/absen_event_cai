@@ -10,8 +10,16 @@
         @media print{
             *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
             @page {
-                page-break-after: always
-            } 
+                page-break-after: always;
+                margin: 0;
+                margin-top:-2rem;
+                size:F4;
+            }
+
+            @page :first {
+                margin-top: -3.2cm;
+                margin-left:0.5cm;    /* Top margin on first page 10cm */
+            }
 
             /* *{
                 -webkit-print-color-adjust: exact!important;
@@ -46,7 +54,7 @@
                     </div>
                 </div>
             </div> --}}
-            <div class="{{ $get->ket == 'panitia' ? 'bgpanitia' :($get->ket == 'peserta' ? 'bgpeserta' : '') }}" style="width:12cm; height:16cm; margin-left:1.5rem; margin-top:6rem">
+            <div class="{{ $get->ket == 'panitia' ? 'bgpanitia' :($get->ket == 'peserta' ? 'bgpeserta' : '') }}" style="width:12cm; height:16cm;">
                 <div class="col-md-12 row" style="top:1rem; left:0.7rem">
                     <div class="col-md-3 text-center">
                         <img class="img" src="{{ asset('frontend/images/cai.png') }}" alt="" width="220%">

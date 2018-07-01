@@ -14,7 +14,14 @@
             *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
             @page {
                 page-break-after: always;
-                margin
+                size:F4;
+            }
+
+            @page{
+                margin-top: -3.2cm;
+                margin-left:0.5cm;   
+                margin-right:0.5cm;   
+                margin-bottom:-3.2cm; /* Top margin on first page 10cm */
             }
             
 
@@ -52,7 +59,7 @@
                 </div>
             </div> --}}
             @foreach($get as $value)
-            <div class="{{ $value->ket == 'panitia' ? 'bgpanitia' : ($value->ket == 'peserta' ? 'bgpeserta' : '') }}" style="width:12cm; height:16cm; margin-left:1.5rem; margin-top:7rem">
+            <div class="{{ $value->ket == 'panitia' ? 'bgpanitia' : ($value->ket == 'peserta' ? 'bgpeserta' : '') }}" style="width:12cm; height:16cm; margin-right:0.5rem;margin-bottom:0.5rem">
                 <div class="col-md-12 row" style="top:1rem; left:0.7rem">
                     <div class="col-md-3 text-center">
                         <img class="img" src="{{ asset('frontend/images/cai.png') }}" alt="" width="220%">
