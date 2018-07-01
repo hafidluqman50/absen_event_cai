@@ -142,10 +142,10 @@ class KegiatanController extends Controller
 
         $barcode = new BarcodeGenerator();
         $barcode->setText($get->code_barcode);
-        $barcode->setType(BarcodeGenerator::Code128);
+        $barcode->setType(BarcodeGenerator::Code39);
         $barcode->setScale(1);
-        $barcode->setThickness(25);
-        $barcode->setFontSize(10);
+        $barcode->setThickness(30);
+        $barcode->setFontSize(15);
         $code = $barcode->generate();
     	return view('bet',compact('get','code'));
     }
