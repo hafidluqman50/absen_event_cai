@@ -11,14 +11,14 @@
             *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
             @page {
                 page-break-after: always;
-                margin: 0;
-                margin-top:-2rem;
                 size:F4;
             }
 
-            @page :first {
+            @page{
                 margin-top: -3.2cm;
-                margin-left:0.5cm;    /* Top margin on first page 10cm */
+                margin-left:0.5cm;   
+                margin-right:0.5cm;   
+                margin-bottom:-3.2cm; /* Top margin on first page 10cm */
             }
 
             /* *{
