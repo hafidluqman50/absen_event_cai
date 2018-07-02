@@ -48,13 +48,18 @@
   </style>
 </head>
 <body class="A4 portrait">
+@foreach($get as $key => $data)
+@php
+$count = $key+1;
+@endphp
+@if($count%48 == 0)
 <section class="sheet padding-10mm">
     <h5 style="text-align:center;font-family: 'Source Sans Pro', sans-serif;">
         ABSEN KEGIATAN {{ $kegiatan->nama_kegiatan }} {{ explodeDate($kegiatan->tanggal_kegiatan) }}
     </h5>
-    @foreach($get as $key => $data)
+    @foreach($get as $num => $data)
     @php
-    $num = $key+1;
+    $num = $num+1;
     @endphp
     <div class="label">
         <label class="bar"><img src="data:image/png;base64,{{ $barcode->code($data->code_barcode) }}" alt=""></label><br>
@@ -65,5 +70,7 @@
     @endif
     @endforeach
   </section>
+@endif
+@endforeach
 </body>
 </html>
