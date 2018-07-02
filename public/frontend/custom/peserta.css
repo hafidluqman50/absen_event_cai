@@ -122,3 +122,7 @@
     width: 55%;
     color:#005A2D;
 }
+
+.setpaper{
+    page-break-after: always;
+}

@@ -13,7 +13,7 @@
         @media print{
             *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
             @page {
-                page-break-after: always;
+                /* page-break-after: always; */
                 size:F4;
             }
 
@@ -21,6 +21,7 @@
                 margin:1cm;
                 margin-top:3cm;
                 margin-bottom:1cm;
+                page-break-after: auto;
                 /* margin-top: -3.2cm;
                 margin-left:0.5cm;   
                 margin-right:0.5cm;   
@@ -62,7 +63,7 @@
                     </div>
                 </div>
             </div> --}}
-            @foreach($get as $value)
+            @foreach($get as $key => $value)
             <div class="{{ $value->ket == 'panitia' ? 'bgpanitia' : ($value->ket == 'peserta' ? 'bgpeserta' : '') }}" style="width:13cm; height:17cm; margin-right:2rem;margin-bottom:8rem">
                 <div class="col-md-12 row" style="top:1rem; left:0.7rem">
                     <div class="col-md-3 text-center">
@@ -84,10 +85,13 @@
                     <label class="inp   ">{{ $value->nama_anggota }}</label>
                     <label class="inp-kel">{{ $value->nama_kelompok }}</label>
                     {{--<label class="inp-bar"><img src="data:image/png;base64,{{$barcode->barcode($value->code_barcode)}}" alt="barcode"/>{{ $value->code_barcode }}</label>--}}
-                    <label class="inp-bar">{{-- <img src="data:image/png;base64,{{$barcode->barcode($value->code_barcode)}}"> --}}{{ $value->code_barcode }}</label>
+                    <label class="inp-bar"><img src="data:image/png;base64,{{$barcode->barcode($value->code_barcode)}}"> {{--{{ $value->code_barcode }} --}}</label>
                 </div>
             </div>
             @endforeach
+            @if($key+1%4 == 0)
+            <div class="setpaper"></div>
+            @endif
         </div>
     </div>
 </body>
