@@ -18,8 +18,9 @@
     }
     .label{
         /* Avery 5160 labels -- CSS and HTML by MM at Boulder Information Services */
-        width: 150px; /* plus .6 inches from padding */
-        height: .670in; /* plus .125 inches from padding */
+        width: 220px; /* plus .6 inches from padding */
+        /* height: .670in; */
+        height: .960in; /* plus .125 inches from padding */
         padding: .10in 0in 0;
         margin-right: .125in; /* the gutter */
         margin-bottom: .125in; /* the gutter */
@@ -43,7 +44,7 @@
       }
       .bar{
           font-family: 'Libre Barcode 128 Text', cursive;
-          font-size:25pt;
+          font-size:27pt;
       }
   </style>
 </head>
