@@ -194,6 +194,24 @@ class KegiatanController extends Controller
         }
     }
 
+    public function cetakBarcode($id) {
+        if (KegiatanDetail::where('id_kegiatan',$id)->count() == 0) {
+            return redirect('/admin/kegiatan/'.$id.'/peserta')->with('log','Maaf Peserta Tidak Ada');
+        }
+        else {
+            $kegiatan = Kegiatan::where('id_kegiatan',$id)->firstOrFail();
+            $get = DB::table('kegiatan_detail')
+                    ->join('anggota','kegiatan_detail.id_anggota','=','anggota.id_anggota')
+                    // ->join('kelompok','anggota.id_kelompok','=','kelompok.id_kelompok')
+                    // ->join('kegiatan','kegiatan_detail.id_kegiatan','=','kegiatan.id_kegiatan')
+                    ->select('anggota.nama_anggota','kegiatan_detail.code_barcode')
+                    ->where('id_kegiatan',$id)
+                    ->get();
+            $barcode = new KegiatanDetail;
+            return view('barcode',compact('get','barcode','kegiatan'));
+        }
+    }
+
     // public function cetakBetPdf($id,$id_detail) {
     //     $get = DB::table('kegiatan_detail')
     //             ->join('anggota','kegiatan_detail.id_anggota','=','anggota.id_anggota')

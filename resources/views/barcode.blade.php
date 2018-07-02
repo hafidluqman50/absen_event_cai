@@ -24,13 +24,14 @@
         margin-right: .125in; /* the gutter */
         margin-bottom: .125in; /* the gutter */
         float: left;
+        display: block;
         text-align: center;
         overflow: hidden;
         outline: 1px dotted; 
         }
-    .page-break  {
-        clear: left;
-        display:block;
+      .page-break {
+        clear: both;
+        /*display:block;*/
         page-break-after:always;
         }
       .text-nama {
@@ -40,7 +41,6 @@
         text-align: center;
         line-height: 2pt;
       }
-
       .bar{
           font-family: 'Libre Barcode 128 Text', cursive;
           font-size:25pt;
@@ -50,205 +50,20 @@
 <body class="A4 portrait">
 <section class="sheet padding-10mm">
     <h5 style="text-align:center;font-family: 'Source Sans Pro', sans-serif;">
-        ABSEN KEGIATAN CINTA ALAM INDONESIA 2018
+        ABSEN KEGIATAN {{ $kegiatan->nama_kegiatan }} {{ explodeDate($kegiatan->tanggal_kegiatan) }}
     </h5>
+    @foreach($get as $key => $data)
+    @php
+    $num = $key+1;
+    @endphp
     <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>    
-    <div class="label">
-        <label class="bar">2941533150001</label><br>
-        <span class="text-nama">Khoirulli Nurul Fatimah</span>
-    </div>   
-
+        <label class="bar"><img src="data:image/png;base64,{{ $barcode->code($data->code_barcode) }}" alt=""></label><br>
+        <span class="text-nama">{{ $data->nama_anggota }}</span>
+    </div>
+    @if($num%48 == 0)
     <div class="page-break"></div>
-
-    
+    @endif
+    @endforeach
   </section>
-  
 </body>
 </html>

@@ -84,6 +84,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'isAdmin'], function () {
     Route::get('/kegiatan/{id}/peserta/{id_detail}/delete', ['as' => 'peserta-tambah-admin', 'uses' => 'Admin\KegiatanController@deletePeserta']);
     Route::get('/kegiatan/{id}/peserta/{id_detail}/cetak-bet', ['as' => 'cetak-bet-admin', 'uses' => 'Admin\KegiatanController@cetakBet']);
     Route::get('/kegiatan/{id}/peserta/cetak-semua-bet', ['as' => 'cetak-bet-semua-admin', 'uses' => 'Admin\KegiatanController@cetakBetAll']);
+    Route::get('/kegiatan/{id}/peserta/cetak-barcode',['as'=>'cetak-barcode-semua-admin','uses'=>'Admin\KegiatanController@cetakBarcode']);
     // Route::get('/kegiatan/{id}/peserta/{id_detail}/download-bet',['as' => 'download-bet-admin', 'uses' => 'Admin\KegiatanController@cetakBetPdf']);
     // Route::get('/kegiatan/{id}/peserta/download-semua-bet', ['as' => 'download-bet-semua-admin', 'uses' => 'Admin\KegiatanController@cetakBetPdfAll']);
 
@@ -150,6 +151,7 @@ Route::group(['prefix' => 'petugas', 'middleware' => 'isPetugas'], function () {
     Route::get('/kegiatan/{id}/peserta/{id_detail}/delete', ['as' => 'peserta-tambah-admin', 'uses' => 'Petugas\KegiatanController@deletePeserta']);
     Route::get('/kegiatan/{id}/peserta/{id_detail}/cetak-bet', ['as' => 'cetak-bet-admin', 'uses' => 'Petugas\KegiatanController@cetakBet']);
     Route::get('/kegiatan/{id}/peserta/cetak-semua-bet', ['as' => 'cetak-bet-semua-admin', 'uses' => 'Petugas\KegiatanController@cetakBetAll']);
+    Route::get('/kegiatan/{id}/peserta/cetak-barcode',['as'=>'cetak-barcode-semua-admin','uses'=>'Petugas\KegiatanController@cetakBarcode']);
     // Route::get('/kegiatan/{id}/peserta/{id_detail}/download-bet',['as' => 'download-bet-admin', 'uses' => 'Petugas\KegiatanController@cetakBetPdf']);
     // Route::get('/kegiatan/{id}/peserta/download-semua-bet', ['as' => 'download-bet-semua-admin', 'uses' => 'Admin\KegiatanController@cetakBetPdfAll']);
 

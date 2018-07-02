@@ -88,10 +88,10 @@
                     <label class="inp-bar"><img src="data:image/png;base64,{{$barcode->barcode($value->code_barcode)}}"> {{--{{ $value->code_barcode }} --}}</label>
                 </div>
             </div>
-            @endforeach
             @if($key+1%4 == 0)
             <div class="setpaper"></div>
             @endif
+            @endforeach
         </div>
     </div>
 </body>
