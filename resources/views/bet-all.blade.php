@@ -118,7 +118,7 @@
         <br>
         <div class="col-md-12 text-center" style="top:2rem">
             <label class="inp">{{ $value->nama_anggota }}</label>
-            <label class="inp-kel">{{ $value->desa }}</label>
+            <label class="inp-kel">{{ $value->nama_kelompok }}</label>
             <label class="inp-bar"><img src="data:image/png;base64,{{$barcode->barcode($value->code_barcode)}}" alt=""></label>
         </div>
     </div>
