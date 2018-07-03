@@ -26,16 +26,21 @@ class ApiController extends Controller
         		'nama_kegiatan' => 'ABSENSI KEGIATAN '.$get->firstOrFail()->nama_kegiatan,
         		'tanggal_kegiatan' => explodeDate($get->firstOrFail()->tanggal_kegiatan)
         	];
-        	foreach ($absens as $key => $value) {
-        		$num = $key+1;
-        		$text = '<tr><td>'.$num.'</td>'
-        				.'<td>'.$value->nama_anggota.'</td>'
-        				.'<td>'.$value->nama_kelompok.'</td>'
-        				.'<td>'.$value->waktu_absen.'</td>'
-        				.'<td>'.$value->nama_jadwal.' '.$value->hari.' - '.$value->keterangan.'</td>'
-        				.'<td>'.$value->ket_peserta.'</td>'
-        				.'<td><span class="badge badge-primary">'.$value->ket.'</span></td></tr>';
-        		$absen[] = $text;
+        	if(count($absens) > 0) {
+            	foreach ($absens as $key => $value) {
+            		$num = $key+1;
+            		$text = '<tr><td>'.$num.'</td>'
+            				.'<td>'.$value->nama_anggota.'</td>'
+            				.'<td>'.$value->nama_kelompok.'</td>'
+            				.'<td>'.$value->waktu_absen.'</td>'
+            				.'<td>'.$value->nama_jadwal.' '.$value->hari.' - '.$value->keterangan.'</td>'
+            				.'<td>'.$value->ket_peserta.'</td>'
+            				.'<td><span class="badge badge-primary">'.$value->ket.'</span></td></tr>';
+            		$absen[] = $text;
+            	}
+        	}
+        	else {
+        	$absen = '<tr><td colspan="7" align="center"><b>Tidak Ada Data Absen</b></td></tr>';
         	}
     	}
     	else {

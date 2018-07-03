@@ -36,7 +36,7 @@ class UsersController extends Controller
     	$name = $request->name;
     	$username = $request->username;
         if ($username != '' && User::where('username',$username)->count() == 1) {
-            return redirect('')->with('log','Maaf User Sudah Ada');
+            return redirect('/admin/users/tambah')->with('log','Maaf User Sudah Ada');
         }
         $password = $request->password;
     	$level = $request->level;

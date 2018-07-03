@@ -31,7 +31,8 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama Kegiatan</th>
-                                    <th>Tanggal</th>
+                                    <th>Dari Tgl</th>
+                                    <th>Sampai Tgl</th>
                                     <th>Lokasi</th>
                                     <th>#</th>
                                 </tr>
@@ -62,6 +63,7 @@
                 }},
                 {data:'nama_kegiatan',name:'nama_kegiatan'},
                 {data:'tanggal_kegiatan',name:'tanggal_kegiatan'},
+                {data:'sampai_tanggal_kegiatan',name:'sampai_tanggal_kegiatan'},
                 {data:'lokasi_kegiatan',name:'lokasi_kegiatan'},
                 {data:'action',name:'action',searchable:false,orderable:false}
             ],

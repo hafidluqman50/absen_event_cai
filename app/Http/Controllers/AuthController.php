@@ -8,6 +8,7 @@ use Auth;
 use App\User;
 use Log;
 use Telegram\Bot\Laravel\Facades\Telegram;
+use Artisan;
 
 class AuthController extends Controller
 {
@@ -19,6 +20,7 @@ class AuthController extends Controller
     	$username = $request->username;
     	$password = $request->password;
     	if (Auth::attempt(['username'=>$username,'password'=>$password,'status_delete'=>0],false)) {
+            Artisan::call('config:clear');
     		if (Auth::user()->level == 2 && Auth::user()->status_akun == 1) {
             $message = "<b>ABSEN CAI</b> \n"
                        ."User Telah LOG IN \n"
@@ -77,6 +79,7 @@ class AuthController extends Controller
     }
 
     public function logout() {
+        Artisan::call('config:clear');
         $level = Auth::user()->level == 2 ? 'Admin' : (Auth::user()->level == 1 ? 'Petugas' : 'Guest');
         $message = "<b>ABSEN CAI</b> \n"
                    ."User Telah LOG OUT \n"

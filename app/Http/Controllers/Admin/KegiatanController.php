@@ -13,6 +13,7 @@ use DB;
 use PDF;
 use Auth;
 use View;
+use Artisan;
 
 class KegiatanController extends Controller
 {
@@ -43,11 +44,13 @@ class KegiatanController extends Controller
     public function save(Request $request) {
         $nama_kegiatan = $request->nama_kegiatan;
         $tanggal_kegiatan = $request->tanggal_kegiatan;
+        $sampai_tanggal_kegiatan = $request->sampai_tanggal_kegiatan;
         $lokasi_kegiatan = $request->lokasi_kegiatan;
         $id_kegiatan = $request->id_kegiatan;
         $array = [
             'nama_kegiatan' => $nama_kegiatan,
             'tanggal_kegiatan' => $tanggal_kegiatan,
+            'sampai_tanggal_kegiatan' => $sampai_tanggal_kegiatan,
             'lokasi_kegiatan' => $lokasi_kegiatan,
             'status_kegiatan' => 0,
         ];
@@ -178,6 +181,7 @@ class KegiatanController extends Controller
     }
 
     public function cetakBetAll($id) {
+        // dd('sip');
         if (KegiatanDetail::where('id_kegiatan',$id)->count() == 0) {
             return redirect('/admin/kegiatan/'.$id.'/peserta')->with('log','Maaf Peserta Tidak Ada');
         }
@@ -188,27 +192,41 @@ class KegiatanController extends Controller
                     ->join('kegiatan','kegiatan_detail.id_kegiatan','=','kegiatan.id_kegiatan')
                     ->select('anggota.*','kegiatan_detail.*','kegiatan.*','kelompok.nama_kelompok')
                     ->where('kegiatan.id_kegiatan',$id)
+                    ->orderBy('id_detail','desc')
                     ->get();
             $barcode = new KegiatanDetail;
             return view('bet-all',compact('get','barcode'));
         }
     }
-
-    public function cetakBarcode($id) {
+    
+    public function cetakBarcode($id,$id_detail) {
+    	$get = DB::table('kegiatan_detail')
+    			->join('anggota','kegiatan_detail.id_anggota','=','anggota.id_anggota')
+                ->join('kegiatan','kegiatan_detail.id_kegiatan','=','kegiatan.id_kegiatan')
+    			->select('anggota.nama_anggota','kegiatan_detail.code_barcode','kegiatan.nama_kegiatan','kegiatan.tanggal_kegiatan','kegiatan.sampai_tanggal_kegiatan')
+    			->where('kegiatan_detail.id_kegiatan',$id)
+    			->where('id_detail',$id_detail)
+    			->first();
+    	$code = KegiatanDetail::code($get->code_barcode);
+    	return view('barcode',compact('get','code'));
+    }
+    
+    public function cetakBarcodeAll($id) {
+        // Artisan::call('config:cache');
+        // Artisan::call('view:cache');
+        // Artisan::call('clear:data');
         if (KegiatanDetail::where('id_kegiatan',$id)->count() == 0) {
             return redirect('/admin/kegiatan/'.$id.'/peserta')->with('log','Maaf Peserta Tidak Ada');
         }
         else {
             $kegiatan = Kegiatan::where('id_kegiatan',$id)->firstOrFail();
-            $get = DB::table('kegiatan_detail')
-                    ->join('anggota','kegiatan_detail.id_anggota','=','anggota.id_anggota')
-                    // ->join('kelompok','anggota.id_kelompok','=','kelompok.id_kelompok')
-                    // ->join('kegiatan','kegiatan_detail.id_kegiatan','=','kegiatan.id_kegiatan')
-                    ->select('anggota.nama_anggota','kegiatan_detail.code_barcode')
-                    ->where('id_kegiatan',$id)
-                    ->get();
+            $get = KegiatanDetail::show($id);
+            $hitung = ceil($get->count()/48);
+            // dd($hitung);
+            $data = $get->toArray();
+            // dd($data[0]->nama_kegiatan);
             $barcode = new KegiatanDetail;
-            return view('barcode',compact('get','barcode','kegiatan'));
+            return view('barcode-all',compact('get','barcode','hitung','data','kegiatan','id'));
         }
     }
 

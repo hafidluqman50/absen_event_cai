@@ -46,7 +46,7 @@
                     </form>
                     <div class="table-responsive">
                         <h5>Nama Kegiatan : {{ $jadwal->kegiatan->nama_kegiatan }}</h5>
-                        <h5>Tanggal Kegiatan : {{ explodeDate($jadwal->kegiatan->tanggal_kegiatan) }}</h5>
+                        <h5>Tanggal Kegiatan : {{ from_to_date($jadwal->kegiatan->tanggal_kegiatan,$jadwal->kegiatan->sampai_tanggal_kegiatan) }}</h5>
                         <h5>Lokasi Kegiatan : {{ $jadwal->kegiatan->lokasi_kegiatan }}</h5>
                         <h5>Jadwal : {{ $jadwal->nama_jadwal }}</h5>
                         <table class="table table-hover dashboard-task-infos absen" id="table">

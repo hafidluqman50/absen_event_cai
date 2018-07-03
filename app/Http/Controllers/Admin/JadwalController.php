@@ -69,7 +69,7 @@ class JadwalController extends Controller
                     ->select('anggota.*','kelompok.nama_kelompok')
                     ->get();
         $absen = new Absen;
-        Excel::create('Laporan Kegiatan '.ucwords($ket).' '.$kegiatan->nama_kegiatan.' '.explodeDate($kegiatan->tanggal_kegiatan).' '.$kegiatan->nama_jadwal,function($excel)use($kegiatan,$jadwal,$absen,$ket,$peserta){
+        Excel::create('Laporan Kegiatan '.ucwords($ket).' '.$kegiatan->nama_kegiatan.' '.from_to_date($kegiatan->tanggal_kegiatan,$kegiatan->sampai_tanggal_kegiatan).' '.$kegiatan->nama_jadwal,function($excel)use($kegiatan,$jadwal,$absen,$ket,$peserta){
             $excel->sheet('Laporan',function($sheet)use($kegiatan,$jadwal,$absen,$ket){
                 $sheet->setCellValue('A1','Laporan Kegiatan '.$kegiatan->nama_kegiatan.' '.explodeDate($kegiatan->tanggal_kegiatan));
                 $sheet->mergeCells('A1:G1');
@@ -247,7 +247,7 @@ class JadwalController extends Controller
                     ->select('anggota.*','kelompok.nama_kelompok')
                     ->get();
         $absen    = new Absen;
-        Excel::create('Laporan Kegiatan '.$kegiatan->nama_kegiatan.'-'.explodeDate($kegiatan->tanggal_kegiatan).'-Semua-'.ucwords($ket),function($excel)use($kegiatan,$jadwal,$absen,$ket,$peserta){
+        Excel::create('Laporan Kegiatan '.$kegiatan->nama_kegiatan.'-'.from_to_date($kegiatan->tanggal_kegiatan,$kegiatan->sampai_tanggal_kegiatan).'-Semua-'.ucwords($ket),function($excel)use($kegiatan,$jadwal,$absen,$ket,$peserta){
             $excel->sheet('Laporan',function($sheet)use($kegiatan,$jadwal,$absen,$ket){
                 $sheet->setCellValue('A1','Laporan Kegiatan '.$kegiatan->nama_kegiatan.' '.explodeDate($kegiatan->tanggal_kegiatan));
                 $sheet->mergeCells('A1:G1');

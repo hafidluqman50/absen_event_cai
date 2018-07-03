@@ -43,11 +43,13 @@ class KegiatanController extends Controller
     public function save(Request $request) {
         $nama_kegiatan = $request->nama_kegiatan;
         $tanggal_kegiatan = $request->tanggal_kegiatan;
+        $sampai_tanggal_kegiatan = $request->sampai_tanggal_kegiatan;
         $lokasi_kegiatan = $request->lokasi_kegiatan;
         $id_kegiatan = $request->id_kegiatan;
         $array = [
             'nama_kegiatan' => $nama_kegiatan,
             'tanggal_kegiatan' => $tanggal_kegiatan,
+            'sampai_tanggal_kegiatan' => $sampai_tanggal_kegiatan,
             'lokasi_kegiatan' => $lokasi_kegiatan,
             'status_kegiatan' => 0
         ];
@@ -185,44 +187,76 @@ class KegiatanController extends Controller
                     ->join('kegiatan','kegiatan_detail.id_kegiatan','=','kegiatan.id_kegiatan')
                     ->select('anggota.*','kegiatan_detail.*','kegiatan.*','kelompok.nama_kelompok')
                     ->where('kegiatan.id_kegiatan',$id)
+                    ->orderBy('id_detail','desc')
                     ->get();
             $barcode = new KegiatanDetail;
             return view('bet-all',compact('get','barcode'));
         }
     }
-
-    public function cetakBetPdf($id,$id_detail) {
-        $get = DB::table('kegiatan_detail')
-                ->join('anggota','kegiatan_detail.id_anggota','=','anggota.id_anggota')
+    
+    public function cetakBarcode($id,$id_detail) {
+    	$get = DB::table('kegiatan_detail')
+    			->join('anggota','kegiatan_detail.id_anggota','=','anggota.id_anggota')
                 ->join('kegiatan','kegiatan_detail.id_kegiatan','=','kegiatan.id_kegiatan')
-                ->select('anggota.*','kegiatan_detail.*','kegiatan.*')
-                ->where('kegiatan_detail.id_kegiatan',$id)
-                ->where('id_detail',$id_detail)
-                ->first();
-        $barcode = new BarcodeGenerator();
-        $barcode->setText($get->code_barcode);
-        $barcode->setType(BarcodeGenerator::Code128);
-        $barcode->setScale(1);
-        $barcode->setThickness(25);
-        $barcode->setFontSize(10);
-        $code = $barcode->generate();
-        PDF::loadView('bet',compact('get','code'))->download('bet-'.str_slug($get->nama_anggota,'-').'.pdf');
+    			->select('anggota.nama_anggota','kegiatan_detail.code_barcode','kegiatan.nama_kegiatan','kegiatan.tanggal_kegiatan','kegiatan.sampai_tanggal_kegiatan')
+    			->where('kegiatan_detail.id_kegiatan',$id)
+    			->where('id_detail',$id_detail)
+    			->first();
+    	$code = KegiatanDetail::code($get->code_barcode);
+    	return view('barcode',compact('get','code'));
     }
-
-    public function cetakBetPdfAll($id) {
+    
+    public function cetakBarcodeAll($id) {
+        // Artisan::call('config:cache');
+        // Artisan::call('view:cache');
+        // Artisan::call('clear:data');
         if (KegiatanDetail::where('id_kegiatan',$id)->count() == 0) {
-            return redirect('/admin/kegiatan/'.$id.'/peserta')->with('log','Maaf Peserta Tidak Ada');
+            return redirect('/petugas/kegiatan/'.$id.'/peserta')->with('log','Maaf Peserta Tidak Ada');
         }
         else {
-            $get = DB::table('kegiatan_detail')
-                    ->join('anggota','kegiatan_detail.id_anggota','=','anggota.id_anggota')
-                    ->join('kegiatan','kegiatan_detail.id_kegiatan','=','kegiatan.id_kegiatan')
-                    ->select('anggota.*','kegiatan_detail.*','kegiatan.*')
-                    ->where('kegiatan.id_kegiatan',$id)
-                    ->get();
             $kegiatan = Kegiatan::where('id_kegiatan',$id)->firstOrFail();
+            $get = KegiatanDetail::show($id);
+            $hitung = ceil($get->count()/48);
+            // dd($hitung);
+            $data = $get->toArray();
+            // dd($data[0]->nama_kegiatan);
             $barcode = new KegiatanDetail;
-        PDF::loadView('bet-all',compact('get','barcode'))->download('Bet Kegiatan '.$kegiatan->nama_kegiatan.' '.explodeDate($kegiatan->tanggal_kegiatan).'.pdf');
+            return view('barcode-all',compact('get','barcode','hitung','data','kegiatan','id'));
         }
     }
+
+    // public function cetakBetPdf($id,$id_detail) {
+    //     $get = DB::table('kegiatan_detail')
+    //             ->join('anggota','kegiatan_detail.id_anggota','=','anggota.id_anggota')
+    //             ->join('kegiatan','kegiatan_detail.id_kegiatan','=','kegiatan.id_kegiatan')
+    //             ->select('anggota.*','kegiatan_detail.*','kegiatan.*')
+    //             ->where('kegiatan_detail.id_kegiatan',$id)
+    //             ->where('id_detail',$id_detail)
+    //             ->first();
+    //     $barcode = new BarcodeGenerator();
+    //     $barcode->setText($get->code_barcode);
+    //     $barcode->setType(BarcodeGenerator::Code128);
+    //     $barcode->setScale(1);
+    //     $barcode->setThickness(25);
+    //     $barcode->setFontSize(10);
+    //     $code = $barcode->generate();
+    //     PDF::loadView('bet',compact('get','code'))->download('bet-'.str_slug($get->nama_anggota,'-').'.pdf');
+    // }
+
+    // public function cetakBetPdfAll($id) {
+    //     if (KegiatanDetail::where('id_kegiatan',$id)->count() == 0) {
+    //         return redirect('/admin/kegiatan/'.$id.'/peserta')->with('log','Maaf Peserta Tidak Ada');
+    //     }
+    //     else {
+    //         $get = DB::table('kegiatan_detail')
+    //                 ->join('anggota','kegiatan_detail.id_anggota','=','anggota.id_anggota')
+    //                 ->join('kegiatan','kegiatan_detail.id_kegiatan','=','kegiatan.id_kegiatan')
+    //                 ->select('anggota.*','kegiatan_detail.*','kegiatan.*')
+    //                 ->where('kegiatan.id_kegiatan',$id)
+    //                 ->get();
+    //         $kegiatan = Kegiatan::where('id_kegiatan',$id)->firstOrFail();
+    //         $barcode = new KegiatanDetail;
+    //     PDF::loadView('bet-all',compact('get','barcode'))->download('Bet Kegiatan '.$kegiatan->nama_kegiatan.' '.explodeDate($kegiatan->tanggal_kegiatan).'.pdf');
+    //     }
+    // }
 }

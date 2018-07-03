@@ -35,6 +35,12 @@
                 			</div>
                 		</div>
                 		<div class="form-group form-float">
+                			<label class="form-label" for="">Sampai Tanggal Kegiatan</label>
+                			<div class="form-line">
+                				<input type="date" name="sampai_tanggal_kegiatan" class="form-control" required="required" value="{{ isset($row) ? $row->sampai_tanggal_kegiatan : '' }}">
+                			</div>
+                		</div>
+                		<div class="form-group form-float">
                 			<div class="form-line">
                 				<textarea name="lokasi_kegiatan" id="" cols="30" rows="10" class="form-control">{{ isset($row) ? $row->lokasi_kegiatan : '' }}</textarea>
             					<label class="form-label" for="">Lokasi Kegiatan</label>

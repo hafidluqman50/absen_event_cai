@@ -25,7 +25,7 @@
                     </div>
                     @endif
                     <h5>Nama Kegiatan : {{ $kegiatan->nama_kegiatan }}</h5>
-                    <h5>Tanggal Kegiatan : {{ explodeDate($kegiatan->tanggal_kegiatan) }}</h5>
+                    <h5>Tanggal Kegiatan : {{ from_to_date($kegiatan->tanggal_kegiatan,$kegiatan->sampai_tanggal_kegiatan) }}</h5>
                     <h5>Lokasi Kegiatan : {{ $kegiatan->lokasi_kegiatan }}</h5>
                     <div class="btn-group mg" role="button">
                         <a href="{{ url('/petugas/kegiatan/'.$id.'/jadwal/peserta/cetak-semua-excel') }}" title="Cetak" class="btn btn-info waves-effect btn-lg" target="_blank"><b>

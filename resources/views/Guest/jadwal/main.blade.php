@@ -17,7 +17,7 @@
                 </div>
                 <div class="body">
                     <h5>Nama Kegiatan : {{ $kegiatan->nama_kegiatan }}</h5>
-                    <h5>Tanggal Kegiatan : {{ explodeDate($kegiatan->tanggal_kegiatan) }}</h5>
+                    <h5>Tanggal Kegiatan : {{ from_to_date($kegiatan->tanggal_kegiatan,$kegiatan->sampai_tanggal_kegiatan) }}</h5>
                     <h5>Lokasi Kegiatan : {{ $kegiatan->lokasi_kegiatan }}</h5>
                     <div class="table-responsive">
                         <table class="table table-hover dashboard-task-infos jadwal" id="table">

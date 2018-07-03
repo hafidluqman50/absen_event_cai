@@ -143,6 +143,9 @@ class AjaxController extends Controller
         })
         ->editColumn('tanggal_kegiatan',function($edit){
             return explodeDate($edit->tanggal_kegiatan);
+        })
+        ->editColumn('sampai_tanggal_kegiatan',function($edit){
+            return explodeDate($edit->sampai_tanggal_kegiatan);
         })->make(true);
     }
 
@@ -165,6 +168,9 @@ class AjaxController extends Controller
                         </div>
                         <div class="btn-group" role="button">
                             <a href="'.url("/$level/kegiatan/$action->id_kegiatan/peserta/$action->id_detail/cetak-bet").'" class="btn btn-info waves-effect" target="_blank"><b>Cetak Bet</b></a>
+                        </div>
+                        <div class="btn-group" role="button">
+                            <a href="'.url("/$level/kegiatan/$action->id_kegiatan/peserta/$action->id_detail/cetak-barcode").'" class="btn bg-black waves-effect" target="_blank"><b>Cetak Barcode</b></a>
                         </div>';
                         // <div class="btn-group" role="button">
                         //     <a href="'.url("/$level/kegiatan/$action->id_kegiatan/peserta/$action->id_detail/download-bet").'" class="btn btn-danger waves-effect" target="_blank"><b>Download Bet</b></a>

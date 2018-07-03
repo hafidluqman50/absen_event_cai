@@ -61,7 +61,7 @@
             <div class="text-center" style="margin-left: 135pt;margin-top: -84pt;">
                 <p class="judul">PERMATA XXXIX</p>
                 <p class="ket">{{ $get->nama_kegiatan }}</p>
-                <p class="thn">{{ year($get->tanggal_kegiatan) }}</p>
+                <p class="thn">{{ from_to_date($get->tanggal_kegiatan,$get->sampai_tanggal_kegiatan) }}</p>
             </div>
         </div>
         <div class="col-md-12 text-center" style="left:5rem; top:1.9rem">

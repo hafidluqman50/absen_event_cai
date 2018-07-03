@@ -29,11 +29,16 @@
                     @endif
                     <div class="table-responsive">
                         <h5>Nama Kegiatan : {{ $kegiatan->nama_kegiatan }}</h5>
-                        <h5>Tanggal Kegiatan : {{ explodeDate($kegiatan->tanggal_kegiatan) }}</h5>
+                        <h5>Tanggal Kegiatan : {{ from_to_date($kegiatan->tanggal_kegiatan,$kegiatan->sampai_tanggal_kegiatan) }}</h5>
                         <h5>Lokasi Kegiatan : {{ $kegiatan->lokasi_kegiatan }}</h5>
                         <div class="btn-group mg">
                             <a href="{{ url('/petugas/kegiatan/'.$id.'/peserta/cetak-semua-bet') }}" class="btn btn-primary btn-lg waves-effect" target="_blank">
                                 <b>Cetak Semua Bet</b>
+                            </a>
+                        </div>
+                        <div class="btn-group mg">
+                            <a href="{{ url('/petugas/kegiatan/'.$id.'/peserta/cetak-semua-barcode') }}" class="btn btn-lg bg-black waves-effect" target="_blank">
+                                <b>Cetak Semua Barcode</b>
                             </a>
                         </div>
                         <table class="table table-hover dashboard-task-infos peserta" id="table">
