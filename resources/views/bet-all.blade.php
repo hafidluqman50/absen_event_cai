@@ -16,7 +16,6 @@
     @page { size: legal }
     
     @media print { 
-
     }
     .label{
         /* Avery 5160 labels -- CSS and HTML by MM at Boulder Information Services */
@@ -62,11 +61,45 @@
     </div> --}}
 
     <div class="label bgpeserta" style="">
-        <div class="col-md-12 row" style="top:1rem; left:0.7rem">
+
+        {{-- <div class="col-md-12 row" style="top:1rem; left:0.7rem">
             <div class="col-md-3 text-center">
-                <img class="img" src="{{ asset('frontend/images/cai.png') }}" alt="" width="220%">
+                <img class="img pasdiprint" src="{{ asset('frontend/images/cai.png') }}" alt="" width="160pt">
             </div>
-            <div class="col-md-9 text-center" style="left:3rem; margin-top:0.5rem">
+            <div class="col-md-9 text-center" style="left:28pt; margin-top:4pt">
+                <p class="judul">PERMATA XXXIX</p>
+                <p class="ket">CINTA ALAM INDONESIA</p>
+                <p class="thn">2018</p>
+            </div>
+        </div> --}}
+        <div></div>
+            <div class="text-center" style="margin-left:-180pt;margin-top:5pt;">
+                <img class="img" src="{{ asset('frontend/images/cai.png') }}" alt="" width="160pt">
+            </div>
+            <div class="text-center" style="margin-left: 135pt;margin-top: -84pt;">
+                <p class="judul">PERMATA XXXIX</p>
+                <p class="ket">CINTA ALAM INDONESIA</p>
+                <p class="thn">2018</p>
+            </div>
+        <div class="col-md-12 text-center" style="left:5.5rem; top:1.9rem">
+            <div class="kotak text-center">
+                <label class="status">Peserta</label>
+            </div>
+        </div>
+        <br>
+        <div class="col-md-12 text-center" style="top:2rem">
+            <label class="inp   ">Khoirulli Nurul Fatimah</label>
+            <label class="inp-kel">Sambutan</label>
+            <label class="inp-bar">2941533150001</label>
+        </div>
+    </div>
+
+    <div class="label bgpeserta" style="">
+        <div>
+            <div class="text-center" style="margin-left:-180pt;margin-top:5pt;">
+                <img class="img" src="{{ asset('frontend/images/cai.png') }}" alt="" width="160pt">
+            </div>
+            <div class="text-center" style="margin-left: 135pt;margin-top: -84pt;">
                 <p class="judul">PERMATA XXXIX</p>
                 <p class="ket">CINTA ALAM INDONESIA</p>
                 <p class="thn">2018</p>
@@ -86,11 +119,11 @@
     </div>
 
     <div class="label bgpeserta" style="">
-        <div class="col-md-12 row" style="top:1rem; left:0.7rem">
-            <div class="col-md-3 text-center">
-                <img class="img" src="{{ asset('frontend/images/cai.png') }}" alt="" width="220%">
+        <div>
+            <div class="text-center" style="margin-left:-180pt;margin-top:5pt;">
+                <img class="img" src="{{ asset('frontend/images/cai.png') }}" alt="" width="160pt">
             </div>
-            <div class="col-md-9 text-center" style="left:3rem; margin-top:0.5rem">
+            <div class="text-center" style="margin-left: 135pt;margin-top: -84pt;">
                 <p class="judul">PERMATA XXXIX</p>
                 <p class="ket">CINTA ALAM INDONESIA</p>
                 <p class="thn">2018</p>
@@ -110,11 +143,11 @@
     </div>
 
     <div class="label bgpeserta" style="">
-        <div class="col-md-12 row" style="top:1rem; left:0.7rem">
-            <div class="col-md-3 text-center">
-                <img class="img" src="{{ asset('frontend/images/cai.png') }}" alt="" width="220%">
+        <div>
+            <div class="text-center" style="margin-left:-180pt;margin-top:5pt;">
+                <img class="img" src="{{ asset('frontend/images/cai.png') }}" alt="" width="160pt">
             </div>
-            <div class="col-md-9 text-center" style="left:3rem; margin-top:0.5rem">
+            <div class="text-center" style="margin-left: 135pt;margin-top: -84pt;">
                 <p class="judul">PERMATA XXXIX</p>
                 <p class="ket">CINTA ALAM INDONESIA</p>
                 <p class="thn">2018</p>
@@ -134,59 +167,11 @@
     </div>
 
     <div class="label bgpeserta" style="">
-        <div class="col-md-12 row" style="top:1rem; left:0.7rem">
-            <div class="col-md-3 text-center">
-                <img class="img" src="{{ asset('frontend/images/cai.png') }}" alt="" width="220%">
+        <div>
+            <div class="text-center" style="margin-left:-180pt;margin-top:5pt;">
+                <img class="img" src="{{ asset('frontend/images/cai.png') }}" alt="" width="160pt">
             </div>
-            <div class="col-md-9 text-center" style="left:3rem; margin-top:0.5rem">
-                <p class="judul">PERMATA XXXIX</p>
-                <p class="ket">CINTA ALAM INDONESIA</p>
-                <p class="thn">2018</p>
-            </div>
-        </div>
-        <div class="col-md-12 text-center" style="left:5.5rem; top:1.9rem">
-            <div class="kotak text-center">
-                <label class="status">Peserta</label>
-            </div>
-        </div>
-        <br>
-        <div class="col-md-12 text-center" style="top:2rem">
-            <label class="inp   ">Khoirulli Nurul Fatimah</label>
-            <label class="inp-kel">Sambutan</label>
-            <label class="inp-bar">2941533150001</label>
-        </div>
-    </div>
-
-    <div class="label bgpeserta" style="">
-        <div class="col-md-12 row" style="top:1rem; left:0.7rem">
-            <div class="col-md-3 text-center">
-                <img class="img" src="{{ asset('frontend/images/cai.png') }}" alt="" width="220%">
-            </div>
-            <div class="col-md-9 text-center" style="left:3rem; margin-top:0.5rem">
-                <p class="judul">PERMATA XXXIX</p>
-                <p class="ket">CINTA ALAM INDONESIA</p>
-                <p class="thn">2018</p>
-            </div>
-        </div>
-        <div class="col-md-12 text-center" style="left:5.5rem; top:1.9rem">
-            <div class="kotak text-center">
-                <label class="status">Peserta</label>
-            </div>
-        </div>
-        <br>
-        <div class="col-md-12 text-center" style="top:2rem">
-            <label class="inp   ">Khoirulli Nurul Fatimah</label>
-            <label class="inp-kel">Sambutan</label>
-            <label class="inp-bar">2941533150001</label>
-        </div>
-    </div>
-
-    <div class="label bgpeserta" style="">
-        <div class="col-md-12 row" style="top:1rem; left:0.7rem">
-            <div class="col-md-3 text-center">
-                <img class="img" src="{{ asset('frontend/images/cai.png') }}" alt="" width="220%">
-            </div>
-            <div class="col-md-9 text-center" style="left:3rem; margin-top:0.5rem">
+            <div class="text-center" style="margin-left: 135pt;margin-top: -84pt;">
                 <p class="judul">PERMATA XXXIX</p>
                 <p class="ket">CINTA ALAM INDONESIA</p>
                 <p class="thn">2018</p>
