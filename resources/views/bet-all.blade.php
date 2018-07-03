@@ -110,7 +110,7 @@
                 <p class="thn">{{ year($value->tanggal_kegiatan) }}</p>
             </div>
         </div>
-        <div class="col-md-12 text-center" style="left:5.5rem; top:1.9rem">
+        <div class="col-md-12 text-center" style="left:5rem; top:1.9rem">
             <div class="kotak text-center">
                 <label class="status">{{ $value->ket=='panitia'?'Panitia':'Peserta' }}</label>
             </div>
