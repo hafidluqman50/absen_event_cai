@@ -33,7 +33,7 @@
         }
       .page-break {
         clear: both;
-        display:block;
+        /*display:block;*/
         page-break-after:always;
         }
       .text-nama {
@@ -60,7 +60,7 @@
         <span class="text-nama">hm</span>
     </div> --}}
 
-    <div class="label bgpeserta" style="">
+    {{-- <div class="label bgpeserta" style=""> --}}
 
         {{-- <div class="col-md-12 row" style="top:1rem; left:0.7rem">
             <div class="col-md-3 text-center">
@@ -72,7 +72,7 @@
                 <p class="thn">2018</p>
             </div>
         </div> --}}
-        <div></div>
+        {{-- <div></div>
             <div class="text-center" style="margin-left:-180pt;margin-top:5pt;">
                 <img class="img" src="{{ asset('frontend/images/cai.png') }}" alt="" width="160pt">
             </div>
@@ -92,9 +92,40 @@
             <label class="inp-kel">Sambutan</label>
             <label class="inp-bar">2941533150001</label>
         </div>
-    </div>
+    </div> --}}
 
-    <div class="label bgpeserta" style="">
+    @foreach($get as $key => $value)
+    @php
+    $num = $key+1
+    @endphp
+    <div class="label {{ $value->ket=='panitia'?'bgpanitia':'bgpeserta' }}" style="">
+        <div>
+            <div class="text-center" style="margin-left:-180pt;margin-top:5pt;">
+                <img class="img" src="{{ asset('frontend/images/cai.png') }}" alt="" width="160pt">
+            </div>
+            <div class="text-center" style="margin-left: 135pt;margin-top: -84pt;">
+                <p class="judul">PERMATA XXXIX</p>
+                <p class="ket">{{ $value->nama_kegiatan }}</p>
+                <p class="thn">{{ year($value->tanggal_kegiatan) }}</p>
+            </div>
+        </div>
+        <div class="col-md-12 text-center" style="left:5.5rem; top:1.9rem">
+            <div class="kotak text-center">
+                <label class="status">{{ $value->ket=='panitia'?'Panitia':'Peserta' }}</label>
+            </div>
+        </div>
+        <br>
+        <div class="col-md-12 text-center" style="top:2rem">
+            <label class="inp">{{ $value->nama_anggota }}</label>
+            <label class="inp-kel">{{ $value->desa }}</label>
+            <label class="inp-bar"><img src="data:image/png;base64,{{$barcode->barcode($value->code_barcode)}}" alt=""></label>
+        </div>
+    </div>
+    @if($num%4==0)
+    <div class="page-break"></div>
+    @endif
+    @endforeach
+    {{-- <div class="label bgpeserta" style="">
         <div>
             <div class="text-center" style="margin-left:-180pt;margin-top:5pt;">
                 <img class="img" src="{{ asset('frontend/images/cai.png') }}" alt="" width="160pt">
@@ -164,31 +195,7 @@
             <label class="inp-kel">Sambutan</label>
             <label class="inp-bar">2941533150001</label>
         </div>
-    </div>
-
-    <div class="label bgpeserta" style="">
-        <div>
-            <div class="text-center" style="margin-left:-180pt;margin-top:5pt;">
-                <img class="img" src="{{ asset('frontend/images/cai.png') }}" alt="" width="160pt">
-            </div>
-            <div class="text-center" style="margin-left: 135pt;margin-top: -84pt;">
-                <p class="judul">PERMATA XXXIX</p>
-                <p class="ket">CINTA ALAM INDONESIA</p>
-                <p class="thn">2018</p>
-            </div>
-        </div>
-        <div class="col-md-12 text-center" style="left:5.5rem; top:1.9rem">
-            <div class="kotak text-center">
-                <label class="status">Peserta</label>
-            </div>
-        </div>
-        <br>
-        <div class="col-md-12 text-center" style="top:2rem">
-            <label class="inp   ">Khoirulli Nurul Fatimah</label>
-            <label class="inp-kel">Sambutan</label>
-            <label class="inp-bar">2941533150001</label>
-        </div>
-    </div>
+    </div> --}}
 </section>
 </body>
 </html>
