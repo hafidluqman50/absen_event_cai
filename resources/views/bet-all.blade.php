@@ -35,6 +35,7 @@
         clear: both;
         /*display:block;*/
         page-break-after:always;
+        /* margin-bottom:105pt; */
         }
       .text-nama {
         font-family: 'Share Tech Mono';
@@ -98,7 +99,7 @@
     @php
     $num = $key+1
     @endphp
-    <div class="label {{ $value->ket=='panitia'?'bgpanitia':'bgpeserta' }}" style="">
+    <div class="label {{ $value->ket=='panitia'?'bgpanitia':'bgpeserta' }}" style="margin-top:40pt">
         <div>
             <div class="text-center" style="margin-left:-180pt;margin-top:5pt;">
                 <img class="img" src="{{ asset('frontend/images/cai.png') }}" alt="" width="160pt">
