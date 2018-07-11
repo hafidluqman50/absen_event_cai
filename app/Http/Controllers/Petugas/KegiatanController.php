@@ -117,37 +117,45 @@ class KegiatanController extends Controller
     }
 
     public function savePeserta(Request $request) {
-    	$code = 294153315;
-        $peserta     = $request->peserta;
-        $keterangan  = $request->keterangan;
-        $id_kegiatan = $request->id_kegiatan;
-        $id_detail   = $request->id_detail;
+        $code           = 294153315;
+        $peserta        = $request->peserta;
+        // dd($peserta);
+        $keterangan     = $request->keterangan;
+        $id_kegiatan    = $request->id_kegiatan;
+        $id_detail      = $request->id_detail;
         $kegiatanDetail = new KegiatanDetail;
-        $count = $kegiatanDetail->where('id_kegiatan',$id_kegiatan)->where('id_anggota',$peserta)->count();
+        $count = $kegiatanDetail->where('id_kegiatan',$id_kegiatan)->whereIn('id_anggota',$peserta)->count();
         if ($count != 0) {
             return redirect('/petugas/kegiatan/'.$id_kegiatan.'/peserta')->with('log','Maaf Data Sudah Ada');
         }
         else {
-            $number = $kegiatanDetail->where('id_kegiatan',$id_kegiatan)->count();
-            if ($number <= 9999) {
-                $number++;
+            foreach ($peserta as $key => $value) {
+                $count = $kegiatanDetail->where('id_kegiatan',$id_kegiatan)->count();
+                if ($count == 0) {
+                    $number = $count+1;
+                }
+                else {
+                    $first = $kegiatanDetail->where('id_kegiatan',$id_kegiatan)->orderBy('code_barcode','desc')->firstOrFail();
+                    $get = (int)substr($first->code_barcode,-4,4);
+                    $number = $get+1;
+                }
                 $str = str_pad($number,4,'0000',STR_PAD_LEFT);
-            }
-            $barcode = $request->code != '' ? $request->code : $code.$str;
-            $array = [
-                'code_barcode' => $barcode,
-                'id_anggota' => $peserta,
-                'id_kegiatan' => $id_kegiatan,
-                'id_users' => Auth::id(),
-                'ket' => strtolower($keterangan)
-            ];
-            if ($id_detail == '') {
-                KegiatanDetail::create($array);
-                $message = 'Berhasil Input Peserta';
-            }
-            else {
-                KegiatanDetail::where('id_detail',$id_detail)->update($array);
-                $message = 'Berhasil Update Peserta';
+                $barcode = $request->code != '' ? $request->code : $code.$str;
+                $array = [
+                    'code_barcode' => $barcode,
+                    'id_anggota'   => $peserta[$key],
+                    'id_kegiatan'  => $id_kegiatan,
+                    'id_users'     => Auth::id(),
+                    'ket'          => strtolower($keterangan)
+                ];
+                if ($id_detail == '') {
+                    KegiatanDetail::create($array);
+                    $message = 'Berhasil Input Peserta';
+                }
+                else {
+                    KegiatanDetail::where('id_detail',$id_detail)->update($array);
+                    $message = 'Berhasil Update Peserta';
+                }
             }
             return redirect('/petugas/kegiatan/'.$id_kegiatan.'/peserta')->with('message',$message);
         }
@@ -245,7 +253,7 @@ class KegiatanController extends Controller
 
     // public function cetakBetPdfAll($id) {
     //     if (KegiatanDetail::where('id_kegiatan',$id)->count() == 0) {
-    //         return redirect('/admin/kegiatan/'.$id.'/peserta')->with('log','Maaf Peserta Tidak Ada');
+    //         return redirect('/petugas/kegiatan/'.$id.'/peserta')->with('log','Maaf Peserta Tidak Ada');
     //     }
     //     else {
     //         $get = DB::table('kegiatan_detail')

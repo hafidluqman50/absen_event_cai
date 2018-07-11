@@ -32,7 +32,7 @@
                         <h5>Tanggal Kegiatan : {{ from_to_date($kegiatan->tanggal_kegiatan,$kegiatan->sampai_tanggal_kegiatan) }}</h5>
                         <h5>Lokasi Kegiatan : {{ $kegiatan->lokasi_kegiatan }}</h5>
                         <div class="btn-group mg">
-                            <a href="{{ url('/admin/kegiatan/'.$id.'/peserta/cetak-semua-bet') }}" class="btn btn-primary btn-lg waves-effect" target="_blank">
+                            <a href="{{ url('/admin/kegiatan/'.$id.'/peserta/cetak-semua-bet') }}" class="btn btn-lg btn-primary waves-effect" target="_blank">
                                 <b>Cetak Semua Bet</b>
                             </a>
                         </div>
@@ -40,12 +40,22 @@
                             <a href="{{ url('/admin/kegiatan/'.$id.'/peserta/cetak-semua-barcode') }}" class="btn btn-lg bg-black waves-effect" target="_blank">
                                 <b>Cetak Semua Barcode</b>
                             </a>
-                        </div>{{-- 
+                        </div>
+                        {{-- 
                         <div class="btn-group mg">
                             <a href="{{ url('/admin/kegiatan/'.$id.'/peserta/download-semua-bet') }}" class="btn btn-danger btn-lg waves-effect" target="_blank">
                                 <b>Download Semua Bet</b>
                             </a>
-                        </div> --}}
+                        </div> --}}{{-- 
+                        <form action="{{ url('/admin/kegiatan/'.$id.'/peserta/cetak-bet') }}" method="POST">
+                            @csrf --}}{{-- 
+                        <div class="btn-group mg">
+                            <button type="submit" class="btn btn-primary btn-lg waves-effect">
+                                <b>Cetak Bet</b>
+                            </button>
+                        </div> --}}{{-- 
+                            <input type="checkbox" id="checklist" class="filled-in">
+                            <label for="checklist">Centang Semua</label> --}}
                         <table class="table table-hover dashboard-task-infos peserta" id="table">
                             <thead>
                                 <tr>
@@ -59,12 +69,14 @@
                                     <th>Ket.</th>
                                     <th>Input By</th>
                                     <th>#</th>
+                                    {{-- <th>Cetak Bet</th> --}}
                                 </tr>
                             </thead>
                             <tbody>
 
                             </tbody>
                         </table>
+                        {{-- </form> --}}
                     </div>
                 </div>
             </div>
@@ -93,7 +105,8 @@
                 {data:'alamat',name:'alamat'},
                 {data:'ket',name:'ket'},
                 {data:'name',name:'name'},
-                {data:'action',name:'action',searchable:false,orderable:false}
+                {data:'action',name:'action',searchable:false,orderable:false},
+                // {data:'cetak_bet',name:'cetak_bet',searchable:false,orderable:false}
             ],
             scrollCollapse: true,
             columnDefs: [ {
@@ -109,6 +122,15 @@
         cell.innerHTML = i+1;
         });
         }).draw();
+
+        $('#checklist').click(function(){
+            if ($(this).is(':checked')) {
+                $('input[type="checkbox"][name="cetak_bet[]"]').attr('checked','checked');
+            }
+            else {
+                $('input[type="checkbox"][name="cetak_bet[]"]').removeAttr('checked');   
+            }
+        });
     });
 </script>
 @endsection

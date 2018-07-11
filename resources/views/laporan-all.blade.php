@@ -14,9 +14,14 @@
 	</style>
 </head>
 <body>
-	<h2 align="center"><b>Laporan Kegiatan {{ $kegiatan->nama_kegiatan }} Tanggal {{ explodeDate($kegiatan->tanggal_kegiatan) }}</b></h2>
+	<h2 align="center"><b>Laporan Kegiatan {{ $kegiatan->nama_kegiatan }}
+	<br>Tanggal {{ from_to_date($kegiatan->tanggal_kegiatan,$kegiatan->sampai_tanggal_kegiatan) }}</b></h2>
+	<br>
 	@foreach($jadwal as $value)
-		<h4 align="center"><b>{{ $value->nama_jadwal }} Hari {{ $value->hari }}</b></h4>
+		<h4 align="center">
+		    <b>{{ $value->nama_jadwal }}<br> 
+		    Hari {{ $value->hari }}</b>
+		</h4>
 		<table class="table table-bordered">
 			<thead>
 				<tr align="center">

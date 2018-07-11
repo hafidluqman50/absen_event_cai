@@ -24,7 +24,8 @@ class ApiController extends Controller
         				->get();
         	$kegiatan = [
         		'nama_kegiatan' => 'ABSENSI KEGIATAN '.$get->firstOrFail()->nama_kegiatan,
-        		'tanggal_kegiatan' => explodeDate($get->firstOrFail()->tanggal_kegiatan)
+        		'tanggal_kegiatan' => from_to_date($get->firstOrFail()->tanggal_kegiatan,$get->firstOrFail()->sampai_tanggal_kegiatan),
+        		'lokasi_kegiatan' => $get->firstOrFail()->lokasi_kegiatan
         	];
         	if(count($absens) > 0) {
             	foreach ($absens as $key => $value) {
@@ -35,7 +36,8 @@ class ApiController extends Controller
             				.'<td>'.$value->waktu_absen.'</td>'
             				.'<td>'.$value->nama_jadwal.' '.$value->hari.' - '.$value->keterangan.'</td>'
             				.'<td>'.$value->ket_peserta.'</td>'
-            				.'<td><span class="badge badge-primary">'.$value->ket.'</span></td></tr>';
+            				.'<td><span class="badge badge-primary">'.$value->ket.'</span></td>'
+            				.'<td>'.$value->name.'</td></tr>';
             		$absen[] = $text;
             	}
         	}

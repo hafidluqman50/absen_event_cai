@@ -96,7 +96,7 @@ function from_to_date($date1,$date2) {
         $tanggal = $explode1[2].'-'.$explode2[2].' '.month($explode1[1]).' '.$explode1[0];
     }
     elseif($explode1[0] == $explode2[0]) {
-        $tanggal = $explode1[2].' '.month($explode1[1]).' - '.$explode2[2].' '.month($exxplode2[1]).' '.$explode1[0];
+        $tanggal = $explode1[2].' '.month($explode1[1]).' - '.$explode2[2].' '.month($explode2[1]).' '.$explode1[0];
     }
     else {
         $tanggal = $explode1[2].' '.month($explode1[1]).' '.$explode1[0].' - '.$explode2[2].' '.month($explode2[1]).' '.$explode2[0];

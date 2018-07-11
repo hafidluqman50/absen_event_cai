@@ -119,22 +119,28 @@ class KegiatanController extends Controller
 
     public function savePeserta(Request $request) {
         $code           = 294153315;
-        $peserta        = $request->get('peserta');
+        $peserta        = $request->peserta;
+        // dd($peserta);
         $keterangan     = $request->keterangan;
         $id_kegiatan    = $request->id_kegiatan;
         $id_detail      = $request->id_detail;
         $kegiatanDetail = new KegiatanDetail;
-        $count = $kegiatanDetail->where('id_kegiatan',$id_kegiatan)->where('id_anggota',$peserta)->count();
+        $count = $kegiatanDetail->where('id_kegiatan',$id_kegiatan)->whereIn('id_anggota',$peserta)->count();
         if ($count != 0) {
             return redirect('/admin/kegiatan/'.$id_kegiatan.'/peserta')->with('log','Maaf Data Sudah Ada');
         }
         else {
             foreach ($peserta as $key => $value) {
-                $number = $kegiatanDetail->where('id_kegiatan',$id_kegiatan)->count();
-                if ($number <= 9999) {
-                    $number++;
-                    $str = str_pad($number,4,'0000',STR_PAD_LEFT);
+                $count = $kegiatanDetail->where('id_kegiatan',$id_kegiatan)->count();
+                if ($count == 0) {
+                    $number = $count+1;
                 }
+                else {
+                    $first = $kegiatanDetail->where('id_kegiatan',$id_kegiatan)->orderBy('code_barcode','desc')->firstOrFail();
+                    $get = (int)substr($first->code_barcode,-4,4);
+                    $number = $get+1;
+                }
+                $str = str_pad($number,4,'0000',STR_PAD_LEFT);
                 $barcode = $request->code != '' ? $request->code : $code.$str;
                 $array = [
                     'code_barcode' => $barcode,
@@ -165,20 +171,25 @@ class KegiatanController extends Controller
     			->where('kegiatan_detail.id_kegiatan',$id)
     			->where('id_detail',$id_detail)
     			->first();
-
-//      	$barcode = new BarcodeGenerator();
-// 		$barcode->setText($get->code_barcode);
-// 		$barcode->setType(BarcodeGenerator::Code39);
-// 		$barcode->setScale(1);
-// 		$barcode->setThickness(30);
-// 		$barcode->setFontSize(15);
-// 		$code = $barcode->generate();
         $code = KegiatanDetail::barcode($get->code_barcode);
-        // dd($code);
-// 		dd($code);
-        // $code = DNS1D::getBarcodePNG($get->code_barcode,'C39+',0.9,40,[0,0,0],true);
     	return view('bet',compact('get','code'));
     }
+
+    // public function cetakBet($id,Request $request) {
+    //     // dd($request->cetak_bet);
+    //     $get = DB::table('kegiatan_detail')
+    //          ->join('anggota','kegiatan_detail.id_anggota','=','anggota.id_anggota')
+    //          ->join('kelompok','anggota.id_kelompok','=','kelompok.id_kelompok')
+    //          ->join('kegiatan','kegiatan_detail.id_kegiatan','=','kegiatan.id_kegiatan')
+    //          ->select('anggota.*','kegiatan_detail.*','kegiatan.*','kelompok.nama_kelompok')
+    //          ->where('kegiatan_detail.id_kegiatan',$id)
+    //          ->whereIn('id_detail',$request->cetak_bet)
+    //          ->orderBy('id_detail','desc')
+    //          ->get();
+    //     // $code = KegiatanDetail::barcode($get->code_barcode);
+    //     $barcode = new KegiatanDetail;
+    //  return view('bet-all',compact('get','barcode'));
+    // }
 
     public function cetakBetAll($id) {
         // dd('sip');

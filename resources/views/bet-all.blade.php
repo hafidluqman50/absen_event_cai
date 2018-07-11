@@ -107,10 +107,10 @@
             <div class="text-center" style="margin-left: 135pt;margin-top: -84pt;">
                 <p class="judul">PERMATA XXXIX</p>
                 <p class="ket">{{ $value->nama_kegiatan }}</p>
-                <p class="thn">{{ from_to_date($value->tanggal_kegiatan,$value->sampai_tanggal_kegiatan) }}</p>
+                <p class="thn">{{ year($value->tanggal_kegiatan) }}</p>
             </div>
         </div>
-        <div class="col-md-12 text-center" style="left:5rem; top:1.9rem">
+        <div class="col-md-12 text-center" style="left:4.7rem; top:1.9rem">
             <div class="kotak text-center">
                 <label class="status">{{ $value->ket=='panitia'?'Panitia':'Peserta' }}</label>
             </div>

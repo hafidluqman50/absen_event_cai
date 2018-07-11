@@ -11,8 +11,10 @@
 	</style>
 </head>
 <body>
-	<h2 align="center"><b>Laporan Kegiatan {{ $kegiatan->nama_kegiatan }} Tanggal {{ explodeDate($kegiatan->tanggal_kegiatan) }}</b></h2>
-	<h4 align="center"><b>{{ $jadwal->nama_jadwal }} Hari {{ $jadwal->hari }}</b></h4>
+	<h2 align="center"><b>Laporan Kegiatan {{ $kegiatan->nama_kegiatan }}<br>
+	Tanggal {{ from_to_date($kegiatan->tanggal_kegiatan,$kegiatan->sampai_tanggal_kegiatan) }}</b></h2>
+	<br>
+	<h4 align="center"><b>{{ $jadwal->nama_jadwal }}<br>Hari {{ $jadwal->hari }}</b></h4>
 	<table class="table table-bordered">
 		<thead>
 			<tr align="center">

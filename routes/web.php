@@ -83,6 +83,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'isAdmin'], function () {
     Route::get('/kegiatan/{id}/peserta/cetak-semua-bet', ['as' => 'cetak-bet-semua-admin', 'uses' => 'Admin\KegiatanController@cetakBetAll']);
     Route::get('/kegiatan/{id}/peserta/{id_detail}/cetak-barcode', ['as' => 'cetak-barcode-admin', 'uses' => 'Admin\KegiatanController@cetakBarcode']);
     Route::get('/kegiatan/{id}/peserta/cetak-semua-barcode', ['as' => 'cetak-barcode-semua-admin', 'uses' => 'Admin\KegiatanController@cetakBarcodeAll']);
+    // Route::post('/kegiatan/{id}/peserta/cetak-bet',['as' => 'cetak-barcode-checkbox-admin', 'uses' => 'Admin\KegiatanController@cetakBet']);
     // Route::get('/kegiatan/{id}/peserta/{id_detail}/download-bet',['as' => 'download-bet-admin', 'uses' => 'Admin\KegiatanController@cetakBetPdf']);
     // Route::get('/kegiatan/{id}/peserta/download-semua-bet', ['as' => 'download-bet-semua-admin', 'uses' => 'Admin\KegiatanController@cetakBetPdfAll']);
 

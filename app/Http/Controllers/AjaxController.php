@@ -160,6 +160,9 @@ class AjaxController extends Controller
                     ->get();
         return Datatables::of($peserta)->addColumn('action',function($action){
             $level = Auth::user()->level==2?'admin':(Auth::user()->level==1?'petugas':'');
+            // $test = '<div class="btn-group" role="button">
+            //                 <a href="'.url("/$level/kegiatan/$action->id_kegiatan/peserta/$action->id_detail/cetak-bet").'" class="btn btn-info waves-effect" target="_blank"><b>Cetak Bet</b></a>
+            //             </div>';
             $button = '<div class="btn-group" role="group">
                             <a href="'.url("/$level/kegiatan/$action->id_kegiatan/peserta/$action->id_detail/edit").'" title="Edit" class="btn btn-warning waves-effect"><b>Edit</b></a>
                         </div>
@@ -177,6 +180,10 @@ class AjaxController extends Controller
                         // </div>
             return $button;
         })
+        ->addColumn('cetak_bet',function($cetak){
+            return '<input type="checkbox" name="cetak_bet[]" class="filled-in" id="cetak_bet'.$cetak->id_detail.'" value="'.$cetak->id_detail.'">
+                    <label for="cetak_bet'.$cetak->id_detail.'">Cetak Bet</label>';
+        })
         ->editColumn('tgl_lahir',function($edit){
             return explodeDate($edit->tgl_lahir);
         })
@@ -189,7 +196,7 @@ class AjaxController extends Controller
             }
             return $ket;
         })
-        ->rawColumns(['ket','action'])->make(true);
+        ->rawColumns(['ket','action','cetak_bet'])->make(true);
     }
 
     public function dataJadwal($id) {

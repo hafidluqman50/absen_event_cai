@@ -28,6 +28,10 @@ class isAuth
             }
             return redirect('/'.$user.'/dashboard');
         }
+        else {
+            Auth::check() ? Auth::logout : '';
+            // return redirect('login');
+        }
         return $next($request);
     }
 }

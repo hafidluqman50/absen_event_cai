@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 01, 2018 at 07:16 PM
+-- Generation Time: Jul 10, 2018 at 10:01 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 5.6.30
 
@@ -29,21 +29,14 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `absen` (
-  `id_absen` int(11) NOT NULL,
-  `id_detail` int(11) NOT NULL,
+  `id_absen` bigint(21) NOT NULL,
+  `id_detail` bigint(21) NOT NULL,
   `waktu_absen` datetime NOT NULL,
-  `id_jadwal` int(11) NOT NULL,
+  `id_jadwal` bigint(21) NOT NULL,
   `id_users` int(3) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `absen`
---
-
-INSERT INTO `absen` (`id_absen`, `id_detail`, `waktu_absen`, `id_jadwal`, `id_users`, `created_at`, `updated_at`) VALUES
-(2, 529, '2018-07-01 07:54:54', 1, 4, '2018-07-01 00:54:54', '2018-07-01 00:54:54');
 
 -- --------------------------------------------------------
 
@@ -52,9 +45,9 @@ INSERT INTO `absen` (`id_absen`, `id_detail`, `waktu_absen`, `id_jadwal`, `id_us
 --
 
 CREATE TABLE `anggota` (
-  `id_anggota` int(11) NOT NULL,
+  `id_anggota` bigint(21) NOT NULL,
   `nama_anggota` varchar(70) NOT NULL,
-  `id_kelompok` int(11) NOT NULL,
+  `id_kelompok` bigint(21) NOT NULL,
   `tgl_lahir` date DEFAULT NULL,
   `tempat_lahir` varchar(70) NOT NULL,
   `desa` varchar(50) NOT NULL,
@@ -78,7 +71,7 @@ INSERT INTO `anggota` (`id_anggota`, `nama_anggota`, `id_kelompok`, `tgl_lahir`,
 (1, 'PANGGALIH HUSODO', 3, '1994-11-18', 'MALANG', 'SAMARINDA ULU', 'laki-laki', '0813 5015 7264', 'gnom354@yahoo.com', '-', 'KIRIMAN', 'XL', 'KETUA MUDA/I', 'MUBALLIGH SETEMPAT', '2018-06-30 04:22:06', '2018-06-30 04:22:06'),
 (2, 'NADIA KURNIKOVA', 3, '2003-08-11', 'SAMARINDA', 'SAMARINDA ULU', 'perempuan', '0853 9058 9108', '-', '-', 'KIRIMAN', 'XL', 'ROKYAH', 'PELAJAR', '2018-06-30 04:22:06', '2018-06-30 04:22:06'),
 (3, 'NOVIA RATNA SARI', 3, '1997-11-04', 'SAMARINDA', 'SAMARINDA ULU', 'perempuan', '0813 8512 1140', '-', '-', 'KIRIMAN', 'XL', 'KEPUTRIAN KELOMPOK', 'MUBALLIGH SETEMPAT', '2018-06-30 04:22:06', '2018-06-30 04:22:06'),
-(4, 'KHODIJAH KIKI LESTARI', 21, '1995-04-30', 'SAMARINDA', 'SAMBUTAN', 'perempuan', '0822 5512 1207', 'khodijahklestari@gmail.com', '-', 'KIRIMAN', 'L', 'KEPUTRIAN DESA', 'MUBALLIGH SETEMPAT', '2018-06-30 04:22:06', '2018-06-30 04:22:06'),
+(4, 'RAHMAWATI ISNAENI', 21, '1995-01-01', 'SAMARINDA', 'SAMBUTAN', 'perempuan', '081545139354', 'rahmastat2013@gmail.com', '-', 'KIRIMAN', 'L', '-', 'MUBALLIGH SETEMPAT', '2018-07-05 00:55:08', '2018-07-04 17:55:08'),
 (5, 'MUHAMMAD AFIF', 21, '1998-02-13', 'SAMARINDA', 'SAMBUTAN', 'laki-laki', '0812 5383 9523', 'afif1998m@gmail.com', '-', 'KIRIMAN', 'XL', 'KETUA MUDA MUDI ', 'MAHASISWA', '2018-06-30 04:22:06', '2018-06-30 04:22:06'),
 (6, 'MUHAMMAD NUR HUDA', 21, '1996-11-01', 'SAMARINDA', 'SAMBUTAN', 'laki-laki', '0823 0148 2826', '-', '-', 'KIRIMAN', 'L', 'ROKYAH', 'KERJA', '2018-06-30 04:22:06', '2018-06-30 04:22:06'),
 (7, 'FADLI UMAR HAMDAN', 21, '2000-04-26', 'SAMARINDA', 'SAMBUTAN', 'laki-laki', '0823 5306 8300', 'fedli354@gmail.com', '-', 'KIRIMAN', 'M', 'WAKIL KETUA MUDA MUDI', 'PELAJAR', '2018-06-30 04:22:06', '2018-06-30 04:22:06'),
@@ -90,7 +83,7 @@ INSERT INTO `anggota` (`id_anggota`, `nama_anggota`, `id_kelompok`, `tgl_lahir`,
 (13, 'MUHAMMAD RAMZY', 15, '2003-06-08', 'MUARA BADAK', 'SAMARINDA ILIR', 'laki-laki', '-', '-', '-', 'KIRIMAN', 'M', '-', 'PELAJAR', '2018-06-30 04:22:07', '2018-06-30 04:22:07'),
 (14, 'MUHAMMAD IDHAM ALGHIFARI', 15, '2003-03-15', 'MUARA BADAK', 'SAMARINDA ILIR', 'laki-laki', '-', '-', '-', 'KIRIMAN', 'M', '-', 'PELAJAR', '2018-06-30 04:22:07', '2018-06-30 04:22:07'),
 (15, 'FIRMAN', 13, '1987-11-12', 'SAMARINDA', 'SAMARINDA SEBERANG', 'laki-laki', '0857 8586 8289', '-', '-', 'KIRIMAN', 'M', 'WAKIL KETUA MUDA/I', 'MUBALLIGH SETEMPAT', '2018-06-30 04:22:07', '2018-06-30 04:22:07'),
-(16, 'ARIS WIBOWO', 13, '1994-05-29', 'PALEMBANG ', 'SAMARINDA SEBERANG', 'laki-laki', '0823 5187 2854', '-', '-', 'KIRIMAN', 'L', 'KETUA MUDA/I ', 'MUBALLIGH SETEMPAT', '2018-06-30 04:22:07', '2018-06-30 04:22:07'),
+(16, 'A\'AN', 13, '1994-05-29', 'PALEMBANG', 'SAMARINDA SEBERANG', 'laki-laki', '-', 'lorem@gmail.com', '-', 'KIRIMAN', 'L', 'KETUA MUDA/I', 'MUBALLIGH SETEMPAT', '2018-07-10 14:28:02', '2018-07-10 07:28:02'),
 (17, 'RICHA HANIFA FILLA', 15, '1999-07-05', 'MUARA BADAK', 'SAMARINDA ILIR', 'perempuan', '-', '-', '-', 'KIRIMAN', 'L', '-', 'PELAJAR', '2018-06-30 04:22:07', '2018-06-30 04:22:07'),
 (18, 'MUHAMMAD SHODIQIN', 13, '1999-09-28', 'SUKA RAJA 3', 'SAMARINDA SEBERANG', 'laki-laki', '0813 5069 0009', '--', '-', 'KIRIMAN', 'M', '-', 'MUBALLIGH TUGASAN', '2018-06-30 04:22:07', '2018-06-30 04:22:07'),
 (19, 'TIARA IZZA NAFILA', 15, '2000-07-12', 'BANDUNG', 'SAMARINDA ILIR', 'perempuan', '-', '-', '-', 'KIRIMAN', 'M', 'TIM KEPUTRIAN', 'PELAJAR', '2018-06-30 04:22:07', '2018-06-30 04:22:07'),
@@ -106,9 +99,9 @@ INSERT INTO `anggota` (`id_anggota`, `nama_anggota`, `id_kelompok`, `tgl_lahir`,
 (29, 'PURI AZKA OCTAVIA', 29, '1997-10-19', 'SEMARANG', 'SAMARINDA ULU', 'perempuan', '0815 4803 5361', 'purioctavia354@gmail.com', '', 'KIRIMAN', 'L', 'MT', 'MUBALLIGH TUGASAN', '2018-06-30 04:22:08', '2018-06-30 04:22:08'),
 (30, 'SAFULLOH', 29, '1999-08-30', 'ACEH', 'SAMARINDA ULU', 'laki-laki', '0821 1193 8455', 'saifullohaceh@gmail.com', '', 'KIRIMAN', 'L', 'MT', 'MUBALLIGH TUGASAN', '2018-06-30 04:22:08', '2018-06-30 04:22:08'),
 (31, 'ANDRI KURNIAWAN', 11, '1996-01-11', 'SERAGEN', 'SAMARINDA SEBERANG', 'laki-laki', '0852 5020 2757', 'andrikurn45@gmail.com', '', 'KIRIMAN', 'L', 'KETUA MUDA/I', 'MUBALLIGH SETEMPAT', '2018-06-30 04:22:08', '2018-06-30 04:22:08'),
-(32, 'MAULANA MALIK IBRAHIM', 2, '2000-12-09', 'SAMARINDA', 'SAMBUTAN', 'laki-laki', '0821 5780 3900', 'Wahyu_d95@yahoo.co.id', '', 'KIRIMAN', 'XL', 'WAKIL KETUA', 'BEKERJA', '2018-06-30 04:22:08', '2018-06-30 04:22:08'),
-(33, 'MUSTAQIM', 2, '1993-01-06', 'MAKASSAR', 'SAMBUTAN', 'laki-laki', '0821 5780 3900', 'Wahyu_d95@yahoo.co.id', '', 'KIRIMAN', 'M', 'MT', 'MUBALLIGH SETEMPAT', '2018-06-30 04:22:08', '2018-06-30 04:22:08'),
-(34, 'SAHRUL', 2, '1997-06-06', 'TANJUNG SANTAN', 'SAMBUTAN', 'laki-laki', '0821 5780 3900', 'Wahyu_d95@yahoo.co.id', '', 'KIRIMAN', 'XL', 'KETUA MUDA MUDI', 'MAHASISWA', '2018-06-30 04:22:08', '2018-06-30 04:22:08'),
+(32, 'CINDY AULIA PUTRI', 2, '2000-12-09', 'SAMARINDA', 'SAMBUTAN', 'perempuan', '-', 'Wahyu_d95@yahoo.co.id', '-', 'KIRIMAN', '-', '-', '-', '2018-07-10 07:30:12', '2018-07-10 00:30:12'),
+(33, 'FANIA CAHYANING WULAN', 2, '1993-01-06', 'MAKASSAR', 'SAMBUTAN', 'perempuan', '-', 'Wahyu_d95@yahoo.co.id', '-', 'KIRIMAN', 'M', '-', '-', '2018-07-10 07:29:47', '2018-07-10 00:29:47'),
+(34, 'KHOIRUN FITRIANI', 2, '1997-06-06', 'TANJUNG SANTAN', 'SAMBUTAN', 'perempuan', '-', 'Wahyu_d95@yahoo.co.id', '-', 'KIRIMAN', '-', '-', '-', '2018-07-10 07:28:58', '2018-07-10 00:28:58'),
 (35, 'MUHAMMAD YUSUF ASYIFA\'G', 7, '1998-12-31', 'PARE', 'SAMARINDA ILIR', 'laki-laki', '0821 5465 1347', 'yahya3131@gmail.com', '', 'KIRIMAN', 'L', 'MUBALIGH TUGASAN', 'MUBALLIGH TUGASAN', '2018-06-30 04:22:08', '2018-06-30 04:22:08'),
 (36, 'CINDI FITRIA NISAUL KHASANAH', 14, '2000-01-17', 'DEMAK', 'SAMARINDA ILIR', 'perempuan', '0855 4667 3009', 'cindifitria17@gmail.com', '', 'KIRIMAN', 'L', '-', 'MUBALLIGH SETEMPAT', '2018-06-30 04:22:08', '2018-06-30 04:22:08'),
 (37, 'RAHMATUL ISTUNING AZIZAH', 14, '1998-10-03', 'BATAM', 'SAMARINDA ILIR', 'perempuan', '0813 4749 1095', 'rahmatulistuning@gmail.com', '', 'KIRIMAN', 'XL', 'BENDAHARA', 'MAHASISWA', '2018-06-30 04:22:08', '2018-06-30 04:22:08'),
@@ -398,9 +391,9 @@ INSERT INTO `anggota` (`id_anggota`, `nama_anggota`, `id_kelompok`, `tgl_lahir`,
 (321, 'Faqih Alidonia ', 18, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-06-30 04:22:23', '2018-06-30 04:22:23'),
 (322, 'Sabrina Aurora M', 18, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-06-30 04:22:23', '2018-06-30 04:22:23'),
 (323, 'Annisa Rifdah Maharani ', 18, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-06-30 04:22:23', '2018-06-30 04:22:23'),
-(324, 'Alfina ', 18, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-06-30 04:22:23', '2018-06-30 04:22:23');
+(324, 'Alfina ', 18, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-06-30 04:22:23', '2018-06-30 04:22:23'),
+(325, 'Abdul Ghoni Syakur ', 18, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-06-30 04:22:23', '2018-06-30 04:22:23');
 INSERT INTO `anggota` (`id_anggota`, `nama_anggota`, `id_kelompok`, `tgl_lahir`, `tempat_lahir`, `desa`, `jenis_kelamin`, `no_telepon`, `email`, `alamat`, `ket_peserta`, `ukuran_baju`, `dapukan`, `status_peserta`, `created_at`, `updated_at`) VALUES
-(325, 'Abdul Ghoni Syakur ', 18, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-06-30 04:22:23', '2018-06-30 04:22:23'),
 (326, 'Muhammad Firdaus Ubaydullah', 18, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-06-30 04:22:23', '2018-06-30 04:22:23'),
 (327, 'Amanda Lathifa Khonif ', 18, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-06-30 04:22:24', '2018-06-30 04:22:24'),
 (328, 'Puspita Ayu Fitrianita ', 18, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-06-30 04:22:24', '2018-06-30 04:22:24'),
@@ -518,7 +511,7 @@ INSERT INTO `anggota` (`id_anggota`, `nama_anggota`, `id_kelompok`, `tgl_lahir`,
 (440, 'HUDA FIRDAUS', 17, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-06-30 04:22:33', '2018-06-30 04:22:33'),
 (441, 'KHOIRUL HUDA', 17, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-06-30 04:22:33', '2018-06-30 04:22:33'),
 (442, 'IRFAN ', 17, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-06-30 04:22:33', '2018-06-30 04:22:33'),
-(443, 'DELLA', 17, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-06-30 04:22:33', '2018-06-30 04:22:33'),
+(443, 'BELLA', 17, '1999-01-01', '-', '-', 'perempuan', '7571', 'y@hmail.com', '-', '-', '-', '-', '-', '2018-07-10 09:59:03', '2018-07-10 02:59:03'),
 (444, 'LIA', 17, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-06-30 04:22:33', '2018-06-30 04:22:33'),
 (445, 'DINDA', 17, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-06-30 04:22:33', '2018-06-30 04:22:33'),
 (446, 'NISA', 17, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-06-30 04:22:33', '2018-06-30 04:22:33'),
@@ -527,7 +520,7 @@ INSERT INTO `anggota` (`id_anggota`, `nama_anggota`, `id_kelompok`, `tgl_lahir`,
 (449, 'INTAN ', 17, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-06-30 04:22:34', '2018-06-30 04:22:34'),
 (450, 'ANNA', 17, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-06-30 04:22:34', '2018-06-30 04:22:34'),
 (451, 'ANNIE', 17, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-06-30 04:22:34', '2018-06-30 04:22:34'),
-(452, 'ATIM', 17, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-06-30 04:22:34', '2018-06-30 04:22:34'),
+(452, 'ATIN', 17, '2000-12-24', '-', '-', 'perempuan', '686812', 'Y@gmail.com', '-', '-', '-', '-', '-', '2018-07-10 10:00:47', '2018-07-10 03:00:47'),
 (453, 'CHINTIA', 17, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-06-30 04:22:34', '2018-06-30 04:22:34'),
 (454, 'DILLA', 17, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-06-30 04:22:34', '2018-06-30 04:22:34'),
 (455, 'DITHA', 17, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-06-30 04:22:34', '2018-06-30 04:22:34'),
@@ -608,7 +601,61 @@ INSERT INTO `anggota` (`id_anggota`, `nama_anggota`, `id_kelompok`, `tgl_lahir`,
 (530, 'RIJAL', 20, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-06-30 04:22:37', '2018-06-30 04:22:37'),
 (531, 'AQIB', 20, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-06-30 04:22:38', '2018-06-30 04:22:38'),
 (532, 'KHOIRULLI NURUL FATIMAH', 21, '2001-02-16', 'SAMARINDA', 'SAMBUTAN', 'perempuan', '081250349394', 'khoirullinurul.41@gmail.com', 'PERUM SAMBUTAN IDAMAN PERMAI PELITA 7 BLOK H4 NO.42 RT 30', '-', 'L', 'KEPUTRIAN KELOMPOK', 'PELAJAR', '2018-06-30 08:56:11', '2018-06-30 08:56:11'),
-(533, 'SULTHON AULIA', 21, '2000-11-15', 'SAMARINDA', 'SAMBUTAN', 'laki-laki', '081258143385', 'tes@gmail.com', '-', '-', '-', 'TIM IT DAERAH', '-', '2018-06-30 17:04:39', '2018-06-30 09:04:39');
+(533, 'SULTHON AULIA', 21, '2000-11-15', 'SAMARINDA', 'SAMBUTAN', 'laki-laki', '081258143385', 'tes@gmail.com', '-', '-', '-', 'TIM IT DAERAH', '-', '2018-06-30 17:04:39', '2018-06-30 09:04:39'),
+(535, 'MEIRINDA KUSUMANINGTYAS', 1, '1999-05-05', 'SAMARINDA', 'SAMARINDA ULU', 'perempuan', '085822905605', 'meimeirinda181@gmail.com', '-', 'KIRIMAN', 'M', 'BENDAHARA', 'ROKYAH', '2018-07-09 20:07:22', '2018-07-09 20:07:22'),
+(536, 'TRISDA DERAMA', 1, '1999-12-16', 'SAMARINDA', 'SAMARNDA ULU', 'perempuan', '081257482872', 'lorem@gmail.com', '-', 'KIRIMAN', 'L', '-', 'PELAJAR', '2018-07-09 20:09:47', '2018-07-09 20:09:47'),
+(537, 'DHIMAS ARYA', 1, '1999-01-28', 'SAMARINDA', 'SAMARINDA ULU', 'laki-laki', '085348716061', 'dhimasarya360@gmail.com', '-', 'KIRIMAN', 'L', '-', '-', '2018-07-09 20:11:25', '2018-07-09 20:11:25'),
+(538, 'AULIA ADISTYA CANDRA', 25, '1999-11-11', 'SAMARINDA', 'SAMBUTAN', 'perempuan', '0827627', 'sjkdhjs@yy.com', '-', 'PERSON', '-', '-', '-', '2018-07-09 21:31:13', '2018-07-09 21:31:13'),
+(539, 'UMAR', 5, '2000-01-01', '-', 'SAMRARINDA ILI', 'laki-laki', '2647612849126', 'lorem@gmail.com', '-', 'KIRIMAN', 'M', '-', '-', '2018-07-09 23:20:16', '2018-07-09 23:20:16'),
+(540, 'IBNU NUR WAHID', 2, '1999-01-01', 'SHADHJAS', '-', 'laki-laki', '-', 'y@gmail.com', '-', 'KIRIMAN', '-', '-', '-', '2018-07-10 00:30:56', '2018-07-10 00:30:56'),
+(543, 'CHOIRUL ABIDIN', 26, '1999-01-01', '-', 'SAMARINDA ULU', 'laki-laki', '-', 'yuhu@gmail.com', '-', '-', '-', '-', '-', '2018-07-10 02:11:00', '2018-07-10 02:11:00'),
+(546, 'ANGEL HUFADZ MABRURY', 23, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 02:47:09', '2018-07-10 02:47:09'),
+(547, 'ALFINA DAMAYANTI', 23, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 02:47:09', '2018-07-10 02:47:09'),
+(548, 'NURHIDAYAH PUTRI NABILA', 23, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 02:47:09', '2018-07-10 02:47:09'),
+(549, 'AYU DYAH PEBRIYANTI', 23, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 02:47:09', '2018-07-10 02:47:09'),
+(550, 'NICHALAH SYIFAA', 24, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 02:47:09', '2018-07-10 02:47:09'),
+(551, 'ALISYA DWI AZIZAH', 24, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 02:47:09', '2018-07-10 02:47:09'),
+(552, 'EDITA AMINTYA MAHESWARA ', 24, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 02:47:09', '2018-07-10 02:47:09'),
+(553, 'ABDULLAH ROFIA AL-ANSORI', 23, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 02:47:09', '2018-07-10 02:47:09'),
+(554, 'YORDI ANDIKA ', 23, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 02:47:09', '2018-07-10 02:47:09'),
+(555, 'AYUNDA', 17, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 02:47:09', '2018-07-10 02:47:09'),
+(556, 'SHANTY', 17, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 02:47:09', '2018-07-10 02:47:09'),
+(557, 'LINDA', 17, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 02:47:09', '2018-07-10 02:47:09'),
+(558, 'MILA ', 17, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 02:47:09', '2018-07-10 02:47:09'),
+(559, 'FATIMAH', 17, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 02:47:09', '2018-07-10 02:47:09'),
+(560, 'FAUZIAH', 17, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 02:47:09', '2018-07-10 02:47:09'),
+(561, 'ILEN', 17, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 02:47:09', '2018-07-10 02:47:09'),
+(562, 'DWI ', 17, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 02:47:09', '2018-07-10 02:47:09'),
+(563, 'EVA', 17, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 02:47:09', '2018-07-10 02:47:09'),
+(564, 'LUKMAN ', 17, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 02:47:09', '2018-07-10 02:47:09'),
+(565, 'DASTIN', 17, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 02:47:09', '2018-07-10 02:47:09'),
+(566, 'HAMALAH', 17, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 02:47:09', '2018-07-10 02:47:09'),
+(573, 'RAYA RIZKY ERLANGGA', 18, '2000-12-12', 'SMD', '-', 'laki-laki', '-', 'lorem@gmail.com', '-', '-', '-', '-', '-', '2018-07-10 03:21:44', '2018-07-10 03:21:44'),
+(576, 'MUHAMMAD WAHYU HIDAYATULLAH', 24, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 03:31:53', '2018-07-10 03:31:53'),
+(577, 'ALIF GIBRAN SIDDIQ', 24, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 03:31:53', '2018-07-10 03:31:53'),
+(578, 'HUTOMO ABDULLAH', 24, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 03:31:53', '2018-07-10 03:31:53'),
+(585, 'RUDY TRI MAHARDIKA', 10, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 04:50:08', '2018-07-10 04:50:08'),
+(586, 'DIMAS CHOIRUL UMAM', 10, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 04:50:08', '2018-07-10 04:50:08'),
+(588, 'FAJAR RAMADHAN', 28, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 04:50:08', '2018-07-10 04:50:08'),
+(589, 'PUTRI AZIZA', 23, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 04:50:08', '2018-07-10 04:50:08'),
+(590, 'YOGI FERNANDA', 23, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 04:50:08', '2018-07-10 04:50:08'),
+(591, 'ROMDHON KHOIRI', 23, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 04:50:08', '2018-07-10 04:50:08'),
+(592, 'ALFIANNOOR FADLI', 13, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 04:50:08', '2018-07-10 04:50:08'),
+(593, 'DAUD AHMAD RIDWAN', 23, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 04:50:08', '2018-07-10 04:50:08'),
+(594, 'FAHMI DARMAWAN', 24, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 04:50:08', '2018-07-10 04:50:08'),
+(596, 'MUTIAH RATNA SARI ', 25, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 05:30:26', '2018-07-10 05:30:26'),
+(597, 'NURFADILAH', 25, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 05:30:26', '2018-07-10 05:30:26'),
+(598, 'YUNITA AMELIA', 25, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 05:30:26', '2018-07-10 05:30:26'),
+(599, 'NAHWA', 25, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 05:30:26', '2018-07-10 05:30:26'),
+(600, 'TASKIA', 25, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 05:30:26', '2018-07-10 05:30:26'),
+(601, 'ALDI IMRON', 25, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 05:30:26', '2018-07-10 05:30:26'),
+(602, 'LAILLY TRI', 1, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 05:30:26', '2018-07-10 05:30:26'),
+(603, 'AUDISA', 1, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 05:30:26', '2018-07-10 05:30:26'),
+(604, 'MUHAMMAD GARUN NUGROHO', 10, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 06:14:32', '2018-07-10 06:14:32'),
+(606, 'DIAH', 17, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 06:15:54', '2018-07-10 06:15:54'),
+(607, 'DENNY APRIANTO', 24, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 06:15:54', '2018-07-10 06:15:54'),
+(608, 'AFNI ILMAN NAFIAH', 23, NULL, '-', '-', '-', '-', '-', '', '-', '-', '-', '-', '2018-07-10 06:15:54', '2018-07-10 06:15:54'),
+(610, 'ALFIAN ARIS HABIBULLOH', 12, '2000-12-18', '-', 'SAMBUTAN', 'laki-laki', '-', 'lorem@gmail.com', '-', 'PERSON', '-', '-', '-', '2018-07-10 06:42:08', '2018-07-10 06:42:08');
 
 -- --------------------------------------------------------
 
@@ -617,8 +664,8 @@ INSERT INTO `anggota` (`id_anggota`, `nama_anggota`, `id_kelompok`, `tgl_lahir`,
 --
 
 CREATE TABLE `jadwal` (
-  `id_jadwal` int(11) NOT NULL,
-  `id_kegiatan` int(11) NOT NULL,
+  `id_jadwal` bigint(21) NOT NULL,
+  `id_kegiatan` bigint(21) NOT NULL,
   `nama_jadwal` varchar(50) NOT NULL,
   `hari` varchar(35) NOT NULL,
   `keterangan` text NOT NULL,
@@ -631,7 +678,7 @@ CREATE TABLE `jadwal` (
 --
 
 INSERT INTO `jadwal` (`id_jadwal`, `id_kegiatan`, `nama_jadwal`, `hari`, `keterangan`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Pagi', 'Sabtu, 30 Juni 2018', 'Pemateri lorem ipsum', '2018-06-30 05:19:21', '2018-06-30 05:19:21');
+(5, 1, 'Malam', 'Selasa, 10 Juli 2018', 'Makalah I ( Mengutamakan dan Menomorsatukan Pembinaan Generus dalam Melestarikan QHJ )', '2018-07-10 01:10:12', '2018-07-10 01:10:12');
 
 -- --------------------------------------------------------
 
@@ -640,9 +687,10 @@ INSERT INTO `jadwal` (`id_jadwal`, `id_kegiatan`, `nama_jadwal`, `hari`, `ketera
 --
 
 CREATE TABLE `kegiatan` (
-  `id_kegiatan` int(11) NOT NULL,
+  `id_kegiatan` bigint(21) NOT NULL,
   `nama_kegiatan` varchar(70) NOT NULL,
   `tanggal_kegiatan` date NOT NULL,
+  `sampai_tanggal_kegiatan` date NOT NULL,
   `lokasi_kegiatan` text NOT NULL,
   `status_kegiatan` int(1) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -653,8 +701,8 @@ CREATE TABLE `kegiatan` (
 -- Dumping data for table `kegiatan`
 --
 
-INSERT INTO `kegiatan` (`id_kegiatan`, `nama_kegiatan`, `tanggal_kegiatan`, `lokasi_kegiatan`, `status_kegiatan`, `created_at`, `updated_at`) VALUES
-(1, 'CINTA ALAM INDONESIA', '2018-07-01', 'Ponpes Al-Aziziah', 1, '2018-06-30 04:56:48', '2018-07-01 00:15:50');
+INSERT INTO `kegiatan` (`id_kegiatan`, `nama_kegiatan`, `tanggal_kegiatan`, `sampai_tanggal_kegiatan`, `lokasi_kegiatan`, `status_kegiatan`, `created_at`, `updated_at`) VALUES
+(1, 'CINTA ALAM INDONESIA', '2018-07-10', '2018-04-14', 'Ponpes Al-Aziziah', 1, '2018-06-30 04:56:48', '2018-07-09 22:38:39');
 
 -- --------------------------------------------------------
 
@@ -663,10 +711,10 @@ INSERT INTO `kegiatan` (`id_kegiatan`, `nama_kegiatan`, `tanggal_kegiatan`, `lok
 --
 
 CREATE TABLE `kegiatan_detail` (
-  `id_detail` int(11) NOT NULL,
-  `id_kegiatan` int(11) NOT NULL,
+  `id_detail` bigint(21) NOT NULL,
+  `id_kegiatan` bigint(21) NOT NULL,
   `code_barcode` varchar(100) NOT NULL,
-  `id_anggota` int(11) NOT NULL,
+  `id_anggota` bigint(21) NOT NULL,
   `ket` varchar(30) NOT NULL,
   `id_users` int(3) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -728,7 +776,6 @@ INSERT INTO `kegiatan_detail` (`id_detail`, `id_kegiatan`, `code_barcode`, `id_a
 (49, 1, '2941533150048', 19, 'peserta', 1, '2018-06-30 08:23:39', '2018-06-30 08:23:39'),
 (50, 1, '2941533150049', 21, 'peserta', 1, '2018-06-30 08:23:56', '2018-06-30 08:23:56'),
 (51, 1, '2941533150050', 22, 'peserta', 1, '2018-06-30 08:23:56', '2018-06-30 08:23:56'),
-(52, 1, '2941533150051', 66, 'peserta', 1, '2018-06-30 08:23:56', '2018-06-30 08:23:56'),
 (53, 1, '2941533150052', 67, 'peserta', 1, '2018-06-30 08:31:17', '2018-06-30 08:31:17'),
 (54, 1, '2941533150053', 68, 'peserta', 1, '2018-06-30 08:31:17', '2018-06-30 08:31:17'),
 (55, 1, '2941533150054', 69, 'peserta', 1, '2018-06-30 08:31:17', '2018-06-30 08:31:17'),
@@ -1210,7 +1257,47 @@ INSERT INTO `kegiatan_detail` (`id_detail`, `id_kegiatan`, `code_barcode`, `id_a
 (531, 1, '2941533150530', 75, 'peserta', 1, '2018-06-30 08:40:54', '2018-06-30 08:40:54'),
 (532, 1, '2941533150531', 76, 'peserta', 1, '2018-06-30 08:40:54', '2018-06-30 08:40:54'),
 (533, 1, '2941533150532', 532, 'panitia', 1, '2018-06-30 09:00:13', '2018-06-30 09:00:13'),
-(534, 1, '2941533150533', 533, 'panitia', 1, '2018-06-30 09:00:13', '2018-06-30 09:00:13');
+(534, 1, '2941533150533', 533, 'panitia', 1, '2018-06-30 09:00:13', '2018-06-30 09:00:13'),
+(536, 1, '2941533150535', 535, 'peserta', 1, '2018-07-09 20:24:46', '2018-07-09 20:24:46'),
+(537, 1, '2941533150536', 536, 'peserta', 1, '2018-07-09 20:24:46', '2018-07-09 20:24:46'),
+(538, 1, '2941533150537', 537, 'peserta', 1, '2018-07-09 20:24:46', '2018-07-09 20:24:46'),
+(539, 1, '2941533150538', 538, 'peserta', 1, '2018-07-09 21:31:35', '2018-07-09 21:31:35'),
+(540, 1, '2941533150539', 539, 'peserta', 1, '2018-07-09 23:20:38', '2018-07-09 23:20:38'),
+(541, 1, '2941533150540', 540, 'peserta', 1, '2018-07-10 00:32:34', '2018-07-10 00:32:34'),
+(545, 1, '2941533150542', 546, 'peserta', 1, '2018-07-10 03:11:16', '2018-07-10 03:11:16'),
+(546, 1, '2941533150543', 547, 'peserta', 1, '2018-07-10 03:11:16', '2018-07-10 03:11:16'),
+(547, 1, '2941533150544', 548, 'peserta', 1, '2018-07-10 03:11:16', '2018-07-10 03:11:16'),
+(548, 1, '2941533150545', 549, 'peserta', 1, '2018-07-10 03:11:16', '2018-07-10 03:11:16'),
+(549, 1, '2941533150546', 553, 'peserta', 1, '2018-07-10 03:11:16', '2018-07-10 03:11:16'),
+(550, 1, '2941533150547', 554, 'peserta', 1, '2018-07-10 03:11:16', '2018-07-10 03:11:16'),
+(551, 1, '2941533150548', 550, 'peserta', 1, '2018-07-10 03:11:55', '2018-07-10 03:11:55'),
+(552, 1, '2941533150549', 551, 'peserta', 1, '2018-07-10 03:11:55', '2018-07-10 03:11:55'),
+(553, 1, '2941533150550', 552, 'peserta', 1, '2018-07-10 03:11:55', '2018-07-10 03:11:55'),
+(554, 1, '2941533150551', 543, 'peserta', 1, '2018-07-10 03:13:51', '2018-07-10 03:13:51'),
+(562, 1, '2941533150555', 573, 'peserta', 1, '2018-07-10 03:36:41', '2018-07-10 03:36:41'),
+(563, 1, '2941533150552', 592, 'peserta', 1, '2018-07-10 04:50:41', '2018-07-10 04:50:41'),
+(564, 1, '2941533150553', 585, 'peserta', 1, '2018-07-10 04:51:09', '2018-07-10 04:51:09'),
+(565, 1, '2941533150554', 586, 'peserta', 1, '2018-07-10 04:51:09', '2018-07-10 04:51:09'),
+(567, 1, '2941533150556', 588, 'peserta', 1, '2018-07-10 04:51:37', '2018-07-10 04:51:37'),
+(568, 1, '2941533150557', 589, 'peserta', 1, '2018-07-10 04:52:17', '2018-07-10 04:52:17'),
+(569, 1, '2941533150558', 590, 'peserta', 1, '2018-07-10 04:52:17', '2018-07-10 04:52:17'),
+(570, 1, '2941533150559', 591, 'peserta', 1, '2018-07-10 04:52:17', '2018-07-10 04:52:17');
+INSERT INTO `kegiatan_detail` (`id_detail`, `id_kegiatan`, `code_barcode`, `id_anggota`, `ket`, `id_users`, `created_at`, `updated_at`) VALUES
+(571, 1, '2941533150560', 593, 'peserta', 1, '2018-07-10 04:53:01', '2018-07-10 04:53:01'),
+(572, 1, '2941533150561', 594, 'peserta', 1, '2018-07-10 04:53:21', '2018-07-10 04:53:21'),
+(573, 1, '2941533150562', 596, 'peserta', 1, '2018-07-10 05:31:33', '2018-07-10 05:31:33'),
+(574, 1, '2941533150563', 597, 'peserta', 1, '2018-07-10 05:31:33', '2018-07-10 05:31:33'),
+(575, 1, '2941533150564', 598, 'peserta', 1, '2018-07-10 05:31:33', '2018-07-10 05:31:33'),
+(576, 1, '2941533150565', 599, 'peserta', 1, '2018-07-10 05:31:33', '2018-07-10 05:31:33'),
+(577, 1, '2941533150566', 600, 'peserta', 1, '2018-07-10 05:31:33', '2018-07-10 05:31:33'),
+(578, 1, '2941533150567', 601, 'peserta', 1, '2018-07-10 05:31:33', '2018-07-10 05:31:33'),
+(579, 1, '2941533150568', 602, 'peserta', 1, '2018-07-10 05:32:03', '2018-07-10 05:32:03'),
+(580, 1, '2941533150569', 603, 'peserta', 1, '2018-07-10 05:32:03', '2018-07-10 05:32:03'),
+(583, 1, '2941533150571', 607, 'peserta', 1, '2018-07-10 06:32:10', '2018-07-10 06:32:10'),
+(584, 1, '2941533150573', 604, 'peserta', 1, '2018-07-10 06:32:37', '2018-07-10 06:32:37'),
+(585, 1, '2941533150570', 606, 'peserta', 1, '2018-07-10 06:32:54', '2018-07-10 06:32:54'),
+(586, 1, '2941533150572', 608, 'peserta', 1, '2018-07-10 06:33:22', '2018-07-10 06:33:22'),
+(587, 1, '2941533150574', 610, 'peserta', 1, '2018-07-10 06:42:51', '2018-07-10 06:42:51');
 
 -- --------------------------------------------------------
 
@@ -1219,7 +1306,7 @@ INSERT INTO `kegiatan_detail` (`id_detail`, `id_kegiatan`, `code_barcode`, `id_a
 --
 
 CREATE TABLE `kelompok` (
-  `id_kelompok` int(11) NOT NULL,
+  `id_kelompok` bigint(21) NOT NULL,
   `nama_kelompok` varchar(70) NOT NULL,
   `lokasi_kelompok` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -1305,10 +1392,13 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_users`, `name`, `username`, `password`, `level`, `status_akun`, `last_login`, `remember_token`, `status_delete`, `deleted_at`) VALUES
-(1, 'Administrator', 'admin', '$2y$10$SSTPVCNQM60/kGfdCO8eEO0PLdDekSpAVsMdD4x9bhOPvjHBBrZ0G', 2, 1, NULL, 'gi0uV2kCVnVCIzQ7hM0WSV3dcXk6u7b4Xicb26LLWg2aw61iHntJLopnoAn9', 0, NULL),
-(3, 'aziz', 'aziz', '$2y$10$x/DtXp.55nXXBnNXEwk5fuE1nDqgAxog7zdUrBARoa2SDIX3QWaHm', 0, 1, NULL, 'kl03Y14v9P0AIziSTwBX36xqiLKnQOWWv07MW290DkeoFUQNCHaLOPI66rjb', 0, '2018-06-26 00:03:08'),
-(4, 'Petugas', 'petugas', '$2y$10$K7awF85IQO.3i8c..R76quoiNyhGaYd6b4MQlgpWbwR5FKLWUy7w6', 1, 1, NULL, 'iHPDO8EjdDM7llGx81EqyrJJTnpY5DR4wz3btgRIZocmyWmLcdJVSuAFezSq', 0, '2018-06-27 18:19:04'),
-(5, 'Uhuy', 'uhuy', '$2y$10$arNBnUkGRUxAtYMkRh/0reqRfOOxikYENG298JJa3CLSsAzrypWAa', 0, 1, NULL, NULL, 0, NULL);
+(1, 'Administrator', 'admin', '$2y$10$SSTPVCNQM60/kGfdCO8eEO0PLdDekSpAVsMdD4x9bhOPvjHBBrZ0G', 2, 1, NULL, 'fpNBeq4lRAqJWP1seo0DOV5ShQghcsd3zahdy8cC1hEQDJ3yEvITn83taLVG', 0, NULL),
+(3, 'aziz', 'aziz', '$2y$10$x/DtXp.55nXXBnNXEwk5fuE1nDqgAxog7zdUrBARoa2SDIX3QWaHm', 1, 1, NULL, 'kl03Y14v9P0AIziSTwBX36xqiLKnQOWWv07MW290DkeoFUQNCHaLOPI66rjb', 1, '2018-07-07 22:10:03'),
+(4, 'Petugas', 'petugas', '$2y$10$K7awF85IQO.3i8c..R76quoiNyhGaYd6b4MQlgpWbwR5FKLWUy7w6', 1, 1, NULL, '1YJHCxkH6wwwmbiDjk3RIFLTcciLDYuFXYn9Xj6lUMb8mfGmeBty4XYFnDDl', 0, '2018-06-27 18:19:04'),
+(5, 'Uhuy', 'uhuy', '$2y$10$arNBnUkGRUxAtYMkRh/0reqRfOOxikYENG298JJa3CLSsAzrypWAa', 0, 1, NULL, NULL, 0, NULL),
+(6, 'Tuqim', 'lnwlf', '$2y$10$BvaQuE6itYZPrm9mmJHtDeHSLlG8E55mwC1Uj5hRFNYFKP.zqzOku', 1, 1, NULL, NULL, 0, NULL),
+(7, 'Sulton Aulia', 'sulton', '$2y$10$AKMmUWSOhwo7VafKmAmKtePeZ4Y6cD9ch8/cfU11oLEHL.2S82yHO', 1, 1, NULL, 'Y4aJomB8lb5PXxzZ92LOmqzy9T8B1jvzjurWdFhqj1sww5rj5FX8msqt1yXq', 0, NULL),
+(8, 'aziz', 'aziz123', '$2y$10$Da/cY02TeDKTbscWgHdtv.kwdmN3xNe45KOpRq1jPkWiJ83aMDkuK', 1, 1, NULL, NULL, 0, NULL);
 
 --
 -- Indexes for dumped tables
@@ -1378,37 +1468,37 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `absen`
 --
 ALTER TABLE `absen`
-  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_absen` bigint(21) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=209;
 
 --
 -- AUTO_INCREMENT for table `anggota`
 --
 ALTER TABLE `anggota`
-  MODIFY `id_anggota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=534;
+  MODIFY `id_anggota` bigint(21) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=611;
 
 --
 -- AUTO_INCREMENT for table `jadwal`
 --
 ALTER TABLE `jadwal`
-  MODIFY `id_jadwal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_jadwal` bigint(21) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `kegiatan`
 --
 ALTER TABLE `kegiatan`
-  MODIFY `id_kegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_kegiatan` bigint(21) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `kegiatan_detail`
 --
 ALTER TABLE `kegiatan_detail`
-  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=535;
+  MODIFY `id_detail` bigint(21) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=588;
 
 --
 -- AUTO_INCREMENT for table `kelompok`
 --
 ALTER TABLE `kelompok`
-  MODIFY `id_kelompok` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id_kelompok` bigint(21) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -1420,7 +1510,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_users` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_users` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
@@ -1430,15 +1520,15 @@ ALTER TABLE `users`
 -- Constraints for table `absen`
 --
 ALTER TABLE `absen`
-  ADD CONSTRAINT `absen_ibfk_1` FOREIGN KEY (`id_detail`) REFERENCES `kegiatan_detail` (`id_detail`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `input_by` FOREIGN KEY (`id_users`) REFERENCES `users` (`id_users`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `jadwal` FOREIGN KEY (`id_jadwal`) REFERENCES `jadwal` (`id_jadwal`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `absen_ibfk_1` FOREIGN KEY (`id_users`) REFERENCES `users` (`id_users`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `absen_ibfk_2` FOREIGN KEY (`id_detail`) REFERENCES `kegiatan_detail` (`id_detail`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `absen_ibfk_3` FOREIGN KEY (`id_jadwal`) REFERENCES `jadwal` (`id_jadwal`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `anggota`
 --
 ALTER TABLE `anggota`
-  ADD CONSTRAINT `kelompok` FOREIGN KEY (`id_kelompok`) REFERENCES `kelompok` (`id_kelompok`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `anggota_ibfk_1` FOREIGN KEY (`id_kelompok`) REFERENCES `kelompok` (`id_kelompok`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `jadwal`
@@ -1450,9 +1540,9 @@ ALTER TABLE `jadwal`
 -- Constraints for table `kegiatan_detail`
 --
 ALTER TABLE `kegiatan_detail`
-  ADD CONSTRAINT `kegiatan_detail_ibfk_1` FOREIGN KEY (`id_anggota`) REFERENCES `anggota` (`id_anggota`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `kegiatan_detail_ibfk_2` FOREIGN KEY (`id_kegiatan`) REFERENCES `kegiatan` (`id_kegiatan`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `kegiatan_detail_ibfk_4` FOREIGN KEY (`id_users`) REFERENCES `users` (`id_users`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `kegiatan_detail_ibfk_4` FOREIGN KEY (`id_users`) REFERENCES `users` (`id_users`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `kegiatan_detail_ibfk_5` FOREIGN KEY (`id_anggota`) REFERENCES `anggota` (`id_anggota`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `kegiatan_detail_ibfk_6` FOREIGN KEY (`id_kegiatan`) REFERENCES `kegiatan` (`id_kegiatan`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
