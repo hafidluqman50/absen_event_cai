@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Route::get('/id','AuthController@getId');
+
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // });

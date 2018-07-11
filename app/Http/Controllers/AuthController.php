@@ -97,6 +97,11 @@ class AuthController extends Controller
     	return redirect('/login');
     }
 
+    // public function getId() {
+    //   $updates = Telegram::getUpdates();
+    //   dd($updates);
+    // }
+
     // public function user() {
     // 	$array = [
     // 		'username' => 'petugas',
